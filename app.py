@@ -67,9 +67,6 @@ class EnvSensor(tk.Tk):
         frame = self.frames[container]
         frame.tkraise()
         
-    
-
-    
 
 
 if __name__== '__main__':
