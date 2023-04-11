@@ -4,12 +4,11 @@ from sensor_list import SENSOR_DICT
 from tkinter import *
 
 class Element(ttk.Frame):
-    def __init__(self,parent, controller, show_home, sensor='TVOC'):
+    def __init__(self,parent, controller, show_home, sensor):
         super().__init__(parent)
-        
         self.controller = controller
-        self.sensor = sensor
-        
+        self.sensor_name = sensor
+
 
         self.columnconfigure(0, weight=1)
         
@@ -65,12 +64,12 @@ class Element(ttk.Frame):
         description_left_part.grid(row=0, column=0, sticky="NEWS")
         
         #sample photo code
-        img = PhotoImage(file=SENSOR_DICT[self.sensor][1])
-        img_label = Label(description_part, image=img, bg='black')
-        img_label.image = img
-        img_label.grid(row=0, column=0, sticky="NEWS")
-        
-        
+        img = PhotoImage(file=SENSOR_DICT[sensor][1])
+        self.img_label = Label(description_part, image=img, bg='black')
+        self.img_label.image = img
+        # img_label.configure(image=PhotoImage(file=SENSOR_DICT[sensor][1]))
+        # img_label.image = PhotoImage(file=SENSOR_DICT[sensor][1])
+        self.img_label.grid(row=0, column=0, sticky="NEWS")
         
         
         #### Current Value Part
@@ -78,3 +77,13 @@ class Element(ttk.Frame):
         #### Color Gauge Part
         
         #### Num Value Part
+
+
+    def change_image(self,sensor_name):
+        img = PhotoImage(file=SENSOR_DICT[sensor_name][1])
+        self.img_label.configure(image=img)
+        self.img_label.image = img
+        print('######################################')
+        print(sensor_name)
+        print('######################################')
+        

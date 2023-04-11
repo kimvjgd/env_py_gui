@@ -11,11 +11,11 @@ class Home(ttk.Frame):
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
-        self.rowconfigure(2, weight=6)
+        self.rowconfigure(2, weight=5)
         
         
         # status (upper)
-        status_part = tk.Frame(self, bg="red")
+        status_part = tk.Frame(self, bg="black")
         status_part.grid(row=0, column=0, sticky="NEWS")
         status_part.columnconfigure(0, weight=10)
         status_part.columnconfigure(1, weight=1)
@@ -23,11 +23,18 @@ class Home(ttk.Frame):
         
         
         # temperature & humidity (middle)
-        temp_hum_part = tk.Frame(self, bg="blue")
+        temp_hum_part = tk.Frame(self, bg="black")
         temp_hum_part.grid(row=1, column=0, sticky="NEWS")
+        temp_hum_part.rowconfigure(0, weight=1)
+        temp_hum_part.columnconfigure(0, weight=2)
+        temp_hum_part.columnconfigure(1, weight=3)
+        temp_hum_part.columnconfigure(2, weight=8)
+        temp_hum_part.columnconfigure(3, weight=2)
+        temp_hum_part.columnconfigure(4, weight=3)
+        temp_hum_part.columnconfigure(5, weight=8)
         
         # sensor values (lower)
-        sensor_part = tk.Frame(self, bg="green")
+        sensor_part = tk.Frame(self, bg="black")
         sensor_part.grid(row=2, column=0, sticky="NEWS")
         # row configure
         sensor_part.rowconfigure(0, weight=10)      # first row
@@ -56,7 +63,7 @@ class Home(ttk.Frame):
 ################################################################################################################################################################
         from PIL import Image, ImageTk
         #status
-        time_label = tk.Label(status_part, text=datetime.now())
+        time_label = tk.Label(status_part, text=datetime.now(),bg='black',fg='white', font=('Arial', 20))
         time_label.grid(column=0, row=0,sticky="W")
         wifi_image = tk.PhotoImage(file='img/wifi/wifi.png')
         
@@ -65,9 +72,19 @@ class Home(ttk.Frame):
         wifi_button.grid(column=1,row=0)
         
         
+        
         # temperature & humidity
-        temp_hum_label = tk.Label(temp_hum_part, text="temp_hum")
-        temp_hum_label.pack()
+        
+        # temperature
+        self.set_image(temp_hum_part, 'img/temperature/temp_img.png', row=0, column=0, height=40)
+        self.set_label(temp_hum_part, '36.7°C', row=0, column=1)
+        self.set_image(temp_hum_part, 'img/temperature/temp5.png', row=0, column=2, height=20)
+
+        # humidity
+        self.set_image(temp_hum_part, 'img/humidity/humidity_img.png', row=0, column=3, height=40)
+        self.set_label(temp_hum_part, '53%', row=0, column=4)
+        self.set_image(temp_hum_part, 'img/humidity/humidity5.png', row=0, column=5, height=20)
+        
         
         
         
@@ -140,6 +157,8 @@ class Home(ttk.Frame):
         o3_part = tk.Frame(sensor_part, bg='black')
         o3_part.grid(row=2,column=12,sticky='NEWS')
         self.set_frame_configure(o3_part)
+        
+        
 
 
         
@@ -154,6 +173,7 @@ class Home(ttk.Frame):
         
         def event_func(event, sensor_name):
             show_element()
+            controller.sensor_name = sensor_name
             print(sensor_name)
             
             
@@ -226,13 +246,50 @@ class Home(ttk.Frame):
         o3_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='O3'))
         self.set_image(o3_part, 'img/sensor/Main-O3.png')
         self.set_label(o3_part, 'O3')
+        
+        ########################################### Separator ###########################################
+        # horizontal
+        self.set_horizontal_separator_image(sensor_part, 0)
+        self.set_horizontal_separator_image(sensor_part, 2)
+        self.set_horizontal_separator_image(sensor_part, 4)
+        self.set_horizontal_separator_image(sensor_part, 6)
+        self.set_horizontal_separator_image(sensor_part, 8)
+        self.set_horizontal_separator_image(sensor_part, 10)
+        self.set_horizontal_separator_image(sensor_part, 12)
+        # vertical
+        self.set_vertical_separator_image(sensor_part, 1)
+        self.set_vertical_separator_image(sensor_part, 3)
+        self.set_vertical_separator_image(sensor_part, 5)
+        self.set_vertical_separator_image(sensor_part, 7)
+        self.set_vertical_separator_image(sensor_part, 9)
+        self.set_vertical_separator_image(sensor_part, 11)
+        
+        
+        
+        # temp_img = PhotoImage(file='img/parts/Main_V_separator.png')
+        # temp_img_label = Label(sensor_part, image=temp_img, bg='black')
+        # temp_img_label.image = temp_img
+        # temp_img_label.grid(row=1, column=0)
 
 
-    def set_image(self, frame, img_path):
+    def set_horizontal_separator_image(self, frame, column):
+        sep_h_img = PhotoImage(file='img/parts/Main_H_separator.png')
+        sep_h_img_label = Label(frame, image=sep_h_img, bg='black')
+        sep_h_img_label.image = sep_h_img
+        sep_h_img_label.grid(row=1, column=column, padx=12)
+    
+    def set_vertical_separator_image(self, frame, column):
+        sep_v_img = PhotoImage(file='img/parts/Main_V_separator.png',height=300)
+        sep_v_img_label = Label(frame, image=sep_v_img, bg='black')
+        sep_v_img_label.image = sep_v_img
+        sep_v_img_label.grid(row=0, column=column, rowspan=3)
+    
+    
+    def set_image(self, frame, img_path, row=0, column=0, height=80):
         img = PhotoImage(file=img_path)
-        img_label = Label(frame, image=img, bg='black')
+        img_label = Label(frame, image=img, bg='black',height=height)
         img_label.image = img
-        img_label.grid(row=0, column=0)
+        img_label.grid(row=row, column=column)
         
         
     def set_frame_configure(self, frame):
@@ -241,6 +298,6 @@ class Home(ttk.Frame):
             frame.rowconfigure(1,weight=2)
             frame.rowconfigure(2,weight=1)
 
-    def set_label(self, frame, title):
-        common_label = Label(frame, text=title, bg='black', fg='white', font=('Arial',20))
-        common_label.grid(row=2, column=0, sticky="NEWS")
+    def set_label(self, frame, title,row=2, column=0, font_size=15):
+        common_label = Label(frame, text=title, bg='black', fg='white', font=('Arial',font_size))
+        common_label.grid(row=row, column=column, sticky="NEWS")

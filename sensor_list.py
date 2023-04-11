@@ -22,7 +22,7 @@ SENSOR_DICT = {
     'CO':['img/sensor/Main-CO.png','img/sensor/CO.png'],
     'CO2':['img/sensor/Main-CO2.png','img/sensor/CO2.png'],
     'NO2':['img/sensor/Main-NO2.png','img/sensor/NO2.png'],
-    'PM25':['Main-PM2.img/sensor/5.png','PM2.img/sensor/5.png'],
+    'PM25':['img/sensor/Main-PM2.5.png','img/sensor/PM2.5.png'],
     'H2S':['img/sensor/Main-H2S.png','img/sensor/H2S.png'],
     'PM10':['img/sensor/Main-PM10.png','img/sensor/PM10.png'],
     'LIGHT':['img/sensor/Main-LIGHT.png','img/sensor/LIGHT.png'],
