@@ -6,7 +6,7 @@ from time import strftime
 class Home(ttk.Frame):
     def __init__(self, parent, controller, show_element, show_wifi):
         super().__init__(parent)
-        # time_update()
+        # self.time_update()
         self.controller = controller
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)

@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
-from home import Home
-from element import Element
-from wifi import Wifi
+from home_screen import Home
+from element_screen import Element
+from wifi_screen import Wifi
 
 
 FULL_SCREEN = False             # (True/False) - (Full Screen/Fixed Size Screen)
