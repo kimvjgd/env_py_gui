@@ -159,16 +159,18 @@ class WifiScreen(ttk.Frame):
         
     def get_wifi_list(self):
         cells = Cell.all('wlan0')
-        try:
-            result = subprocess.check_output(["iwgetid", "-r"])
-        except:
-            result = ''
-        # print("현재 연결된 WiFi의 SSID:", result.decode().strip())
-        self.current_wifi_label.config(text=result.decode().strip())
-        self.current_wifi_label.after(1000, self.get_wifi_list)
         for cell in cells:
             print(cell.ssid)
-        # 여기서 gui update해줘야한다.
+        try:
+            result = subprocess.check_output(["iwgetid", "-r"])
+            # print("현재 연결된 WiFi의 SSID:", result.decode().strip())
+            self.current_wifi_label.config(text=result.decode().strip())
+            self.current_wifi_label.after(1000, self.get_wifi_list)
+            for cell in cells:
+                print(cell.ssid)
+            # 여기서 gui update해줘야한다.
+        except:
+            result = ''
         
         
         
