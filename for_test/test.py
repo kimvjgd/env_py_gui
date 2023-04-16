@@ -1,24 +1,18 @@
 import tkinter as tk
 
-window = tk.Tk()
+my_w = tk.Tk()
+my_w.geometry("800x480")
 
-window.title("Label Tutorial")
-window.geometry("800x480")
+from time import strftime
 
-label = tk.Label(window, text="Insert your text")
-label.grid(row=0, column=0, pady=5, padx=5)
+def my_time():
+    time_string = strftime('%H:%M:%S %p')
+    l1.config(text=time_string)
+    l1.after(1000, my_time)
 
-entry = tk.Entry(window)
-entry.grid(row=0, column=1, pady=5, padx=5)
 
-label1 = tk.Label(window, text="Your text")
-label1.grid(row=1, pady=5, padx=5)
-
-def label_reload():
-    upText = entry.get()
-    label1.configure(text=upText)
-    label1.after(100, label_reload)
-
-label_reload()
-
-window.mainloop()
+my_font = ('times', 52, 'bold')
+l1 = tk.Label(my_w, font=my_font, bg="yellow")
+l1.grid(row=1, column=1, padx=5, pady=25)
+my_time()
+my_w.mainloop()

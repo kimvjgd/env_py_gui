@@ -37,8 +37,9 @@ class EnvSensor(tk.Tk):
         
         # For Home
         ############################################################################################################################################
-        home_frame = Home(container, self, lambda: self.show_element_frame(Element), lambda: self.show_frame(Wifi))
-        home_frame.grid(row=0, column=0, sticky="NESW")
+        self.home_frame = Home(container, self, lambda: self.show_element_frame(Element), lambda: self.show_frame(Wifi))
+        
+        self.home_frame.grid(row=0, column=0, sticky="NESW")
         
         # For Element
         ############################################################################################################################################
@@ -46,11 +47,12 @@ class EnvSensor(tk.Tk):
         self.element_frame.grid(row=0, column=0, sticky="NESW")
         
         
+        
         # For Wifi
         wifi_frame = Wifi(container, self, lambda: self.show_frame(Home))
         wifi_frame.grid(row=0, column=0, sticky="NEWS")
         
-        self.frames[Home] = home_frame
+        self.frames[Home] = self.home_frame
         self.frames[Element] = self.element_frame
         self.frames[Wifi] = wifi_frame
         
@@ -73,7 +75,11 @@ class EnvSensor(tk.Tk):
 
 
 if __name__== '__main__':
+    # time_instance = Home()
+    # time_instance.time_update()
     app = EnvSensor()
+    app.home_frame.time_update()
+    
     app.geometry("800x480")
     app.attributes('-fullscreen', FULL_SCREEN)
     app.mainloop()

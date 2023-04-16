@@ -2,11 +2,11 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 from datetime import datetime
-
+from time import strftime
 class Home(ttk.Frame):
     def __init__(self, parent, controller, show_element, show_wifi):
         super().__init__(parent)
-        
+        # time_update()
         self.controller = controller
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
@@ -63,8 +63,10 @@ class Home(ttk.Frame):
 ################################################################################################################################################################
         from PIL import Image, ImageTk
         #status
-        time_label = tk.Label(status_part, text=datetime.now(),bg='black',fg='white', font=('Arial', 20))
-        time_label.grid(column=0, row=0,sticky="W")
+        self.time_label = tk.Label(status_part,bg='black',text='', fg='white', font=('Arial', 20))
+        self.time_label.grid(column=0, row=0,sticky="W")
+        
+        
         wifi_image = tk.PhotoImage(file='img/wifi/wifi.png')
         
         wifi_button = tk.Button(status_part, image=wifi_image, command=show_wifi, height=20, width=20)
@@ -175,6 +177,8 @@ class Home(ttk.Frame):
             show_element()
             controller.sensor_name = sensor_name
             print(sensor_name)
+        
+        
             
             
         #tvoc_part - contents
@@ -301,3 +305,8 @@ class Home(ttk.Frame):
     def set_label(self, frame, title,row=2, column=0, font_size=15):
         common_label = Label(frame, text=title, bg='black', fg='white', font=('Arial',font_size))
         common_label.grid(row=row, column=column, sticky="NEWS")
+
+    def time_update(self):
+        time_string = strftime('%Y %m %D %H:%M:%S %p')
+        self.time_label.config(text=time_string)
+        self.time_label.after(1000, self.time_update)
