@@ -4,6 +4,8 @@ from home import Home
 from element import Element
 from wifi import Wifi
 
+
+FULL_SCREEN = False             # (True/False) - (Full Screen/Fixed Size Screen)
 PRIMARY_COLOR = "#2e3f4f"
 
 class EnvSensor(tk.Tk):
@@ -52,7 +54,7 @@ class EnvSensor(tk.Tk):
         self.frames[Element] = self.element_frame
         self.frames[Wifi] = wifi_frame
         
-        # First Screen
+        # First Screenu
         self.show_frame(Home)
 
     
@@ -63,7 +65,8 @@ class EnvSensor(tk.Tk):
     
     def show_element_frame(self, container):            # 왜 한박자씩 느려... ㅠ
         print('###sensor name : ',self.sensor_name)
-        self.element_frame.change_image(self.sensor_name)           
+        # Element UI고치느라 주석
+        # self.element_frame.change_image(self.sensor_name)          
         frame = self.frames[container]
         frame.tkraise()
         
@@ -72,5 +75,7 @@ class EnvSensor(tk.Tk):
 if __name__== '__main__':
     app = EnvSensor()
     app.geometry("800x480")
+    app.attributes('-fullscreen', FULL_SCREEN)
     app.mainloop()
 
+# self.get_image(sensor_description_part, 'img/sensor/CH2O.png', 80, 80, 0, 0, 'NEWS', rowspan=2)
