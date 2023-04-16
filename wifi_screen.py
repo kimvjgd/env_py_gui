@@ -5,7 +5,8 @@ from PIL import Image, ImageTk
 # from wifi import Cell, Scheme
 
 
-class Wifi(ttk.Frame):
+# class name을 Wifi로 지으면 안된다.
+class WifiScreen(ttk.Frame):
     def __init__(self, parent, controller, show_home):
         super().__init__(parent)
         

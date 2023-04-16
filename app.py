@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from home_screen import Home
 from element_screen import Element
-from wifi_screen import Wifi
+from wifi_screen import WifiScreen
 
 
 FULL_SCREEN = False             # (True/False) - (Full Screen/Fixed Size Screen)
@@ -37,7 +37,7 @@ class EnvSensor(tk.Tk):
         
         # For Home
         ############################################################################################################################################
-        self.home_frame = Home(container, self, lambda: self.show_element_frame(Element), lambda: self.show_frame(Wifi))
+        self.home_frame = Home(container, self, lambda: self.show_element_frame(Element), lambda: self.show_frame(WifiScreen))
         
         self.home_frame.grid(row=0, column=0, sticky="NESW")
         
@@ -49,12 +49,12 @@ class EnvSensor(tk.Tk):
         
         
         # For Wifi
-        wifi_frame = Wifi(container, self, lambda: self.show_frame(Home))
+        wifi_frame = WifiScreen(container, self, lambda: self.show_frame(Home))
         wifi_frame.grid(row=0, column=0, sticky="NEWS")
         
         self.frames[Home] = self.home_frame
         self.frames[Element] = self.element_frame
-        self.frames[Wifi] = wifi_frame
+        self.frames[WifiScreen] = wifi_frame
         
         # First Screenu
         self.show_frame(Home)
