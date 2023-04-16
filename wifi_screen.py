@@ -84,8 +84,8 @@ class WifiScreen(ttk.Frame):
         current_wifi_title_part = tk.Frame(main_part, bg='black')
         current_wifi_title_part.grid(row=1, column=0,sticky='NEWS')
         
-        self.current_wifi_title_label = Label(current_wifi_title_part, text='현재 네트워크',fg='white', bg='black', font=('Arial',15), padx=30)
-        self.current_wifi_title_label.grid(row=0, column=0)
+        current_wifi_title_label = Label(current_wifi_title_part, text='현재 네트워크',fg='white', bg='black', font=('Arial',15), padx=30)
+        current_wifi_title_label.grid(row=0, column=0)
 
         current_wifi_part = tk.Frame(main_part, bg='black')
         current_wifi_part.grid(row=2, column=0,sticky='NEWS')
@@ -98,8 +98,8 @@ class WifiScreen(ttk.Frame):
         
         self.get_image(current_wifi_part, 'img/wifi/Wi-Fi-01.png', 25, 25, 0 ,0, 'E', command=nothing_func)
         
-        current_wifi_label = Label(current_wifi_part, font=('Arial', 15), padx=14, fg='white', bg='black')
-        current_wifi_label.grid(row=0, column=1, sticky='W')
+        self.current_wifi_label = Label(current_wifi_part, font=('Arial', 15), padx=14, fg='white', bg='black')
+        self.current_wifi_label.grid(row=0, column=1, sticky='W')
 
         available_wifi_title_part = tk.Frame(main_part, bg='black')
         available_wifi_title_part.grid(row=3, column=0,sticky='NEWS')
@@ -159,10 +159,13 @@ class WifiScreen(ttk.Frame):
         
     def get_wifi_list(self):
         cells = Cell.all('wlan0')
-        result = subprocess.check_output(["iwgetid", "-r"])
+        try:
+            result = subprocess.check_output(["iwgetid", "-r"])
+        except:
+            result = ''
         # print("현재 연결된 WiFi의 SSID:", result.decode().strip())
-        self.current_wifi_title_label.config(text=result.decode().strip())
-        self.current_wifi_title_label.after(1000, self.get_wifi_list)
+        self.current_wifi_label.config(text=result.decode().strip())
+        self.current_wifi_label.after(1000, self.get_wifi_list)
         for cell in cells:
             print(cell.ssid)
         # 여기서 gui update해줘야한다.
