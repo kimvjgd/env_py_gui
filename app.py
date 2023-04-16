@@ -49,12 +49,12 @@ class EnvSensor(tk.Tk):
         
         
         # For Wifi
-        wifi_frame = WifiScreen(container, self, lambda: self.show_frame(Home))
-        wifi_frame.grid(row=0, column=0, sticky="NEWS")
+        self.wifi_frame = WifiScreen(container, self, lambda: self.show_frame(Home))
+        self.wifi_frame.grid(row=0, column=0, sticky="NEWS")
         
         self.frames[Home] = self.home_frame
         self.frames[Element] = self.element_frame
-        self.frames[WifiScreen] = wifi_frame
+        self.frames[WifiScreen] = self.wifi_frame
         
         # First Screenu
         self.show_frame(Home)
@@ -79,6 +79,7 @@ if __name__== '__main__':
     # time_instance.time_update()
     app = EnvSensor()
     app.home_frame.time_update()
+    app.wifi_frame.get_wifi_list()
     
     app.geometry("800x480")
     app.attributes('-fullscreen', FULL_SCREEN)

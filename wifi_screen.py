@@ -2,17 +2,14 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
-# from wifi import Cell, Scheme
-
+from wifi import Cell, Scheme
+import subprocess
 
 # class name을 Wifi로 지으면 안된다.
 class WifiScreen(ttk.Frame):
     def __init__(self, parent, controller, show_home):
         super().__init__(parent)
         
-        # cells = Cell.all('wlan0')
-        # for cell in cells:
-        #     print(cell.ssid)
         self.show_home = show_home
         
         self.controller = controller
@@ -159,3 +156,14 @@ class WifiScreen(ttk.Frame):
         img_label = Button(frame, image=photo_img, bg='black', command=command,bd=0)        # bd = border
         img_label.image = photo_img
         img_label.grid(row=row, column=column, sticky=sticky)
+        
+    def get_wifi_list(self):
+        cells = Cell.all('wlan0')
+        result = subprocess.check_output(["iwgetid", "-r"])
+        print("현재 연결된 WiFi의 SSID:", result.decode().strip())
+        for cell in cells:
+            print(cell.ssid)
+        # 여기서 gui update해줘야한다.
+        
+        
+        
