@@ -65,17 +65,21 @@ class EnvSensor(tk.Tk):
         frame = self.frames[container]
         frame.tkraise()
     
-    def show_element_frame(self, container):            # 왜 한박자씩 느려... 
+    def show_element_frame(self, container):
         # Element UI고치느라 주석
         self.element_frame.change_image(self.sensor_name)  
-        print('!!!!!!!!app sensor_name!!!!!!!!')
-        print(self.sensor_name)
         frame = self.frames[container]
         frame.tkraise()
         
 
 
+
+
 if __name__== '__main__':
+
+    u = UartDataThread()
+    u.start()
+
     app = EnvSensor()
     app.home_frame.time_update()
     # app.wifi_frame.get_wifi_list()
@@ -83,7 +87,4 @@ if __name__== '__main__':
     app.geometry("800x480")
     app.attributes('-fullscreen', FULL_SCREEN)
     app.mainloop()
-    
-    u = UartDataThread()
-    u.start()
 # self.get_image(sensor_description_part, 'img/sensor/CH2O.png', 80, 80, 0, 0, 'NEWS', rowspan=2)
