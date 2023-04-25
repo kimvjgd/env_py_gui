@@ -3,10 +3,11 @@ from tkinter import ttk
 from home_screen import Home
 from element_screen import Element
 from wifi_screen import WifiScreen
-
+from uart_data_thread import UartDataThread
 
 FULL_SCREEN = False             # (True/False) - (Full Screen/Fixed Size Screen)
 PRIMARY_COLOR = "#2e3f4f"
+           
 
 class EnvSensor(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -62,27 +63,27 @@ class EnvSensor(tk.Tk):
     
     def show_frame(self, container):
         frame = self.frames[container]
-        print('sensor name : ',self.sensor_name)
         frame.tkraise()
     
-    def show_element_frame(self, container):            # 왜 한박자씩 느려... ㅠ
-        print('###sensor name : ',self.sensor_name)
+    def show_element_frame(self, container):            # 왜 한박자씩 느려... 
         # Element UI고치느라 주석
-        # self.element_frame.change_image(self.sensor_name)          
+        self.element_frame.change_image(self.sensor_name)  
+        print('!!!!!!!!app sensor_name!!!!!!!!')
+        print(self.sensor_name)
         frame = self.frames[container]
         frame.tkraise()
         
 
 
 if __name__== '__main__':
-    # time_instance = Home()
-    # time_instance.time_update()
     app = EnvSensor()
     app.home_frame.time_update()
-    app.wifi_frame.get_wifi_list()
+    # app.wifi_frame.get_wifi_list()
     
     app.geometry("800x480")
     app.attributes('-fullscreen', FULL_SCREEN)
     app.mainloop()
-
+    
+    u = UartDataThread()
+    u.start()
 # self.get_image(sensor_description_part, 'img/sensor/CH2O.png', 80, 80, 0, 0, 'NEWS', rowspan=2)

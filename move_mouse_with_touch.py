@@ -15,7 +15,6 @@ last_y = 0
 
 
 
-clickTrigger = False
 
 try:
     while 1:

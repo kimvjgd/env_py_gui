@@ -3,6 +3,9 @@ from tkinter import ttk
 from tkinter import *
 from datetime import datetime
 from time import strftime
+
+
+
 class Home(ttk.Frame):
     def __init__(self, parent, controller, show_element, show_wifi):
         super().__init__(parent)
@@ -173,10 +176,11 @@ class Home(ttk.Frame):
         # element_button.grid(row=0, column=1, sticky="NEWS", pady = (10,0))
 
         
+        
         def event_func(event, sensor_name):
-            show_element()
+            # 순서 바꾸면 안돼!!!!
             controller.sensor_name = sensor_name
-            print(sensor_name)
+            show_element()
         
         
             
@@ -310,3 +314,5 @@ class Home(ttk.Frame):
         time_string = strftime('%Y %m %D %H:%M:%S %p')
         self.time_label.config(text=time_string)
         self.time_label.after(1000, self.time_update)
+    
+    
