@@ -12,7 +12,23 @@ PRIMARY_COLOR = "#2e3f4f"
 class EnvSensor(tk.Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.temperature = tk.StringVar(value=36.7)
+        self.TVOC = tk.StringVar(value=0)
+        self.CO2 = tk.StringVar(value=0)
+        self.PM25 = tk.StringVar(value=0)
+        self.PM10 = tk.StringVar(value=0)
+        self.CH2O = tk.StringVar(value=0)
+        self.Sm = tk.StringVar(value=0)
+        self.NH3 = tk.StringVar(value=0)
+        self.CO = tk.StringVar(value=0)
+        self.NO2 = tk.StringVar(value=0)
+        self.H2S = tk.StringVar(value=0)
+        self.LIGHT = tk.StringVar(value=0)
+        self.SOUND = tk.StringVar(value=0)
+        self.Rn = tk.StringVar(value=0)
+        self.O3 = tk.StringVar(value=0)
+        self.temperature = tk.StringVar(value=0)
+        self.humidity = tk.StringVar(value=0)
+        
         style = ttk.Style(self)
         style.theme_use("clam")
         
@@ -38,7 +54,7 @@ class EnvSensor(tk.Tk):
         
         # For Home
         ############################################################################################################################################
-        self.home_frame = Home(container, self, lambda: self.show_element_frame(Element), lambda: self.show_frame(WifiScreen))
+        self.home_frame = Home(container, self, lambda: self.show_element_frame(Element), lambda: self.show_frame(WifiScreen), self.temperature.get())
         
         self.home_frame.grid(row=0, column=0, sticky="NESW")
         
@@ -72,7 +88,23 @@ class EnvSensor(tk.Tk):
         frame.tkraise()
     
     def get_temp(self):
-        print(self.temperature.get())
+        print(self.TVOC)
+        print(self.CO2)
+        print(self.PM25)
+        print(self.PM10)
+        print(self.CH2O)
+        print(self.Sm)
+        print(self.NH3)
+        print(self.CO)
+        print(self.NO2)
+        print(self.H2S)
+        print(self.LIGHT)
+        print(self.SOUND)
+        print(self.Rn)
+        print(self.O3)
+        print(self.temperature)
+        print(self.humidity)
+        
         self.after(1000, self.get_temp)
         
 import uart_data_thread
@@ -90,7 +122,9 @@ if __name__== '__main__':
     u.start()
 
     # home = app.home_frame
-    app.get_temp()
+    # app.get_temp()
+    app.home_frame.get_all_data()
+    # app.home_frame.get_temperature(temperature=app.temperature.get())
     app.home_frame.time_update()
     
     # app.home_frame.data_get(u.TVOC,u.CO2,u.PM25,u.PM10,u.CH2O,u.Sm,u.NH3,u.CO,u.NO2,u.H2S,u.LIGHT,u.SOUND,u.Rn,u.O3,u.temperature,u.humidity)

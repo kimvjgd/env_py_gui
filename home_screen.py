@@ -8,7 +8,7 @@ import uart_data_thread
 
 
 class Home(ttk.Frame):
-    def __init__(self, parent, controller, show_element, show_wifi):
+    def __init__(self, parent, controller, show_element, show_wifi, temperature):
         super().__init__(parent)
         
         self.TVOC = 0.0
@@ -26,7 +26,7 @@ class Home(ttk.Frame):
         self.SOUND = 0.0
         self.Rn = 0.0
         self.O3 = 0.0
-        self.temperature = 0.0
+        self.temperature = temperature
         # self.temperature = tk.StringVar(value=37.5)
         self.humidity = 0.0
         
@@ -104,12 +104,16 @@ class Home(ttk.Frame):
         
         # temperature
         self.set_image(temp_hum_part, 'img/temperature/temp_img.png', row=0, column=0, height=40)
-        self.set_label(temp_hum_part, '36.7°C', row=0, column=1)
+        # self.set_label(temp_hum_part, self.temperature, row=0, column=1)
+        self.temp_label = Label(temp_hum_part, text=self.temperature, bg='black', fg='white', font=('Arial', 15))
+        self.temp_label.grid(row=0, column=1, sticky='NEWS')
         self.set_image(temp_hum_part, 'img/temperature/temp5.png', row=0, column=2, height=20)
 
         # humidity
         self.set_image(temp_hum_part, 'img/humidity/humidity_img.png', row=0, column=3, height=40)
-        self.set_label(temp_hum_part, '53%', row=0, column=4)
+        # self.set_label(temp_hum_part, '53%', row=0, column=4)
+        self.humidity_label = Label(temp_hum_part, text=self.humidity, bg='black', fg='white', font=('Arial', 15))
+        self.humidity_label.grid(row=0, column=4, sticky='NEWS')
         self.set_image(temp_hum_part, 'img/humidity/humidity5.png', row=0, column=5, height=20)
         
         
@@ -119,71 +123,95 @@ class Home(ttk.Frame):
         tvoc_part = tk.Frame(sensor_part,bg="black")
         tvoc_part.grid(row=0,column=0,sticky='NEWS')
         self.set_frame_configure(tvoc_part)
+        self.TVOC_label = Label(tvoc_part, text=self.TVOC, bg='black', fg='white', font=('Arial', 15))
+        self.TVOC_label.grid(row=1, column=0, sticky='NEWS')
+        
         
         co_part = tk.Frame(sensor_part, bg='black')
         co_part.grid(row=2,column=0,sticky='NEWS')
         self.set_frame_configure(co_part)
-        
+        self.CO_label = Label(co_part, text=self.CO, bg='black', fg='white', font=('Arial', 15))
+        self.CO_label.grid(row=1, column=0, sticky='NEWS')
         
 
         co2_part = tk.Frame(sensor_part, bg='black')
         co2_part.grid(row=0,column=2,sticky='NEWS')
         self.set_frame_configure(co2_part)
-
+        self.CO2_label = Label(co2_part, text=self.CO2, bg='black', fg='white', font=('Arial', 15))
+        self.CO2_label.grid(row=1, column=0, sticky='NEWS')
 
         no2_part = tk.Frame(sensor_part, bg='black')
         no2_part.grid(row=2,column=2,sticky='NEWS')
         self.set_frame_configure(no2_part)
-
+        self.NO2_label = Label(no2_part, text=self.NO2, bg='black', fg='white', font=('Arial', 15))
+        self.NO2_label.grid(row=1, column=0, sticky='NEWS')
 
         pm25_part = tk.Frame(sensor_part, bg='black')
         pm25_part.grid(row=0,column=4,sticky='NEWS')
         self.set_frame_configure(pm25_part)
-
+        self.PM25_label = Label(pm25_part, text=self.PM25, bg='black', fg='white', font=('Arial', 15))
+        self.PM25_label.grid(row=1, column=0, sticky='NEWS')
 
         h2s_part = tk.Frame(sensor_part, bg='black')
         h2s_part.grid(row=2,column=4,sticky='NEWS')
         self.set_frame_configure(h2s_part)
-
+        self.H2S_label = Label(h2s_part, text=self.H2S, bg='black', fg='white', font=('Arial', 15))
+        self.H2S_label.grid(row=1, column=0, sticky='NEWS')
 
         pm10_part = tk.Frame(sensor_part, bg='black')
         pm10_part.grid(row=0,column=6,sticky='NEWS')
         self.set_frame_configure(pm10_part)
-
+        self.PM10_label = Label(pm10_part, text=self.PM10, bg='black', fg='white', font=('Arial', 15))
+        self.PM10_label.grid(row=1, column=0, sticky='NEWS')
 
         light_part = tk.Frame(sensor_part, bg='black')
         light_part.grid(row=2,column=6,sticky='NEWS')
         self.set_frame_configure(light_part)
-
+        self.Light_label = Label(light_part, text=self.LIGHT, bg='black', fg='white', font=('Arial', 15))
+        self.Light_label.grid(row=1, column=0, sticky='NEWS')
 
         ch2o_part = tk.Frame(sensor_part, bg='black')
         ch2o_part.grid(row=0,column=8,sticky='NEWS')
         self.set_frame_configure(ch2o_part)
+        self.CH2O_label = Label(ch2o_part, text=self.CH2O, bg='black', fg='white', font=('Arial', 15))
+        self.CH2O_label.grid(row=1, column=0, sticky='NEWS')
+
 
 
         sound_part = tk.Frame(sensor_part, bg='black')
         sound_part.grid(row=2,column=8,sticky='NEWS')
         self.set_frame_configure(sound_part)
+        self.Sound_label = Label(sound_part, text=self.SOUND, bg='black', fg='white', font=('Arial', 15))
+        self.Sound_label.grid(row=1, column=0, sticky='NEWS')
+
 
 
         sm_part = tk.Frame(sensor_part, bg='black')
         sm_part.grid(row=0,column=10,sticky='NEWS')
         self.set_frame_configure(sm_part)
+        self.Sm_label = Label(sm_part, text=self.Sm, bg='black', fg='white', font=('Arial', 15))
+        self.Sm_label.grid(row=1, column=0, sticky='NEWS')
 
 
         rn_part = tk.Frame(sensor_part, bg='black')
         rn_part.grid(row=2,column=10,sticky='NEWS')
         self.set_frame_configure(rn_part)
+        self.Rn_label = Label(rn_part, text=self.Rn, bg='black', fg='white', font=('Arial', 15))
+        self.Rn_label.grid(row=1, column=0, sticky='NEWS')
 
 
         nh3_part = tk.Frame(sensor_part, bg='black')
         nh3_part.grid(row=0,column=12,sticky='NEWS')
         self.set_frame_configure(nh3_part)
+        self.NH3_label = Label(nh3_part, text=self.NH3, bg='black', fg='white', font=('Arial', 15))
+        self.NH3_label.grid(row=1, column=0, sticky='NEWS')
 
 
         o3_part = tk.Frame(sensor_part, bg='black')
         o3_part.grid(row=2,column=12,sticky='NEWS')
         self.set_frame_configure(o3_part)
+        self.O3_label = Label(o3_part, text=self.O3, bg='black', fg='white', font=('Arial', 15))
+        self.O3_label.grid(row=1, column=0, sticky='NEWS')
         
         
 
@@ -325,8 +353,9 @@ class Home(ttk.Frame):
     def set_frame_configure(self, frame):
             frame.columnconfigure(0, weight=1)
             frame.rowconfigure(0,weight=2)
-            frame.rowconfigure(1,weight=2)
+            frame.rowconfigure(1,weight=1)
             frame.rowconfigure(2,weight=1)
+            frame.rowconfigure(3,weight=1)
 
     def set_label(self, frame, title,row=2, column=0, font_size=15):
         common_label = Label(frame, text=title, bg='black', fg='white', font=('Arial',font_size))
@@ -337,6 +366,60 @@ class Home(ttk.Frame):
         self.time_label.config(text=time_string)
         self.time_label.after(1000, self.time_update)
         # print(uart_data_thread.TVOC)
+    
+    def get_all_data(self):
+        self.temperature = self.controller.temperature
+        self.temp_label.config(text=self.temperature)
+        self.humidity = self.controller.humidity
+        self.humidity_label.config(text=self.humidity)
+        # 밑에 마저 해야한다.
+        self.TVOC = self.controller.TVOC
+        self.TVOC_label.config(text=self.TVOC)
+        
+        self.CO2 = self.controller.CO2
+        self.CO2_label.config(text=self.CO2)
+        
+        self.PM25 = self.controller.PM25
+        self.PM25_label.config(text=self.PM25)
+        
+        self.PM10 = self.controller.PM10
+        self.PM10_label.config(text=self.PM10)
+        
+        self.CH2O = self.controller.CH2O
+        self.CH2O_label.config(text=self.CH2O)
+        
+        self.Sm = self.controller.Sm
+        self.Sm_label.config(text=self.Sm)
+        
+        self.NH3 = self.controller.NH3
+        self.NH3_label.config(text=self.NH3)
+        
+        self.CO = self.controller.CO
+        self.CO_label.config(text=self.CO)
+        
+        self.NO2 = self.controller.NO2
+        self.NO2_label.config(text=self.NO2)
+        
+        self.H2S = self.controller.H2S
+        self.H2S_label.config(text=self.H2S)
+        
+        self.LIGHT = self.controller.LIGHT
+        self.Light_label.config(text=self.LIGHT)
+        
+        self.SOUND = self.controller.SOUND
+        self.Sound_label.config(text=self.SOUND)
+        
+        self.Rn = self.controller.Rn
+        self.Rn_label.config(text=self.Rn)
+        
+        self.O3 = self.controller.O3
+        self.O3_label.config(text=self.O3)
+        
+        
+        
+        self.after(1000, self.get_all_data)
+        # self.temp_label.after(1000, self.get_temperature, temperature)      # 맨뒤에 매개변수를 계속 넣어줘야해!!!!
+        
 
     # def get_one_data(self, TVOC):
     #     self.TVOC = TVOC
@@ -347,56 +430,3 @@ class Home(ttk.Frame):
     #     # 일단 time_label은 임시로 썼다@
     #     self.time_label.after(1000, self.get_one_data, TVOC)
     
-        
-    # def data_get(self, TVOC,CO2,PM25,PM10,CH2O,Sm,NH3,CO,NO2,H2S,LIGHT,SOUND,Rn,O3,temperature,humidity):
-    #     self.TVOC = TVOC
-    #     self.CO2 = CO2
-    #     self.PM25 = PM25
-    #     self.PM10 = PM10
-    #     self.CH2O = CH2O
-    #     self.Sm = Sm
-    #     self.NH3 = NH3
-    #     self.CO = CO
-    #     self.NO2 = NO2
-    #     self.H2S = H2S
-    #     self.LIGHT = LIGHT
-    #     self.SOUND = SOUND
-    #     self.Rn = Rn
-    #     self.O3 = O3
-    #     self.temperature = temperature
-    #     self.humidity = humidity
-    #     print('TVOC         :   ', end='')
-    #     print(TVOC)
-    #     print('CO2          :   ', end='')
-    #     print(CO2)
-    #     print('PM25         :   ', end='')
-    #     print(PM25)
-    #     print('PM10         :   ', end='')
-    #     print(PM10)
-    #     print('CH2O         :   ', end='')
-    #     print(CH2O)
-    #     print('Sm           :   ', end='')
-    #     print(Sm)
-    #     print('NH3          :   ', end='')
-    #     print(NH3)
-    #     print('CO           :   ', end='')
-    #     print(CO)
-    #     print('NO2          :   ', end='')
-    #     print(NO2)
-    #     print('H2S          :   ', end='')
-    #     print(H2S)
-    #     print('LIGHT        :   ', end='')
-    #     print(LIGHT)
-    #     print('SOUND        :   ', end='')
-    #     print(SOUND)
-    #     print('Rn           :   ', end='')
-    #     print(Rn)
-    #     print('O3           :   ', end='')
-    #     print(O3)
-    #     print('temperature  :   ', end='')
-    #     print(temperature)
-    #     print('humidity     :   ', end='')
-    #     print(humidity)
-    #     self.after(100, self.data_get)
-    
-        
