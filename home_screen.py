@@ -3,12 +3,34 @@ from tkinter import ttk
 from tkinter import *
 from datetime import datetime
 from time import strftime
+import uart_data_thread
 
 
 
 class Home(ttk.Frame):
     def __init__(self, parent, controller, show_element, show_wifi):
         super().__init__(parent)
+        
+        self.TVOC = 0.0
+        # self.TVOC = tk.StringVar(value=123)
+        self.CO2 = 0.0
+        self.PM25 = 0.0
+        self.PM10 = 0.0
+        self.CH2O = 0.0
+        self.Sm = 0.0
+        self.NH3 = 0.0
+        self.CO = 0.0
+        self.NO2 = 0.0
+        self.H2S = 0.0
+        self.LIGHT = 0.0
+        self.SOUND = 0.0
+        self.Rn = 0.0
+        self.O3 = 0.0
+        self.temperature = 0.0
+        # self.temperature = tk.StringVar(value=37.5)
+        self.humidity = 0.0
+        
+        
         # self.time_update()
         self.controller = controller
         self.columnconfigure(0, weight=1)
@@ -314,5 +336,67 @@ class Home(ttk.Frame):
         time_string = strftime('%Y %m %D %H:%M:%S %p')
         self.time_label.config(text=time_string)
         self.time_label.after(1000, self.time_update)
+        # print(uart_data_thread.TVOC)
+
+    # def get_one_data(self, TVOC):
+    #     self.TVOC = TVOC
+    #     print('Right reception')
+    #     print('TVOC : ', self.TVOC)
+    #     print('global TVOC : ', uart_data_thread.TVOC)
+
+    #     # 일단 time_label은 임시로 썼다@
+    #     self.time_label.after(1000, self.get_one_data, TVOC)
     
+        
+    # def data_get(self, TVOC,CO2,PM25,PM10,CH2O,Sm,NH3,CO,NO2,H2S,LIGHT,SOUND,Rn,O3,temperature,humidity):
+    #     self.TVOC = TVOC
+    #     self.CO2 = CO2
+    #     self.PM25 = PM25
+    #     self.PM10 = PM10
+    #     self.CH2O = CH2O
+    #     self.Sm = Sm
+    #     self.NH3 = NH3
+    #     self.CO = CO
+    #     self.NO2 = NO2
+    #     self.H2S = H2S
+    #     self.LIGHT = LIGHT
+    #     self.SOUND = SOUND
+    #     self.Rn = Rn
+    #     self.O3 = O3
+    #     self.temperature = temperature
+    #     self.humidity = humidity
+    #     print('TVOC         :   ', end='')
+    #     print(TVOC)
+    #     print('CO2          :   ', end='')
+    #     print(CO2)
+    #     print('PM25         :   ', end='')
+    #     print(PM25)
+    #     print('PM10         :   ', end='')
+    #     print(PM10)
+    #     print('CH2O         :   ', end='')
+    #     print(CH2O)
+    #     print('Sm           :   ', end='')
+    #     print(Sm)
+    #     print('NH3          :   ', end='')
+    #     print(NH3)
+    #     print('CO           :   ', end='')
+    #     print(CO)
+    #     print('NO2          :   ', end='')
+    #     print(NO2)
+    #     print('H2S          :   ', end='')
+    #     print(H2S)
+    #     print('LIGHT        :   ', end='')
+    #     print(LIGHT)
+    #     print('SOUND        :   ', end='')
+    #     print(SOUND)
+    #     print('Rn           :   ', end='')
+    #     print(Rn)
+    #     print('O3           :   ', end='')
+    #     print(O3)
+    #     print('temperature  :   ', end='')
+    #     print(temperature)
+    #     print('humidity     :   ', end='')
+    #     print(humidity)
+    #     self.after(100, self.data_get)
     
+        

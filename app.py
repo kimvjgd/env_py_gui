@@ -12,7 +12,7 @@ PRIMARY_COLOR = "#2e3f4f"
 class EnvSensor(tk.Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
+        self.temperature = tk.StringVar(value=36.7)
         style = ttk.Style(self)
         style.theme_use("clam")
         
@@ -70,18 +70,33 @@ class EnvSensor(tk.Tk):
         self.element_frame.change_image(self.sensor_name)  
         frame = self.frames[container]
         frame.tkraise()
+    
+    def get_temp(self):
+        print(self.temperature.get())
+        self.after(1000, self.get_temp)
         
+import uart_data_thread
+
+def pprint():
+    print('일단 이거는 당연히 되는거지')
 
 
 
 
 if __name__== '__main__':
 
-    u = UartDataThread()
+    app = EnvSensor()
+    u = UartDataThread(app)
     u.start()
 
-    app = EnvSensor()
+    # home = app.home_frame
+    app.get_temp()
     app.home_frame.time_update()
+    
+    # app.home_frame.data_get(u.TVOC,u.CO2,u.PM25,u.PM10,u.CH2O,u.Sm,u.NH3,u.CO,u.NO2,u.H2S,u.LIGHT,u.SOUND,u.Rn,u.O3,u.temperature,u.humidity)
+    # temp_number = u.TVOC_VALUE
+    # print('u.TVOC_VALUE : ', temp_number)
+    # app.home_frame.get_one_data(temp_number)
     # app.wifi_frame.get_wifi_list()
     
     app.geometry("800x480")
