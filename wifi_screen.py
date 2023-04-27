@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 from wifi import Cell, Scheme
+import wifi
 import subprocess
 
 # class name을 Wifi로 지으면 안된다.
@@ -103,9 +104,17 @@ class WifiScreen(ttk.Frame):
 
         available_wifi_title_part = tk.Frame(main_part, bg='black')
         available_wifi_title_part.grid(row=3, column=0,sticky='NEWS')
+        available_wifi_title_part.rowconfigure(0, weight=1)
+        available_wifi_title_part.columnconfigure(0, weight=10)
+        available_wifi_title_part.columnconfigure(1, weight=1)
 
         available_wifi_title_label = Label(available_wifi_title_part, text='사용 가능한 네트워크',fg='white', bg='black', font=('Arial',15), padx=30)
         available_wifi_title_label.grid(row=0, column=0)
+        
+        self.get_image(available_wifi_title_part, 'img/wifi/refresh_wifi.png', 25, 25, 0, 0, "NEWS")
+        
+        
+        
         
         # available_wifi_title_label = Label(available_wifi_title_part, text='available_wifi_title_part')
         # available_wifi_title_label.grid(row=0, column=0)
@@ -173,6 +182,7 @@ class WifiScreen(ttk.Frame):
             result = ''
             
         self.current_wifi_label.after(1000, self.get_wifi_list)
-        
+    
+    
         
         
