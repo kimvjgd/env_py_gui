@@ -4,7 +4,7 @@ from tkinter import *
 from datetime import datetime
 from time import strftime
 import uart_data_thread
-
+import sys
 
 
 class Home(ttk.Frame):
@@ -44,6 +44,7 @@ class Home(ttk.Frame):
         status_part.grid(row=0, column=0, sticky="NEWS")
         status_part.columnconfigure(0, weight=10)
         status_part.columnconfigure(1, weight=1)
+        status_part.columnconfigure(2, weight=1)
         status_part.rowconfigure(0, weight=1)
         
         
@@ -93,10 +94,17 @@ class Home(ttk.Frame):
         
         
         wifi_image = tk.PhotoImage(file='img/wifi/wifi.png')
+        quit_image = tk.PhotoImage(file='img/wifi/refresh_wifi.png')
         
         wifi_button = tk.Button(status_part, image=wifi_image, command=show_wifi, height=20, width=20)
         wifi_button.image = wifi_image                  # to keep a ref
         wifi_button.grid(column=1,row=0)
+        
+        # Temporary Quit Button
+        quit_button = tk.Button(status_part, image=quit_image, command=controller.destroy, height=20, width=20)
+        quit_button.image = quit_image                  # to keep a ref
+        quit_button.grid(column=2,row=0)
+        
         
         
         
@@ -429,4 +437,5 @@ class Home(ttk.Frame):
 
     #     # 일단 time_label은 임시로 썼다@
     #     self.time_label.after(1000, self.get_one_data, TVOC)
-    
+    def quit_program(self):
+        sys.exit()
