@@ -22,9 +22,9 @@ class Element(ttk.Frame):
         
         status_part.rowconfigure(0, weight=1)
 
-        status_part.columnconfigure(0, weight=1)
-        status_part.columnconfigure(1, weight=10)
-        status_part.columnconfigure(2, weight=1)
+        status_part.columnconfigure(0, weight=3)
+        status_part.columnconfigure(1, weight=20)
+        status_part.columnconfigure(2, weight=2)
         
         back_button_part = tk.Frame(status_part, bg='black')
         back_button_part.grid(row=0, column=0, sticky="NEWS", pady=10,ipadx=0, ipady=0)
@@ -35,8 +35,8 @@ class Element(ttk.Frame):
         back_button_part.bind("<Button-1>", show_home)
         
         # self.get_button(back_button_part, show_home, "img/parts/back_button.png", 25, 25,0, 0, 'NE')
-        self.get_image(back_button_part, "img/parts/back_button.png", 25, 25,0, 0, 'NE', command=show_home)
-        back_label = Label(back_button_part, text='MAIN', font=('Arial', 20), fg='white', bg='black')
+        self.get_image(back_button_part, "img/parts/back_button.png", 30, 30,0, 0, 'E', command=show_home)
+        back_label = Label(back_button_part, text='MAIN', font=('Arial', 30), fg='white', bg='black', pady=3)
         back_label.grid(row=0, column=1, sticky='NW')
         
         # 나중에 정리....
@@ -72,9 +72,9 @@ class Element(ttk.Frame):
         # image_name = 'img/sensor/' + controller.sensor_name + '.png'
         # self.get_image(sensor_description_part, image_name, 80, 80, 0, 0, 'NEWS', rowspan=2)
         sensor_img = Image.open(image_path)
-        resized_img = sensor_img.resize((80, 80), Image.ANTIALIAS)
+        resized_img = sensor_img.resize((70, 70), Image.ANTIALIAS)
         sensor_image = ImageTk.PhotoImage(resized_img)
-        self.img_label = Label(sensor_description_part, image=sensor_image, bg='red')
+        self.img_label = Label(sensor_description_part, image=sensor_image, bg='green')
         self.img_label.image = sensor_image
         self.img_label.grid(row=0, column=0, rowspan=2, sticky='NEWS')
         

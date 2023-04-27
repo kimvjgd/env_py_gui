@@ -16,3 +16,5 @@ l1 = tk.Label(my_w, font=my_font, bg="yellow")
 l1.grid(row=1, column=1, padx=5, pady=25)
 my_time()
 my_w.mainloop()
+
+

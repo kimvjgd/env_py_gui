@@ -3,7 +3,9 @@ from tkinter import ttk
 from home_screen import Home
 from element_screen import Element
 from wifi_screen import WifiScreen
-from uart_data_thread import UartDataThread
+
+# 나중에 링크 풀어줘야한다.
+# from uart_data_thread import UartDataThread
 
 FULL_SCREEN = False             # (True/False) - (Full Screen/Fixed Size Screen)
 PRIMARY_COLOR = "#2e3f4f"
@@ -54,7 +56,7 @@ class EnvSensor(tk.Tk):
         
         # For Home
         ############################################################################################################################################
-        self.home_frame = Home(container, self, lambda: self.show_element_frame(Element), lambda: self.show_frame(WifiScreen), self.temperature.get())
+        self.home_frame = Home(container, self, lambda: self.show_element_frame(Element), lambda: self.show_frame(WifiScreen))
         
         self.home_frame.grid(row=0, column=0, sticky="NESW")
         
@@ -118,8 +120,9 @@ def pprint():
 if __name__== '__main__':
 
     app = EnvSensor()
-    u = UartDataThread(app)
-    u.start()
+    # 나중에 주석을 풀어줘야 한다.
+    # u = UartDataThread(app)
+    # u.start()
 
     # home = app.home_frame
     # app.get_temp()

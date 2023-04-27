@@ -31,7 +31,7 @@ class WifiScreen(ttk.Frame):
         status_part.columnconfigure(2, weight=1)
         
         back_button_part = tk.Frame(status_part, bg='black')
-        back_button_part.grid(row=0, column=0, sticky="NEWS", pady=10,ipadx=0, ipady=0)
+        back_button_part.grid(row=0, column=0, sticky="NEWS", pady=0,ipadx=0, ipady=0)
         back_button_part.place(relx=0.1, rely=0.5, anchor='c')          # 안맞으면...그냥 해야함... 나도 이유 모름... 그냥.... 그냥 함...  아니면 골 때려짐
         back_button_part.rowconfigure(0, weight=1)
         back_button_part.columnconfigure(0, weight=1)
@@ -39,8 +39,8 @@ class WifiScreen(ttk.Frame):
         back_button_part.bind("<Button-1>", show_home)
         
         # self.get_button(back_button_part, show_home, "img/parts/back_button.png", 25, 25,0, 0, 'NE')
-        self.get_image(back_button_part, "img/parts/back_button.png", 25, 25,0, 0, 'NE', command=show_home)
-        back_label = Label(back_button_part, text='BACK', font=('Arial', 20), fg='white', bg='black')
+        self.get_image(back_button_part, "img/parts/back_button.png", 30, 30,0, 0, 'E', command=show_home)
+        back_label = Label(back_button_part, text='BACK', font=('Arial', 30), fg='white', bg='black', pady=3)
         back_label.grid(row=0, column=1, sticky='NW')
         
         # 나중에 정리....
@@ -77,13 +77,13 @@ class WifiScreen(ttk.Frame):
         
         # add_wifi_title_part.place(relx=0.1, rely=0.5, anchor='c')
         
-        wifi_title_label = Label(wifi_title_part, text='Wi-Fi', font=('Arial',20), fg='blue', bg='black')
+        wifi_title_label = Label(wifi_title_part, text='Wi-Fi', font=('Arial',22), fg='blue', bg='black')
         wifi_title_label.grid(row=0, column=0,sticky="W", padx=20)
         
         current_wifi_title_part = tk.Frame(main_part, bg='black')
         current_wifi_title_part.grid(row=1, column=0,sticky='NEWS')
         
-        current_wifi_title_label = Label(current_wifi_title_part, text='현재 네트워크',fg='white', bg='black', font=('Arial',15), padx=30)
+        current_wifi_title_label = Label(current_wifi_title_part, text='현재 네트워크',fg='white', bg='black', font=('Arial',18), padx=30)
         current_wifi_title_label.grid(row=0, column=0)
 
         current_wifi_part = tk.Frame(main_part, bg='black')
@@ -95,9 +95,9 @@ class WifiScreen(ttk.Frame):
         def nothing_func():
             pass
         
-        self.get_image(current_wifi_part, 'img/wifi/Wi-Fi-01.png', 25, 25, 0 ,0, 'E', command=nothing_func)
+        self.get_image(current_wifi_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 0 ,0, 'E', command=nothing_func)
         
-        self.current_wifi_label = Label(current_wifi_part, text= 'Sangsanglab 5G', font=('Arial', 15), padx=14, fg='white', bg='black')
+        self.current_wifi_label = Label(current_wifi_part, text= 'Sangsanglab 5G', font=('Arial', 18), padx=14, fg='white', bg='black')
         self.current_wifi_label.grid(row=0, column=1, sticky='W')
 
         available_wifi_title_part = tk.Frame(main_part, bg='black')
@@ -106,12 +106,10 @@ class WifiScreen(ttk.Frame):
         available_wifi_title_part.columnconfigure(0, weight=10)
         available_wifi_title_part.columnconfigure(1, weight=1)
 
-        available_wifi_title_label = Label(available_wifi_title_part, text='사용 가능한 네트워크',fg='white', bg='black', font=('Arial',15), padx=30)
-        available_wifi_title_label.grid(row=0, column=0)
+        available_wifi_title_label = Label(available_wifi_title_part, text='사용 가능한 네트워크',fg='white', bg='black', font=('Arial',20), padx=30)
+        available_wifi_title_label.grid(row=0, column=0, sticky='W')
         
         self.get_image(available_wifi_title_part, 'img/wifi/refresh_wifi.png', 25, 25, 0, 1, "NEWS")
-        
-        
         
         
         # available_wifi_title_label = Label(available_wifi_title_part, text='available_wifi_title_part')
@@ -132,22 +130,30 @@ class WifiScreen(ttk.Frame):
         down_button.grid(row=1, column=2, sticky='NEWS')
         
         available_wifi_list_part = tk.Frame(available_wifi_part, bg='yellow')
+        # available_wifi_list_part.grid(row=0, column=1, rowspan=2, sticky='NEWS')
         available_wifi_list_part.grid(row=0, column=1, rowspan=2, sticky='NEWS')
         available_wifi_list_part.columnconfigure(0, weight=1)
         available_wifi_list_part.rowconfigure(0, weight=1)
         available_wifi_list_part.rowconfigure(1, weight=1)
         available_wifi_list_part.rowconfigure(2, weight=1)
         
+        # first_label = Label(available_wifi_list_part, text='first!!', font=('Arial', 20))
+        # second_label = Label(available_wifi_list_part, text='first!!', font=('Arial', 20))
+        # third_label = Label(available_wifi_list_part, text='first!!', font=('Arial', 20))
+        # first_label.grid(row=0)
+        # second_label.grid(row=1)
+        # third_label.grid(row=2)
+        
         
         for i in range(3):
-            self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 25, 25, i ,0, 'E', command=nothing_func)
-            available_wifi_label = Label(available_wifi_list_part, text='sangsanglab 5G', font=('Arial', 15), padx=14, fg='white', bg='black')
+            self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, i ,0, 'W', command=nothing_func)
+            available_wifi_label = Label(available_wifi_list_part, text='sangsanglab 5G', font=('Arial', 20), padx=14, fg='white', bg='black')
             available_wifi_label.grid(row=i, column=1, sticky='W')
         
         
         
         
-        available_wifi_label = Label(available_wifi_part, text='available_wifi_part')
+        available_wifi_label = Label(available_wifi_part, text='empty')
         available_wifi_label.grid(row=0, column=0)
 
 
@@ -189,4 +195,7 @@ class WifiScreen(ttk.Frame):
     
     
         
-        
+class WifiListItem():
+    def __init__():
+        pass
+    
