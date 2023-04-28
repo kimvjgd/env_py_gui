@@ -18,8 +18,9 @@ class WifiScreen(ttk.Frame):
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=6)
         
-        
-
+        # self.temp_list = ['aaaa', 'bbbb', 'cccc', 'dddd', 'eeee', 'ffff', 'gggg', 'hhhh', 'iiii', 'jjjj', 'kkkk']
+        # self.show_list = []
+        # self.last_num = len(self.temp_list)
         status_part = tk.Frame(self, bg="black")
         status_part.grid(row=0, column=0, sticky="NEWS")
         
@@ -146,11 +147,24 @@ class WifiScreen(ttk.Frame):
         # second_label.grid(row=1)
         # third_label.grid(row=2)
         
+        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 0 ,0, 'E', command=nothing_func)
+        first_label = Label(available_wifi_list_part, text='1111111111', font=('Arial', 20), padx=14, fg='white', bg='black')
+        first_label.grid(row=0, column=1, sticky='W')
         
-        for i in range(4):
-            self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, i ,0, 'E', command=nothing_func)
-            available_wifi_label = Label(available_wifi_list_part, text='sangsanglab 5G', font=('Arial', 20), padx=14, fg='white', bg='black')
-            available_wifi_label.grid(row=i, column=1, sticky='W')
+        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 1 ,0, 'E', command=nothing_func)
+        second_label = Label(available_wifi_list_part, text='2222222222', font=('Arial', 20), padx=14, fg='white', bg='black')
+        second_label.grid(row=1, column=1, sticky='W')
+        
+        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 2 ,0, 'E', command=nothing_func)
+        third_label = Label(available_wifi_list_part, text='3333333333', font=('Arial', 20), padx=14, fg='white', bg='black')
+        third_label.grid(row=2, column=1, sticky='W')
+        
+        
+        
+        # for i in range(4):
+        #     self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, i ,0, 'E', command=nothing_func)
+        #     available_wifi_label = Label(available_wifi_list_part, text='sangsanglab 5G', font=('Arial', 20), padx=14, fg='white', bg='black')
+        #     available_wifi_label.grid(row=i, column=1, sticky='W')
             
         
         

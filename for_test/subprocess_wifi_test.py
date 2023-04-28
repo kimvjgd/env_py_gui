@@ -31,5 +31,5 @@ Replace network-ssid with the name of your network.
 If you have WEP or WPA security on your WI-Fi, 
 you can specify the network password in the command as well.
 
-# nmcli dev wifi connect network-ssid password "network-password"
+# nmcli dev wifi connect "network-ssid" password "network-password"
 '''
