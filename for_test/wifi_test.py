@@ -21,7 +21,7 @@
 # get_wifi_list()
 
 import wifi
-
+import subprocess
 def Search():
     wifilist = []
 
@@ -126,5 +126,5 @@ if __name__ == '__main__':
 
     # # Delete WiFi from auto connect list
     # print Delete('DeleteWiFi')
-    print(Search())
-    
+    # print(Search())
+    Connect('sangsanglab', '0327107179')
