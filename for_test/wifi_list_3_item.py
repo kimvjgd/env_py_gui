@@ -1,14 +1,14 @@
-temp_list = [['aaaa', 'Good'], ['bbbb', 'Good'], ['cccc', 'Good'], ['dddd', 'Good'], ['eeee', 'Good'], ['ffff', 'Good'], ['gggg', 'Good'], ['hhhh', 'Good'], ['iiii', 'Good'], ['jjjj', 'Good'], ['kkkk', 'Good']]
-show_list = []
-last_num = len(temp_list) -1
+available_wifi_list = [['aaaa', 'Good'], ['bbbb', 'Good'], ['cccc', 'Good'], ['dddd', 'Good'], ['eeee', 'Good'], ['ffff', 'Good'], ['gggg', 'Good'], ['hhhh', 'Good'], ['iiii', 'Good'], ['jjjj', 'Good'], ['kkkk', 'Good']]
+showing_wifi_list = []
+last_num = len(available_wifi_list) -1
 
 current_start_num = 0
 current_end_num = 2
 
 
 while(1):
-    show_list = temp_list[current_start_num:current_end_num+1]
-    print(show_list)
+    showing_wifi_list = available_wifi_list[current_start_num:current_end_num+1]
+    print(showing_wifi_list)
     cmd = input()
     if cmd == 'u':
         print('Up Btn Clicked')

@@ -7,7 +7,7 @@ from wifi_screen import WifiScreen
 # 나중에 링크 풀어줘야한다.
 # from uart_data_thread import UartDataThread
 
-FULL_SCREEN = True             # (True/False) - (Full Screen/Fixed Size Screen)
+FULL_SCREEN = False             # (True/False) - (Full Screen/Fixed Size Screen)
 PRIMARY_COLOR = "#2e3f4f"
            
 

@@ -538,7 +538,7 @@ class Home(ttk.Frame):
         common_label.grid(row=row, column=column, sticky="NEWS")
 
     def time_update(self):
-        time_string = strftime('%Y %m %D %H:%M:%S %p')
+        time_string = strftime('%Y-%m-%d %H:%M:%S')
         self.time_label.config(text=time_string)
         self.time_label.after(1000, self.time_update)
         # print(uart_data_thread.TVOC)
