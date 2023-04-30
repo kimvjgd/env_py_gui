@@ -155,56 +155,52 @@ class WifiScreen(ttk.Frame):
         self.first_label = Label(available_wifi_list_part, text=self.showing_wifi_list[0], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.first_label.grid(row=0, column=1, sticky='W')
         
-        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 1 ,0, 'E', command=nothing_func)
+        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 1 ,0, 'E', command=self.open)
         self.second_label = Label(available_wifi_list_part, text=self.showing_wifi_list[1], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.second_label.grid(row=1, column=1, sticky='W')
         
-        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 2 ,0, 'E', command=nothing_func)
+        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 2 ,0, 'E', command=self.open)
         self.third_label = Label(available_wifi_list_part, text=self.showing_wifi_list[2], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.third_label.grid(row=2, column=1, sticky='W')
         
-        
-        
-        # for i in range(4):
-        #     self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, i ,0, 'E', command=nothing_func)
-        #     available_wifi_label = Label(available_wifi_list_part, text='sangsanglab 5G', font=('Arial', 20), padx=14, fg='white', bg='black')
-        #     available_wifi_label.grid(row=i, column=1, sticky='W')
                 
         available_wifi_label = Label(available_wifi_part, text=' ', bg='black')
         available_wifi_label.grid(row=0, column=0)
 
     def open(self):
-        top = Toplevel()
+        top = Toplevel(self)
+        top.geometry("800x480")
+        top.attributes('-fullscreen', False)
         top.title('My Second Window')
-        my_label = Label(top, text='Second Window').pack()    
+        connecting_frame = tk.Frame(top, bg='black')
+        connecting_frame.grid(row=0, column=0, sticky='NEWS')
+        connecting_frame.rowconfigure(0, weight=1)
+        connecting_frame.columnconfigure(0, weight=1)
+        
+        my_label = Label(connecting_frame, text='Second Window')
+        my_label.grid(row=0, column=0, sticky='NEWS')
 
     def press_up_button(self):
         if self.current_start_num>0:
             self.current_start_num -= 1
             self.current_end_num -= 1
-            print('start # : ',self.current_start_num)
-            print('end # : ',self.current_end_num)
             
             self.showing_wifi_list = self.available_wifi_list[self.current_start_num:self.current_end_num+1]
             self.first_label.config(text=self.showing_wifi_list[0])
             self.second_label.config(text=self.showing_wifi_list[1])
             self.third_label.config(text=self.showing_wifi_list[2])
-            print(self.showing_wifi_list)
-        
-        
+            
     
     def press_down_button(self):
         if self.current_end_num < len(self.available_wifi_list)-1:
             self.current_start_num += 1
             self.current_end_num += 1
-            print('start # : ',self.current_start_num)
-            print('end # : ',self.current_end_num)
-
+            
             self.showing_wifi_list = self.available_wifi_list[self.current_start_num:self.current_end_num+1]
             self.first_label.config(text=self.showing_wifi_list[0])
             self.second_label.config(text=self.showing_wifi_list[1])
             self.third_label.config(text=self.showing_wifi_list[2])
-            print(self.showing_wifi_list)
+            
         
     # def time_update(self):
     #     time_string = strftime('%Y-%m-%d %H:%M:%S')
