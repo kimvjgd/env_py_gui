@@ -115,6 +115,29 @@ def Delete(ssid):
 
     return False
 
+def wifi_Search():
+    wifilist = []
+
+    cells = wifi.Cell.all('wlan0')
+
+    for cell in cells:
+        signal = abs(cell.signal)
+        if signal <= 50:
+            wifilist.append([cell.ssid, 'Good'])
+        elif signal <= 65:
+            wifilist.append([cell.ssid, 'Soso'])
+        else:
+            wifilist.append([cell.ssid, 'Bad'])
+    
+    '''
+    cell.signal
+                <= 50           -> Good connection strength
+                50 < && < 65    -> SoSo connection strength
+                65 <=           -> Bad  connection strength 
+
+    '''
+
+    return wifilist
 
 if __name__ == '__main__':
     # Search WiFi and return WiFi list
@@ -127,4 +150,5 @@ if __name__ == '__main__':
     # # Delete WiFi from auto connect list
     # print Delete('DeleteWiFi')
     # print(Search())
-    Connect('sangsanglab', '0327107179')
+    # Connect('sangsanglab', '0327107179')
+    print(wifi_Search())

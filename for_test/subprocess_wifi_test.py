@@ -33,3 +33,18 @@ you can specify the network password in the command as well.
 
 # nmcli dev wifi connect "network-ssid" password "network-password"
 '''
+'''
+
+[['olleh_GiGA_WiFi_05A8', -52], ['olleh_WiFi_05A8', -40], ['U+NetF230', -67], 
+ ['AT_410_AFAN_910604_WW_ee0e', -49], ['AP-408-701', -50], ['U+Net479C', -62]
+// Good (Green)
+ 00:07:89:30:05:AB  olleh_WiFi_05A8             Infra  4     130 Mbit/s>   -40
+40:B0:34:58:ED:74  DIRECT-76-HP OfficeJet 7510  Infra  4     65 Mbit/s >    
+64:CB:E9:3F:EE:0E  AT_410_AFAN_910604_WW_ee0e   Infra  11    65 Mbit/s >    -49
+E8:54:84:14:34:7C  AP-408-701                   Infra  5     270 Mbit/s>    -50
+// Soso (Yellow)
+00:07:89:30:05:AC  olleh_GiGA_WiFi_05A8         Infra  149   270 Mbit/s>    -52
+08:5D:DD:84:47:9B  U+Net479C                    Infra  10    130 Mbit/s>    -62
+// Bad (PInk)
+08:5D:DD:AC:F2:2F  U+NetF230                    Infra  9     130 Mbit/s>    -67
+'''

@@ -6,6 +6,7 @@ from wifi_screen import WifiScreen
 from wifi_connection_screen import WifiConnectionScreen
 # 나중에 링크 풀어줘야한다.
 # from uart_data_thread import UartDataThread
+import uart_data_thread
 
 FULL_SCREEN = False             # (True/False) - (Full Screen/Fixed Size Screen)
 PRIMARY_COLOR = "#2e3f4f"
@@ -116,7 +117,6 @@ class EnvSensor(tk.Tk):
         
         self.after(1000, self.get_temp)
         
-import uart_data_thread
 
 def pprint():
     print('일단 이거는 당연히 되는거지')
