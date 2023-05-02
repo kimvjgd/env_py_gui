@@ -9,11 +9,11 @@ import wifi_func as wf
 
 # class name을 Wifi로 지으면 안된다.
 class WifiScreen(ttk.Frame):
-    def __init__(self, parent, controller, show_home):
+    def __init__(self, parent, controller, show_home, show_wifi_detail):
         super().__init__(parent)
         
         self.show_home = show_home
-        
+        self.show_wifi_detail = show_wifi_detail
         self.controller = controller
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
@@ -152,15 +152,15 @@ class WifiScreen(ttk.Frame):
         # second_label.grid(row=1)
         # third_label.grid(row=2)
         
-        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 0 ,0, 'E', command=self.open)
+        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 0 ,0, 'E', command=self.show_wifi_detail)
         self.first_label = Label(available_wifi_list_part, text=self.showing_wifi_list[0], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.first_label.grid(row=0, column=1, sticky='W')
         
-        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 1 ,0, 'E', command=self.open)
+        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 1 ,0, 'E', command=self.show_wifi_detail)
         self.second_label = Label(available_wifi_list_part, text=self.showing_wifi_list[1], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.second_label.grid(row=1, column=1, sticky='W')
         
-        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 2 ,0, 'E', command=self.open)
+        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 2 ,0, 'E', command=self.show_wifi_detail)
         self.third_label = Label(available_wifi_list_part, text=self.showing_wifi_list[2], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.third_label.grid(row=2, column=1, sticky='W')
         
@@ -231,7 +231,6 @@ class WifiScreen(ttk.Frame):
     
     def get_wifi_list(self):
         self.available_wifi_list = wf.wifi_Search()
-        available_wifi_list = self.available_wifi_list
         self.available_wifi_list.sort(key = lambda x:x[1])
         self.showing_wifi_list = self.available_wifi_list[0:3]
         self.last_num = len(self.available_wifi_list) -1

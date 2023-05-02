@@ -4,6 +4,7 @@ from home_screen import Home
 from element_screen import Element
 from wifi_screen import WifiScreen
 from wifi_connection_screen import WifiConnectionScreen
+from wifi_detail_screen import WifiDetailScreen
 # 나중에 링크 풀어줘야한다.
 # from uart_data_thread import UartDataThread
 import uart_data_thread
@@ -69,7 +70,7 @@ class EnvSensor(tk.Tk):
                 
         # For Wifi
         ############################################################################################################################################
-        self.wifi_frame = WifiScreen(container, self, lambda: self.show_frame(Home))
+        self.wifi_frame = WifiScreen(container, self, lambda: self.show_frame(Home), lambda: self.show_frame(WifiDetailScreen))
         self.wifi_frame.grid(row=0, column=0, sticky="NEWS")
         
         # For Wifi Connection Screen
@@ -77,11 +78,15 @@ class EnvSensor(tk.Tk):
         self.wifi_connection_frame = WifiConnectionScreen(container, self, lambda: self.show_frame(WifiScreen))
         self.wifi_connection_frame.grid(row=0, column=0, sticky='NEWS')
 
+        # For Wifi Detail Screen
+        self.wifi_detail_frame = WifiDetailScreen(container, self, lambda:self.show_frame(WifiScreen))
 
         
         self.frames[Home] = self.home_frame
         self.frames[Element] = self.element_frame
         self.frames[WifiScreen] = self.wifi_frame
+        self.frames[WifiConnectionScreen] = self.wifi_connection_frame
+        self.frames[WifiDetailScreen] = self.wifi_detail_frame
         
         # First Screenu
         self.show_frame(Home)
