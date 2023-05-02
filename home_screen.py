@@ -8,7 +8,7 @@ import sys
 
 
 class Home(ttk.Frame):
-    def __init__(self, parent, controller, show_element, show_wifi):
+    def __init__(self, parent, controller, show_element, show_wifi, show_info):
         super().__init__(parent)
         
         self.TVOC = 0.0
@@ -107,7 +107,7 @@ class Home(ttk.Frame):
         quit_button.grid(column=2,row=0)
         
         # Info Screen
-        info_button = tk.Button(status_part, image=info_image, command=lambda x:x, height=20, width=20)
+        info_button = tk.Button(status_part, image=info_image, command=show_info, height=20, width=20)
         info_button.image = info_image                  # to keep a ref
         info_button.grid(column=3,row=0)
         
