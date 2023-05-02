@@ -123,17 +123,17 @@ def wifi_Search():
     for cell in cells:
         signal = abs(cell.signal)
         if signal <= 50:
-            wifilist.append([cell.ssid, 'Good'])
+            wifilist.append([cell.ssid, 'a'])
         elif signal <= 65:
-            wifilist.append([cell.ssid, 'Soso'])
+            wifilist.append([cell.ssid, 'b'])
         else:
-            wifilist.append([cell.ssid, 'Bad'])
+            wifilist.append([cell.ssid, 'c'])
     
     '''
     cell.signal
-                <= 50           -> Good connection strength
-                50 < && < 65    -> SoSo connection strength
-                65 <=           -> Bad  connection strength
+                <= 50           -> Good connection strength => a
+                50 < && < 65    -> SoSo connection strength => b
+                65 <=           -> Bad  connection strength => c
 
     '''
 

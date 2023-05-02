@@ -44,6 +44,7 @@ class Home(ttk.Frame):
         status_part.columnconfigure(0, weight=10)
         status_part.columnconfigure(1, weight=1)
         status_part.columnconfigure(2, weight=1)
+        status_part.columnconfigure(3, weight=1)
         status_part.rowconfigure(0, weight=1)
         
         
@@ -94,6 +95,7 @@ class Home(ttk.Frame):
         
         wifi_image = tk.PhotoImage(file='img/wifi/wifi.png')
         quit_image = tk.PhotoImage(file='img/wifi/refresh_wifi.png')
+        info_image = tk.PhotoImage(file='img/wifi/info.png')
         
         wifi_button = tk.Button(status_part, image=wifi_image, command=show_wifi, height=20, width=20)
         wifi_button.image = wifi_image                  # to keep a ref
@@ -103,6 +105,12 @@ class Home(ttk.Frame):
         quit_button = tk.Button(status_part, image=quit_image, command=controller.destroy, height=20, width=20)
         quit_button.image = quit_image                  # to keep a ref
         quit_button.grid(column=2,row=0)
+        
+        # Info Screen
+        info_button = tk.Button(status_part, image=info_image, command=lambda x:x, height=20, width=20)
+        info_button.image = info_image                  # to keep a ref
+        info_button.grid(column=3,row=0)
+        
         
         
         
@@ -594,16 +602,7 @@ class Home(ttk.Frame):
         
         
         self.after(1000, self.get_all_data)
-        # self.temp_label.after(1000, self.get_temperature, temperature)      # 맨뒤에 매개변수를 계속 넣어줘야해!!!!
         
 
-    # def get_one_data(self, TVOC):
-    #     self.TVOC = TVOC
-    #     print('Right reception')
-    #     print('TVOC : ', self.TVOC)
-    #     print('global TVOC : ', uart_data_thread.TVOC)
-
-    #     # 일단 time_label은 임시로 썼다@
-    #     self.time_label.after(1000, self.get_one_data, TVOC)
     def quit_program(self):
         sys.exit()

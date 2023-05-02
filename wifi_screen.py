@@ -5,6 +5,7 @@ from PIL import Image, ImageTk
 from wifi import Cell, Scheme
 import wifi
 import subprocess
+import wifi_func as wf
 
 # class name을 Wifi로 지으면 안된다.
 class WifiScreen(ttk.Frame):
@@ -229,31 +230,18 @@ class WifiScreen(ttk.Frame):
         
     
     def get_wifi_list(self):
-        # cells = Cell.all('wlan0')
-        # for cell in cells:
-        #     print(cell.ssid)
-            
-        # try:
-        #     result = subprocess.check_output(["iwgetid", "-r"])
-        #     # print("현재 연결된 WiFi의 SSID:", result.decode().strip())
-        #     self.current_wifi_label.config(text=result.decode().strip())
-        #     for cell in cells:
-        #         print(cell.ssid)
-        #     # 여기서 gui update해줘야한다.
-        # except:
-        #     result = ''
+        self.available_wifi_list = wf.wifi_Search()
+        available_wifi_list = self.available_wifi_list
+        self.available_wifi_list.sort(key = lambda x:x[1])
+        self.showing_wifi_list = self.available_wifi_list[0:3]
+        self.last_num = len(self.available_wifi_list) -1
+        self.current_start_num = 0
+        self.current_end_num = 2
         
-        # # self.current_wifi_label.after(1000, self.get_wifi_list)
-        wifilist = []
-        cells = wifi.Cell.all('wlan0')
-        for cell in cells:
-            wifilist.append(cell)
-            print(cell)
+        
+        self.first_label.config(text=self.available_wifi_list[0])
+        self.second_label.config(text=self.available_wifi_list[1])
+        self.third_label.config(text=self.available_wifi_list[2])
+        
+        
 
-    
-    
-        
-class WifiListItem():
-    def __init__():
-        pass
-    
