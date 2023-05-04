@@ -5,7 +5,7 @@ from PIL import Image,ImageTk
 
 class InfoScreen(ttk.Frame):
     def __init__(self, parent, controller, show_home):
-        self.mac_address = controller.mac_address
+        self.mac_address = controller.mac_address                                  
         super().__init__(parent)
         self.controller = controller
         self.columnconfigure(0, weight=1)
@@ -41,13 +41,13 @@ class InfoScreen(ttk.Frame):
         device_number_label = Label(self, text='Device Number', font=('Arial',30), fg='white', bg='black')
         device_number_label.grid(row=1, column=0,sticky='SW',padx=20)
         
-        device_number_value_label = Label(self, text='1', font=('Arial',25), fg='white', bg='black')
+        device_number_value_label = Label(self, text=controller.device_number, font=('Arial',25), fg='white', bg='black')
         device_number_value_label.grid(row=2, column=0,sticky='NW', padx=50)
         
         mac_address_label = Label(self, text='Mac Address', font=('Arial',30), fg='white', bg='black')
         mac_address_label.grid(row=3, column=0,sticky='SW',padx=20)
         
-        mac_address_value_label = Label(self, text='1', font=('Arial',25), fg='white', bg='black')
+        mac_address_value_label = Label(self, text=self.mac_address, font=('Arial',25), fg='white', bg='black')
         mac_address_value_label.grid(row=4, column=0,sticky='NW', padx=50)
 
         

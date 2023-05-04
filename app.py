@@ -14,7 +14,7 @@ import uart_data_thread
 
 FULL_SCREEN = False             # (True/False) - (Full Screen/Fixed Size Screen)
 PRIMARY_COLOR = "#2e3f4f"
-           
+DEVICE_NUMBER = 1
 
 class EnvSensor(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -35,7 +35,7 @@ class EnvSensor(tk.Tk):
         self.O3 = tk.StringVar(value=0)
         self.temperature = tk.StringVar(value=0)
         self.humidity = tk.StringVar(value=0)
-        
+        self.device_number = DEVICE_NUMBER
         self.mac_address = get_mac_address()
         
         style = ttk.Style(self)
