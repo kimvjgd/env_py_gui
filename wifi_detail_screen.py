@@ -6,8 +6,11 @@ from PIL import Image, ImageTk
 class WifiDetailScreen(ttk.Frame):
     def __init__(self, parent, controller, show_wifi_list_screen, wifi_name='temp_wifi_name'):
         super().__init__(parent)
+        
         self.controller = controller
         self.wifi_name = wifi_name
+        self.pw_visible_state = True            # True - Visible
+
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0,weight=2)   # status
         self.rowconfigure(1,weight=2)   # 비밀번호
@@ -40,7 +43,50 @@ class WifiDetailScreen(ttk.Frame):
         back_label.bind("<Button-1>", back_click)
         pw_label = Label(self, text='비밀번호', font=('Arial', 10))
         pw_label.grid(row=1, column=0, sticky="W")
+
+        self.pw_core_frame = Frame(self, bg='red')
+        self.pw_core_frame.grid(row=2, column=0)
+        self.pw_core_frame.rowconfigure(0, weight=1)
+        self.pw_core_frame.columnconfigure(0, weight=10)
+        self.pw_core_frame.columnconfigure(1, weight=1)
         
+        self.password_entry = Entry(self.pw_core_frame, highlightthickness=2.4, bd=2.4, bg='white', fg='black', relief=FLAT, show='*', font=('Arial', 16))
+        self.password_entry.grid(row=0, column=0)
+
+        self.show_image = ImageTk.PhotoImage(file='img/wifi/info.png')
+        self.hide_image = ImageTk.PhotoImage(file='img/wifi/refresh_wifi.png')
+        
+        self.show_button = Button(self.pw_core_frame, image=self.show_image, command=self.show, relief=FLAT, activebackground='white', bd=0, background='white')
+        self.show_button.grid(row=0, column=1)
+        
+        self.auto_connection_frame = Frame(self, bg='blue')
+        self.auto_connection_frame.grid(row=3, column=0)
+        self.auto_connection_frame.rowconfigure(0, weight=1)
+        self.auto_connection_frame.columnconfigure(0, weight=6)
+        self.auto_connection_frame.columnconfigure(1, weight=1)
+
+        Label(self.auto_connection_frame, text='자동으로 연결').grid(row=0, column=0)
+
+        on = PhotoImage(file='img/wifi/on.png')
+        off = PhotoImage(file='img/wifi/off.png')
+        
+    
+        
+    def show(self):
+        print(self.pw_visible_state)
+        if self.pw_visible_state:
+            self.show_button.config(image=self.hide_image)
+            self.password_entry.config(show='*')
+            self.pw_visible_state = not self.pw_visible_state
+            
+        else:
+            self.show_button.config(image=self.show_image)
+            self.password_entry.config(show='')
+            self.pw_visible_state = not self.pw_visible_state
+    
+    
+
+    
         
         
         
