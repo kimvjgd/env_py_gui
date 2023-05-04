@@ -9,19 +9,19 @@ state = True
 def switch():
     global state
     if state:
-        lab.config(text='Night Mode')
+        # lab.config(text='Night Mode')
         btn.config(image=off)
-        lab.config(fg='black')
+        # lab.config(fg='black')
         state = False
     else:
-        lab.config(text='Day Mode')
+        # lab.config(text='Day Mode')
         btn.config(image=on)
-        lab.config(fg='green')
+        # lab.config(fg='green')
         state = True
 
 
-lab = Label(root, text='Day mode', font=('Arial', 20), fg='green')
-lab.pack(pady=20)
+# lab = Label(root, text='Day mode', font=('Arial', 20), fg='green')
+# lab.pack(pady=20)
 
 on = PhotoImage(file='img/wifi/on.png')
 off = PhotoImage(file='img/wifi/off.png')

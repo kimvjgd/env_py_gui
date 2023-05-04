@@ -6,9 +6,11 @@ from wifi_screen import WifiScreen
 from wifi_connection_screen import WifiConnectionScreen
 from wifi_detail_screen import WifiDetailScreen
 from info_screen import InfoScreen
+from mac_address import get_mac_address
 # 나중에 링크 풀어줘야한다.
 # from uart_data_thread import UartDataThread
 import uart_data_thread
+ 
 
 FULL_SCREEN = False             # (True/False) - (Full Screen/Fixed Size Screen)
 PRIMARY_COLOR = "#2e3f4f"
@@ -33,6 +35,8 @@ class EnvSensor(tk.Tk):
         self.O3 = tk.StringVar(value=0)
         self.temperature = tk.StringVar(value=0)
         self.humidity = tk.StringVar(value=0)
+        
+        self.mac_address = get_mac_address()
         
         style = ttk.Style(self)
         style.theme_use("clam")

@@ -5,6 +5,7 @@ from PIL import Image,ImageTk
 
 class InfoScreen(ttk.Frame):
     def __init__(self, parent, controller, show_home):
+        self.mac_address = controller.mac_address
         super().__init__(parent)
         self.controller = controller
         self.columnconfigure(0, weight=1)

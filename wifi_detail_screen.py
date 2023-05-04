@@ -9,7 +9,7 @@ class WifiDetailScreen(ttk.Frame):
         
         self.controller = controller
         self.wifi_name = wifi_name
-        self.pw_visible_state = True            # True - Visible
+        self.pw_visible_state = False            # True - Visible
 
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0,weight=2)   # status
@@ -52,6 +52,7 @@ class WifiDetailScreen(ttk.Frame):
         
         self.password_entry = Entry(self.pw_core_frame, highlightthickness=2.4, bd=2.4, bg='white', fg='black', relief=FLAT, show='*', font=('Arial', 16))
         self.password_entry.grid(row=0, column=0)
+        self.password_entry.config(show='*')
 
         self.show_image = ImageTk.PhotoImage(file='img/wifi/info.png')
         self.hide_image = ImageTk.PhotoImage(file='img/wifi/refresh_wifi.png')
@@ -66,11 +67,21 @@ class WifiDetailScreen(ttk.Frame):
         self.auto_connection_frame.columnconfigure(1, weight=1)
 
         Label(self.auto_connection_frame, text='자동으로 연결').grid(row=0, column=0)
-
-        on = PhotoImage(file='img/wifi/on.png')
-        off = PhotoImage(file='img/wifi/off.png')
+            
         
-    
+        self.on = PhotoImage(file='img/wifi/on.png')
+        self.off = PhotoImage(file='img/wifi/off.png')
+        self.auto_btn = Button(self.auto_connection_frame, image=self.on, bd=0, command=self.switch)
+        self.auto_btn.grid(row=0, column=1)
+        
+    def switch(self):
+        if self.pw_visible_state:
+            self.auto_btn.config(image=self.off)
+            self.pw_visible_state = False
+        else:
+            self.auto_btn.config(image=self.on)
+            self.pw_visible_state = True
+            
         
     def show(self):
         print(self.pw_visible_state)
