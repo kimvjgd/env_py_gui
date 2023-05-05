@@ -10,12 +10,14 @@ class InfoScreen(ttk.Frame):
         self.controller = controller
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0,weight=3)
-        self.rowconfigure(1,weight=4)
-        self.rowconfigure(2,weight=5)
-        self.rowconfigure(3,weight=4)
-        self.rowconfigure(4,weight=5)
+        self.rowconfigure(1,weight=18)
+        # self.rowconfigure(1,weight=4)
+        # self.rowconfigure(2,weight=5)
+        # self.rowconfigure(3,weight=4)
+        # self.rowconfigure(4,weight=5)
         
-        status_part = tk.Frame(self, bg='blue')
+        
+        status_part = tk.Frame(self, bg='black')
         status_part.grid(row=0, column=0, sticky="NEWS")
         
         status_part.rowconfigure(0, weight=1)
@@ -38,17 +40,26 @@ class InfoScreen(ttk.Frame):
             show_home()
         back_label.bind("<Button-1>", back_click)
         
-        device_number_label = Label(self, text='Device Number', font=('Arial',30), fg='white', bg='black')
-        device_number_label.grid(row=1, column=0,sticky='SW',padx=20)
+
+        value_part = Frame(self, bg='red')
+        value_part.grid(row=1, column=0, sticky='NEWS')
+        value_part.rowconfigure(0, weight=4)
+        value_part.rowconfigure(1, weight=5)
+        value_part.rowconfigure(2, weight=4)
+        value_part.rowconfigure(3, weight=5)
+
+        ## value_part
+        device_number_label = Label(value_part, text='Device Number', font=('Arial',30), fg='white', bg='black')
+        device_number_label.grid(row=0, column=0,sticky='SW',padx=20)
         
-        device_number_value_label = Label(self, text=controller.device_number, font=('Arial',25), fg='white', bg='black')
-        device_number_value_label.grid(row=2, column=0,sticky='NW', padx=50)
+        device_number_value_label = Label(value_part, text=controller.device_number, font=('Arial',25), fg='white', bg='black')
+        device_number_value_label.grid(row=1, column=0,sticky='NW', padx=50)
         
-        mac_address_label = Label(self, text='Mac Address', font=('Arial',30), fg='white', bg='black')
-        mac_address_label.grid(row=3, column=0,sticky='SW',padx=20)
+        mac_address_label = Label(value_part, text='Mac Address', font=('Arial',30), fg='white', bg='black')
+        mac_address_label.grid(row=2, column=0,sticky='SW',padx=20)
         
-        mac_address_value_label = Label(self, text=self.mac_address, font=('Arial',25), fg='white', bg='black')
-        mac_address_value_label.grid(row=4, column=0,sticky='NW', padx=50)
+        mac_address_value_label = Label(value_part, text=self.mac_address, font=('Arial',25), fg='white', bg='black')
+        mac_address_value_label.grid(row=3, column=0,sticky='NW', padx=50)
 
         
         
