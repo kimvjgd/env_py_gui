@@ -95,7 +95,7 @@ class EnvSensor(tk.Tk):
         ############################################################################################################################################
         
         # For Keyboard Screen
-        self.keyboard_frame = KeyboardSreen(container, self, self.wifi_detail_frame, lambda:self.show_frame(WifiDetailScreen))
+        self.keyboard_frame = KeyboardSreen(container, self, self.wifi_detail_frame.password_entry, lambda:self.show_frame(WifiDetailScreen))
         self.keyboard_frame.grid(row=0, column=0, sticky='NEWS')
         ############################################################################################################################################
         

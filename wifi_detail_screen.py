@@ -12,12 +12,18 @@ class WifiDetailScreen(ttk.Frame):
         self.show_keyboard_screen = show_keyboard_screen
         self.pw_visible_state = False            # True - Visible
 
-        self.columnconfigure(0, weight=1)
         self.rowconfigure(0,weight=1)   # status
-        self.rowconfigure(1,weight=1)   # 비밀번호
-        self.rowconfigure(2,weight=2)   # type PW
-        self.rowconfigure(3,weight=2)   # auto connection
-        self.rowconfigure(4,weight=1)   # connect
+        self.rowconfigure(1,weight=6)
+        self.columnconfigure(0, weight=1)
+        
+        pw_part = Frame(self, bg='black')
+        pw_part.grid(row=1, column=0, sticky='NEWS')
+
+        pw_part.rowconfigure(0,weight=1)   # 비밀번호
+        pw_part.rowconfigure(1,weight=2)   # type PW
+        pw_part.rowconfigure(2,weight=2)   # auto connection
+        pw_part.rowconfigure(3,weight=1)   # connect
+        pw_part.columnconfigure(0, weight=1)
         
         
         status_part = tk.Frame(self, bg='black')
@@ -43,11 +49,11 @@ class WifiDetailScreen(ttk.Frame):
         def back_click(event):
             show_wifi_list_screen()
         back_label.bind("<Button-1>", back_click)
-        pw_label = Label(self, text='비밀번호', font=('Arial', 30))
-        pw_label.grid(row=1, column=0, sticky="W")
+        pw_label = Label(pw_part, text='비밀번호', font=('Arial', 30))
+        pw_label.grid(row=0, column=0, sticky="W")
 
-        self.pw_core_frame = Frame(self, bg='black')
-        self.pw_core_frame.grid(row=2, column=0)
+        self.pw_core_frame = Frame(pw_part, bg='black')
+        self.pw_core_frame.grid(row=1, column=0)
         self.pw_core_frame.rowconfigure(0, weight=1)
         self.pw_core_frame.columnconfigure(0, weight=10)
         self.pw_core_frame.columnconfigure(1, weight=1)
@@ -67,8 +73,8 @@ class WifiDetailScreen(ttk.Frame):
         self.show_button = Button(self.pw_core_frame, image=self.show_image, command=self.show, relief=FLAT, activebackground='white', bd=0, background='white')
         self.show_button.grid(row=0, column=1)
         
-        self.auto_connection_frame = Frame(self, bg='blue')
-        self.auto_connection_frame.grid(row=3, column=0)
+        self.auto_connection_frame = Frame(pw_part, bg='blue')
+        self.auto_connection_frame.grid(row=2, column=0)
         self.auto_connection_frame.rowconfigure(0, weight=1)
         self.auto_connection_frame.columnconfigure(0, weight=6)
         self.auto_connection_frame.columnconfigure(1, weight=1)
@@ -80,6 +86,9 @@ class WifiDetailScreen(ttk.Frame):
         self.off = PhotoImage(file='img/wifi/off.png')
         self.auto_btn = Button(self.auto_connection_frame, image=self.on, bd=0, command=self.switch)
         self.auto_btn.grid(row=0, column=1)
+
+        connect_button = Button(pw_part, text='Connect')
+        connect_button.grid(row=3, column=0, sticky='NE')
         
     def switch(self):
         if self.pw_visible_state:
