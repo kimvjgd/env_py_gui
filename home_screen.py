@@ -3,7 +3,6 @@ from tkinter import ttk
 from tkinter import *
 from datetime import datetime
 from time import strftime
-import uart_data_thread
 import sys
 
 

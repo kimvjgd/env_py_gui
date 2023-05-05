@@ -6,10 +6,11 @@ from wifi_screen import WifiScreen
 from wifi_connection_screen import WifiConnectionScreen
 from wifi_detail_screen import WifiDetailScreen
 from info_screen import InfoScreen
+from keyboard_screen import KeyboardSreen
 from mac_address import get_mac_address
 # 나중에 링크 풀어줘야한다.
 # from uart_data_thread import UartDataThread
-import uart_data_thread
+
  
 
 FULL_SCREEN = False             # (True/False) - (Full Screen/Fixed Size Screen)
@@ -91,6 +92,9 @@ class EnvSensor(tk.Tk):
         self.info_frame = InfoScreen(container, self, lambda:self.show_frame(Home))
         self.info_frame.grid(row=0, column=0, sticky='NEWS')
         
+        # For Keyboard Screen
+        self.keyboard_frame = KeyboardSreen(container, self, lambda:self.show_frame(WifiDetailScreen))
+        self.keyboard_frame.grid(row=0, column=0, sticky='NEWS')
         
         self.frames[Home] = self.home_frame
         self.frames[Element] = self.element_frame
@@ -98,9 +102,10 @@ class EnvSensor(tk.Tk):
         self.frames[WifiConnectionScreen] = self.wifi_connection_frame
         self.frames[WifiDetailScreen] = self.wifi_detail_frame
         self.frames[InfoScreen] = self.info_frame
+        self.frames[KeyboardSreen] = self.keyboard_frame
         
         # First Screenu
-        self.show_frame(Home)
+        self.show_frame(KeyboardSreen)
 
     
     def show_frame(self, container):
