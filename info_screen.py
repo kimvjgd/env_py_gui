@@ -41,25 +41,25 @@ class InfoScreen(ttk.Frame):
         back_label.bind("<Button-1>", back_click)
         
 
-        value_part = Frame(self, bg='red')
+        value_part = Frame(self, bg='black')
         value_part.grid(row=1, column=0, sticky='NEWS')
         value_part.rowconfigure(0, weight=4)
-        value_part.rowconfigure(1, weight=5)
+        value_part.rowconfigure(1, weight=5)    
         value_part.rowconfigure(2, weight=4)
         value_part.rowconfigure(3, weight=5)
 
         ## value_part
         device_number_label = Label(value_part, text='Device Number', font=('Arial',30), fg='white', bg='black')
-        device_number_label.grid(row=0, column=0,sticky='SW',padx=20)
+        device_number_label.grid(row=0, column=0,padx=20)
         
         device_number_value_label = Label(value_part, text=controller.device_number, font=('Arial',25), fg='white', bg='black')
-        device_number_value_label.grid(row=1, column=0,sticky='NW', padx=50)
+        device_number_value_label.grid(row=1, column=0, padx=50)
         
         mac_address_label = Label(value_part, text='Mac Address', font=('Arial',30), fg='white', bg='black')
-        mac_address_label.grid(row=2, column=0,sticky='SW',padx=20)
+        mac_address_label.grid(row=2, column=0,padx=20)
         
         mac_address_value_label = Label(value_part, text=self.mac_address, font=('Arial',25), fg='white', bg='black')
-        mac_address_value_label.grid(row=3, column=0,sticky='NW', padx=50)
+        mac_address_value_label.grid(row=3, column=0, padx=50)
 
         
         
@@ -75,3 +75,6 @@ class InfoScreen(ttk.Frame):
         def local_click(event):
             command()
         img_label.bind("<Button-1>", local_click)
+
+
+        

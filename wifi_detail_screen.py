@@ -4,22 +4,23 @@ from tkinter import *
 from PIL import Image, ImageTk
 
 class WifiDetailScreen(ttk.Frame):
-    def __init__(self, parent, controller, show_wifi_list_screen, wifi_name='temp_wifi_name'):
+    def __init__(self, parent, controller, show_wifi_list_screen, show_keyboard_screen, wifi_name='temp_wifi_name'):
         super().__init__(parent)
         
         self.controller = controller
         self.wifi_name = wifi_name
+        self.show_keyboard_screen = show_keyboard_screen
         self.pw_visible_state = False            # True - Visible
 
         self.columnconfigure(0, weight=1)
-        self.rowconfigure(0,weight=2)   # status
-        self.rowconfigure(1,weight=2)   # 비밀번호
-        self.rowconfigure(2,weight=4)   # type PW
-        self.rowconfigure(3,weight=4)   # auto connection
-        self.rowconfigure(4,weight=2)   # connect
+        self.rowconfigure(0,weight=1)   # status
+        self.rowconfigure(1,weight=1)   # 비밀번호
+        self.rowconfigure(2,weight=2)   # type PW
+        self.rowconfigure(3,weight=2)   # auto connection
+        self.rowconfigure(4,weight=1)   # connect
         
         
-        status_part = tk.Frame(self, bg='blue')
+        status_part = tk.Frame(self, bg='black')
         status_part.grid(row=0, column=0, sticky="NEWS")
         
         status_part.rowconfigure(0, weight=1)
@@ -38,21 +39,27 @@ class WifiDetailScreen(ttk.Frame):
         back_label = Label(back_button_part, text='BACK', font=('Arial', 30), fg='white', bg='black', pady=3)
         back_label.grid(row=0, column=1, sticky='NW')
         # 나중에 정리....
+
         def back_click(event):
             show_wifi_list_screen()
         back_label.bind("<Button-1>", back_click)
-        pw_label = Label(self, text='비밀번호', font=('Arial', 10))
+        pw_label = Label(self, text='비밀번호', font=('Arial', 30))
         pw_label.grid(row=1, column=0, sticky="W")
 
-        self.pw_core_frame = Frame(self, bg='red')
+        self.pw_core_frame = Frame(self, bg='black')
         self.pw_core_frame.grid(row=2, column=0)
         self.pw_core_frame.rowconfigure(0, weight=1)
         self.pw_core_frame.columnconfigure(0, weight=10)
         self.pw_core_frame.columnconfigure(1, weight=1)
         
+
+        def entry_click(event):
+            show_keyboard_screen()
+
         self.password_entry = Entry(self.pw_core_frame, highlightthickness=2.4, bd=2.4, bg='white', fg='black', relief=FLAT, show='*', font=('Arial', 16))
         self.password_entry.grid(row=0, column=0)
         self.password_entry.config(show='*')
+        self.password_entry.bind('<Button-1>', entry_click)
 
         self.show_image = ImageTk.PhotoImage(file='img/wifi/info.png')
         self.hide_image = ImageTk.PhotoImage(file='img/wifi/refresh_wifi.png')
@@ -66,7 +73,7 @@ class WifiDetailScreen(ttk.Frame):
         self.auto_connection_frame.columnconfigure(0, weight=6)
         self.auto_connection_frame.columnconfigure(1, weight=1)
 
-        Label(self.auto_connection_frame, text='자동으로 연결').grid(row=0, column=0)
+        Label(self.auto_connection_frame, text='자동으로 연결', font=('Arial',30)).grid(row=0, column=0)
             
         
         self.on = PhotoImage(file='img/wifi/on.png')
@@ -95,15 +102,6 @@ class WifiDetailScreen(ttk.Frame):
             self.password_entry.config(show='')
             self.pw_visible_state = not self.pw_visible_state
     
-    
-
-    
-        
-        
-        
-
-        
-        
         
         
     def get_image(self, frame, path, width, height, row, column,sticky, command=None):

@@ -4,10 +4,12 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 
 class KeyboardSreen(ttk.Frame):
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller, my_entry, show_wifi_detail):
         super().__init__(parent)
-
+        self.controller = controller
         self.capslock_state = False
+        self.my_entry = my_entry
+        self.show_wifi_detail = show_wifi_detail
 
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=8)
@@ -258,7 +260,7 @@ class KeyboardSreen(ttk.Frame):
         self.Btn_semi_col.grid(row=0, column=10, sticky='NEWS')
         self.Btn_apo = Button(third_line_frame,text='\'',command=lambda: self.Btn_click("'"), font=('Arial',10), bg='black', fg='white')
         self.Btn_apo.grid(row=0, column=11, sticky='NEWS')
-        self.Btn_enter = Button(third_line_frame, text='Enter', font=('Arial', 10), bg='black', fg='white')
+        self.Btn_enter = Button(third_line_frame, text='Enter', font=('Arial', 10), bg='black', fg='white', command=self.enter_func)
         self.Btn_enter.grid(row=0, column=12, sticky='NEWS')
 
         # fourth_line_frame
@@ -274,28 +276,6 @@ class KeyboardSreen(ttk.Frame):
         # self.Btn(fourth_line_frame, 0, 9, '.')
         # self.Btn(fourth_line_frame, 0, 10, '/')
         # self.Btn(fourth_line_frame, 0, 11, 'shift')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         self.Btn_l_shift = Button(fourth_line_frame, text='shift', font=('Arial',10), bg='black', fg='white')
@@ -333,11 +313,12 @@ class KeyboardSreen(ttk.Frame):
         self.Btn_fif_empty.grid(row=0, column=0, sticky='NEWS')
         self.Btn_spacebar = Button(fifth_line_frame, text='space bar', font=('Arial',10), bg='black', fg='white', command=self.spacebar_click)
         self.Btn_spacebar.grid(row=0, column=1, sticky='NEWS')
-        self.Btn_connect = Button(fifth_line_frame, text='Connect', font=('Arial', 15), bg='black', fg='white')
+        self.Btn_connect = Button(fifth_line_frame, text='Connect', font=('Arial', 15), bg='black', fg='white', command= self.connect_func)
         self.Btn_connect.grid(row=0, column=2, sticky='NEWS')
     
     def Btn(self, frame, row, column, content):
         Button(frame, text=content, font=('Arial', 10), fg='white', bg='black', command=lambda: self.Btn_click(content)).grid(row=row, column=column, sticky='NEWS')
+        # return Button(frame, text=content, font=('Arial', 10), fg='white', bg='black', command=lambda: self.Btn_click(content)).grid(row=row, column=column, sticky='NEWS')
 
     # def func_btn(self, frame, row, column):
 
@@ -478,3 +459,17 @@ class KeyboardSreen(ttk.Frame):
         current = self.pw_entry.get()
         self.pw_entry.delete(0, END)
         self.pw_entry.insert(0, str(current)+str(alphabet))
+
+    def enter_func(self):
+        self.controller.wifi_pw = self.pw_entry.get()
+        print(self.controller.wifi_pw)
+        self.my_entry.delete(0, END)
+        self.my_entry.insert(0, str(self.pw_entry.get()))
+        self.show_wifi_detail()
+
+    def connect_func(self):
+        self.controller.wifi_pw = self.pw_entry.get()
+        print(self.controller.wifi_pw)
+        self.my_entry.delete(0, END)
+        self.my_entry.insert(0, str(self.pw_entry.get()))
+        self.show_wifi_detail()

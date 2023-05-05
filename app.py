@@ -39,6 +39,8 @@ class EnvSensor(tk.Tk):
         self.device_number = DEVICE_NUMBER
         self.mac_address = get_mac_address()
         
+        self.wifi_pw = tk.StringVar(value='')
+
         style = ttk.Style(self)
         style.theme_use("clam")
         
@@ -63,38 +65,39 @@ class EnvSensor(tk.Tk):
         #### frames ####
         
         # For Home
-        ############################################################################################################################################
         self.home_frame = Home(container, self, lambda: self.show_element_frame(Element), lambda: self.show_frame(WifiScreen), lambda: self.show_frame(InfoScreen))
         self.home_frame.grid(row=0, column=0, sticky="NESW")
+        ############################################################################################################################################
         
         # For Element
-        ############################################################################################################################################
         self.element_frame = Element(container, self, lambda: self.show_frame(Home), sensor=self.sensor_name)      # just for sample TVOC
         self.element_frame.grid(row=0, column=0, sticky="NESW")
-        
-        
-                
-        # For Wifi
         ############################################################################################################################################
+        
+        # For Wifi
         self.wifi_frame = WifiScreen(container, self, lambda: self.show_frame(Home), lambda: self.show_frame(WifiDetailScreen))
         self.wifi_frame.grid(row=0, column=0, sticky="NEWS")
+        ############################################################################################################################################
         
         # For Wifi Connection Screen
-        ############################################################################################################################################
         self.wifi_connection_frame = WifiConnectionScreen(container, self, lambda: self.show_frame(WifiScreen))
         self.wifi_connection_frame.grid(row=0, column=0, sticky='NEWS')
+        ############################################################################################################################################
 
         # For Wifi Detail Screen
-        self.wifi_detail_frame = WifiDetailScreen(container, self, lambda:self.show_frame(WifiScreen))
+        self.wifi_detail_frame = WifiDetailScreen(container, self, lambda:self.show_frame(WifiScreen), lambda: self.show_frame(KeyboardSreen))
         self.wifi_detail_frame.grid(row=0, column=0, sticky='NEWS')
+        ############################################################################################################################################
         
         # For Info Screen
         self.info_frame = InfoScreen(container, self, lambda:self.show_frame(Home))
         self.info_frame.grid(row=0, column=0, sticky='NEWS')
+        ############################################################################################################################################
         
         # For Keyboard Screen
-        self.keyboard_frame = KeyboardSreen(container, self, lambda:self.show_frame(WifiDetailScreen))
+        self.keyboard_frame = KeyboardSreen(container, self, self.wifi_detail_frame, lambda:self.show_frame(WifiDetailScreen))
         self.keyboard_frame.grid(row=0, column=0, sticky='NEWS')
+        ############################################################################################################################################
         
         self.frames[Home] = self.home_frame
         self.frames[Element] = self.element_frame
@@ -105,7 +108,7 @@ class EnvSensor(tk.Tk):
         self.frames[KeyboardSreen] = self.keyboard_frame
         
         # First Screenu
-        self.show_frame(KeyboardSreen)
+        self.show_frame(Home)
 
     
     def show_frame(self, container):
