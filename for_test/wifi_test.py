@@ -1,25 +1,3 @@
-# from wifi import Cell, Scheme
-# import subprocess
-
-# def get_wifi_list():
-#     cells = Cell.all('wlan0')
-#     for cell in cells:
-#         print(cell.ssid)
-    
-#     try:
-#         result = subprocess.check_output(["iwgetid", "-r"])
-#         print("현재 연결된 WiFi의 SSID:", result.decode().strip())
-#         # self.current_wifi_label.config(text=result.decode().strip())
-#         for cell in cells:
-#             print(cell.ssid)
-#         # 여기서 gui update해줘야한다.
-#     except:
-#         result = ''
-        
-#     # self.current_wifi_label.after(1000, self.get_wifi_list)
-    
-# get_wifi_list()
-
 import wifi
 import subprocess
 def Search():

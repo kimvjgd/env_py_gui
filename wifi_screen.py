@@ -7,6 +7,8 @@ import wifi
 import subprocess
 import wifi_func as wf
 
+# 현재 어떠한 와이파이가 있고 다른 와이파이들을 검색해주는 화면
+
 # class name을 Wifi로 지으면 안된다.
 class WifiScreen(ttk.Frame):
     def __init__(self, parent, controller, show_home, show_wifi_detail):
@@ -152,34 +154,28 @@ class WifiScreen(ttk.Frame):
         # second_label.grid(row=1)
         # third_label.grid(row=2)
         
-        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 0 ,0, 'E', command=self.show_wifi_detail)
+        
+                ############### available wifi list ###############
+
+        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 0 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(0))
         self.first_label = Label(available_wifi_list_part, text=self.showing_wifi_list[0], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.first_label.grid(row=0, column=1, sticky='W')
         
-        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 1 ,0, 'E', command=self.show_wifi_detail)
+        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 1 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(1))
         self.second_label = Label(available_wifi_list_part, text=self.showing_wifi_list[1], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.second_label.grid(row=1, column=1, sticky='W')
         
-        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 2 ,0, 'E', command=self.show_wifi_detail)
+        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 2 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(2))
         self.third_label = Label(available_wifi_list_part, text=self.showing_wifi_list[2], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.third_label.grid(row=2, column=1, sticky='W')
         
                 
         available_wifi_label = Label(available_wifi_part, text=' ', bg='black')
         available_wifi_label.grid(row=0, column=0)
-
-    def open(self):
-        top = Toplevel(self)
-        top.geometry("800x480")
-        top.attributes('-fullscreen', False)
-        top.title('My Second Window')
-        connecting_frame = tk.Frame(top, bg='black')
-        connecting_frame.grid(row=0, column=0, sticky='NEWS')
-        connecting_frame.rowconfigure(0, weight=1)
-        connecting_frame.columnconfigure(0, weight=1)
         
-        my_label = Label(connecting_frame, text='Second Window')
-        my_label.grid(row=0, column=0, sticky='NEWS')
+    def show_wifi_detail_with_ssid(self, num):
+        print(self.showing_wifi_list[num])
+        self.show_wifi_detail()
 
     def press_up_button(self):
         if self.current_start_num>0:
@@ -202,6 +198,18 @@ class WifiScreen(ttk.Frame):
             self.second_label.config(text=self.showing_wifi_list[1])
             self.third_label.config(text=self.showing_wifi_list[2])
             
+    # def open(self):
+    #     top = Toplevel(self)
+    #     top.geometry("800x480")
+    #     top.attributes('-fullscreen', False)
+    #     top.title('My Second Window')
+    #     connecting_frame = tk.Frame(top, bg='black')
+    #     connecting_frame.grid(row=0, column=0, sticky='NEWS')
+    #     connecting_frame.rowconfigure(0, weight=1)
+    #     connecting_frame.columnconfigure(0, weight=1)
+        
+    #     my_label = Label(connecting_frame, text='Second Window')
+    #     my_label.grid(row=0, column=0, sticky='NEWS')
         
     # def time_update(self):
     #     time_string = strftime('%Y-%m-%d %H:%M:%S')

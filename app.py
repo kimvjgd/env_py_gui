@@ -38,7 +38,7 @@ class EnvSensor(tk.Tk):
         self.humidity = tk.StringVar(value=0)
         self.device_number = DEVICE_NUMBER
         self.mac_address = get_mac_address()
-        
+        self.wifi_ssid = tk.StringVar(value='')
         self.wifi_pw = tk.StringVar(value='')
 
         style = ttk.Style(self)

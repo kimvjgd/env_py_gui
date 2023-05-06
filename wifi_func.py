@@ -52,6 +52,10 @@ def FindFromSavedList(ssid):
     return False
 
 
+def connect_wifi(ssid, password):
+    cmd = 'nmcli device wifi connect {} password {}'.format(ssid, password)
+    subprocess.call(cmd, shell=True)
+
 def Connect(ssid, password=None):
     cell = FindFromSearchList(ssid)
 

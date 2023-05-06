@@ -2,13 +2,15 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 from PIL import Image, ImageTk
+import wifi_func as wf
+# 와이파이 하나 클릭하면 비번치고...등등등 하는 화면
 
 class WifiDetailScreen(ttk.Frame):
-    def __init__(self, parent, controller, show_wifi_list_screen, show_keyboard_screen, wifi_name='temp_wifi_name'):
+    def __init__(self, parent, controller, show_wifi_list_screen, show_keyboard_screen, wifi_ssid='temp_wifi_ssid'):
         super().__init__(parent)
         
         self.controller = controller
-        self.wifi_name = wifi_name
+        self.wifi_ssid = wifi_ssid
         self.show_keyboard_screen = show_keyboard_screen
         self.pw_visible_state = False            # True - Visible
 
@@ -87,9 +89,17 @@ class WifiDetailScreen(ttk.Frame):
         self.auto_btn = Button(self.auto_connection_frame, image=self.on, bd=0, command=self.switch)
         self.auto_btn.grid(row=0, column=1)
 
-        connect_button = Button(pw_part, text='Connect')
+        connect_button = Button(pw_part, text='Connect', command=self.wifi_connect)
         connect_button.grid(row=3, column=0, sticky='NE')
+##################################################################################################################
+    def wifi_connect(self):
+        print('ssid : ', end='')
+        print(self.password_entry.get())
+        print('password : ', end='')
+        print(self.controller.wifi_pw)
         
+        # wf.connect_wifi('ssid', 'password')
+##################################################################################################################
     def switch(self):
         if self.pw_visible_state:
             self.auto_btn.config(image=self.off)
