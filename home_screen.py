@@ -10,6 +10,8 @@ class Home(ttk.Frame):
     def __init__(self, parent, controller, show_element, show_wifi, show_info):
         super().__init__(parent)
         
+        self.controller = controller
+        
         self.TVOC = 0.0
         # self.TVOC = tk.StringVar(value=123)
         self.CO2 = 0.0
@@ -30,7 +32,6 @@ class Home(ttk.Frame):
         
         
         # self.time_update()
-        self.controller = controller
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)

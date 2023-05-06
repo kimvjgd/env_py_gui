@@ -6,17 +6,17 @@ import wifi_func as wf
 # 와이파이 하나 클릭하면 비번치고...등등등 하는 화면
 
 class WifiDetailScreen(ttk.Frame):
-    def __init__(self, parent, controller, show_wifi_list_screen, show_keyboard_screen, wifi_ssid='temp_wifi_ssid'):
+    def __init__(self, parent, controller, show_wifi_list_screen, show_keyboard_screen):
         super().__init__(parent)
         
         self.controller = controller
-        self.wifi_ssid = wifi_ssid
         self.show_keyboard_screen = show_keyboard_screen
         self.pw_visible_state = False            # True - Visible
 
         self.rowconfigure(0,weight=1)   # status
         self.rowconfigure(1,weight=6)
         self.columnconfigure(0, weight=1)
+        
         
         pw_part = Frame(self, bg='black')
         pw_part.grid(row=1, column=0, sticky='NEWS')
@@ -94,9 +94,11 @@ class WifiDetailScreen(ttk.Frame):
 ##################################################################################################################
     def wifi_connect(self):
         print('ssid : ', end='')
-        print(self.password_entry.get())
+        #### 왜 안되지..
+        # wifi_ssid = self.controller.wifi_ssid
+        print(self.controller.wifi_ssid.get())
         print('password : ', end='')
-        print(self.controller.wifi_pw)
+        print(self.password_entry.get())
         
         # wf.connect_wifi('ssid', 'password')
 ##################################################################################################################
