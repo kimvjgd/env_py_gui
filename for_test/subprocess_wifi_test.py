@@ -31,8 +31,14 @@ def connect_wifi(name, password):
     cmd = 'nmcli device wifi connect {} password {}'.format(name, password)
     subprocess.call(cmd, shell=True)
 
-get_wifi_list()
-connect_wifi('sangsanglab', '0327107179')
+def get_current_wifi():
+    cmd = 'iwconfig wlan0'
+    subprocess.call(cmd,shell=True)
+import wifi
+# get_wifi_list()
+# connect_wifi('sangsanglab', '0327107179')
+# get_current_wifi()
+print(get_wifi_list())
 
 '''
 #####################################################################################
@@ -70,3 +76,5 @@ E8:54:84:14:34:7C  AP-408-701                   Infra  5     270 Mbit/s>    -50
 // Bad (PInk)
 08:5D:DD:AC:F2:2F  U+NetF230                    Infra  9     130 Mbit/s>    -67
 '''
+
+
