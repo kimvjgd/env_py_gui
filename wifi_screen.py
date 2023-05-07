@@ -174,10 +174,10 @@ class WifiScreen(ttk.Frame):
         available_wifi_label.grid(row=0, column=0)
         
     def show_wifi_detail_with_ssid(self, num):
-        self.controller.wifi_ssid = self.showing_wifi_list[num]
+        self.controller.wifi_ssid = self.showing_wifi_list[num][0]
         self.show_wifi_detail()
         # for test
-        print(self.showing_wifi_list[num])
+        print(self.showing_wifi_list[num][0])
 
 
 
