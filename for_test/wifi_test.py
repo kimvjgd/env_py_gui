@@ -128,5 +128,5 @@ if __name__ == '__main__':
     # # Delete WiFi from auto connect list
     # print Delete('DeleteWiFi')
     # print(Search())
-    # Connect('sangsanglab', '0327107179')
     print(wifi_Search())
+    Connect('sangsanglab', '0327107179')

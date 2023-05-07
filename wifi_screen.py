@@ -26,6 +26,15 @@ class WifiScreen(ttk.Frame):
         self.last_num = len(self.available_wifi_list) - 1
         self.current_start_num = 0
         self.current_end_num = 2
+        good_img = Image.open('img/wifi/Wi-Fi-01.png').resize((40,40), Image.ANTIALIAS)
+        self.good_wifi_signal = ImageTk.PhotoImage(good_img)
+        
+        soso_img = Image.open('img/wifi/Wi-Fi-02.png').resize((40,40), Image.ANTIALIAS)
+        self.soso_wifi_signal = ImageTk.PhotoImage(soso_img)
+        
+        bad_img = Image.open('img/wifi/Wi-Fi-03.png').resize((40,40), Image.ANTIALIAS)
+        self.bad_wifi_signal = ImageTk.PhotoImage(bad_img)
+        
         
         
         status_part = tk.Frame(self, bg="black")
@@ -157,15 +166,15 @@ class WifiScreen(ttk.Frame):
         
                 ############### available wifi list ###############
 
-        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 0 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(0))
+        self.first_image_label = self.get_image_instance(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 0 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(0))
         self.first_label = Label(available_wifi_list_part, text=self.showing_wifi_list[0], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.first_label.grid(row=0, column=1, sticky='W')
         
-        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 1 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(1))
+        self.second_image_label = self.get_image_instance(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 1 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(1))
         self.second_label = Label(available_wifi_list_part, text=self.showing_wifi_list[1], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.second_label.grid(row=1, column=1, sticky='W')
         
-        self.get_image(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 2 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(2))
+        self.third_image_label = self.get_image_instance(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 2 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(2))
         self.third_label = Label(available_wifi_list_part, text=self.showing_wifi_list[2], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.third_label.grid(row=2, column=1, sticky='W')
         
@@ -187,9 +196,41 @@ class WifiScreen(ttk.Frame):
             self.current_end_num -= 1
             
             self.showing_wifi_list = self.available_wifi_list[self.current_start_num:self.current_end_num+1]
-            self.first_label.config(text=self.showing_wifi_list[0])
-            self.second_label.config(text=self.showing_wifi_list[1])
-            self.third_label.config(text=self.showing_wifi_list[2])
+            # 나중에 list로 뺴서 for로 돌리자... 일단 급한대로 하드코딩
+            self.first_label.config(text=self.showing_wifi_list[0][0])
+            self.second_label.config(text=self.showing_wifi_list[1][0])
+            self.third_label.config(text=self.showing_wifi_list[2][0])
+            if self.showing_wifi_list[0][1] == 'a':
+                self.first_image_label.config(image=self.good_wifi_signal)
+                self.first_image_label.image = self.good_wifi_signal
+            elif self.showing_wifi_list[0][1] == 'b':
+                self.first_image_label.config(image=self.soso_wifi_signal)
+                self.first_image_label.image = self.soso_wifi_signal
+            else:
+                self.first_image_label.config(image=self.bad_wifi_signal)
+                self.first_image_label.image = self.bad_wifi_signal
+
+            if self.showing_wifi_list[1][1] == 'a':
+                self.second_image_label.config(image=self.good_wifi_signal)
+                self.second_image_label.image = self.good_wifi_signal
+            elif self.showing_wifi_list[1][1] == 'b':
+                self.second_image_label.config(image=self.soso_wifi_signal)
+                self.second_image_label.image = self.soso_wifi_signal
+            else:
+                self.second_image_label.config(image=self.bad_wifi_signal)
+                self.second_image_label.image = self.bad_wifi_signal
+
+            if self.showing_wifi_list[2][1] == 'a':
+                self.third_image_label.config(image=self.good_wifi_signal)
+                self.third_image_label.image = self.good_wifi_signal
+            elif self.showing_wifi_list[2][1] == 'b':
+                self.third_image_label.config(image=self.soso_wifi_signal)
+                self.third_image_label.image = self.soso_wifi_signal
+            else:
+                self.third_image_label.config(image=self.bad_wifi_signal)
+                self.third_image_label.image = self.bad_wifi_signal
+            
+            
             
     
     def press_down_button(self):
@@ -198,9 +239,38 @@ class WifiScreen(ttk.Frame):
             self.current_end_num += 1
             
             self.showing_wifi_list = self.available_wifi_list[self.current_start_num:self.current_end_num+1]
-            self.first_label.config(text=self.showing_wifi_list[0])
-            self.second_label.config(text=self.showing_wifi_list[1])
-            self.third_label.config(text=self.showing_wifi_list[2])
+            self.first_label.config(text=self.showing_wifi_list[0][0])
+            self.second_label.config(text=self.showing_wifi_list[1][0])
+            self.third_label.config(text=self.showing_wifi_list[2][0])
+            if self.showing_wifi_list[0][1] == 'a':
+                self.first_image_label.config(image=self.good_wifi_signal)
+                self.first_image_label.image = self.good_wifi_signal
+            elif self.showing_wifi_list[0][1] == 'b':
+                self.first_image_label.config(image=self.soso_wifi_signal)
+                self.first_image_label.image = self.soso_wifi_signal
+            else:
+                self.first_image_label.config(image=self.bad_wifi_signal)
+                self.first_image_label.image = self.bad_wifi_signal
+
+            if self.showing_wifi_list[1][1] == 'a':
+                self.second_image_label.config(image=self.good_wifi_signal)
+                self.second_image_label.image = self.good_wifi_signal
+            elif self.showing_wifi_list[1][1] == 'b':
+                self.second_image_label.config(image=self.soso_wifi_signal)
+                self.second_image_label.image = self.soso_wifi_signal
+            else:
+                self.second_image_label.config(image=self.bad_wifi_signal)
+                self.second_image_label.image = self.bad_wifi_signal
+
+            if self.showing_wifi_list[2][1] == 'a':
+                self.third_image_label.config(image=self.good_wifi_signal)
+                self.third_image_label.image = self.good_wifi_signal
+            elif self.showing_wifi_list[2][1] == 'b':
+                self.third_image_label.config(image=self.soso_wifi_signal)
+                self.third_image_label.image = self.soso_wifi_signal
+            else:
+                self.third_image_label.config(image=self.bad_wifi_signal)
+                self.third_image_label.image = self.bad_wifi_signal
             
     # def open(self):
     #     top = Toplevel(self)
@@ -231,6 +301,19 @@ class WifiScreen(ttk.Frame):
         def local_click(event):
             command()
         img_label.bind("<Button-1>", local_click)
+    
+    def get_image_instance(self, frame, path, width, height, row, column,sticky, command=None):
+        img = Image.open(path)
+        resized_img = img.resize((width,height), Image.ANTIALIAS)
+        photo_img = ImageTk.PhotoImage(resized_img)
+        img_label = Label(frame, image=photo_img, bg='black')
+        img_label.image = photo_img
+        img_label.grid(row=row, column=column, sticky=sticky)
+        def local_click(event):
+            command()
+        img_label.bind("<Button-1>", local_click)
+        return img_label
+    
 
     def get_button(self, frame,command, path, width, height, row, column,sticky):
         img = Image.open(path)
@@ -250,9 +333,9 @@ class WifiScreen(ttk.Frame):
         self.current_end_num = 2
         
         
-        self.first_label.config(text=self.available_wifi_list[0])
-        self.second_label.config(text=self.available_wifi_list[1])
-        self.third_label.config(text=self.available_wifi_list[2])
+        self.first_label.config(text=self.available_wifi_list[0][0])
+        self.second_label.config(text=self.available_wifi_list[1][0])
+        self.third_label.config(text=self.available_wifi_list[2][0])
         
         
 

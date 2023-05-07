@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import *
 from PIL import Image, ImageTk
 import wifi_func as wf
+import subprocess
 # 와이파이 하나 클릭하면 비번치고...등등등 하는 화면
 
 class WifiDetailScreen(ttk.Frame):
@@ -98,14 +99,18 @@ class WifiDetailScreen(ttk.Frame):
         connect_button.grid(row=3, column=0, sticky='NE')
 ##################################################################################################################
     def wifi_connect(self):
-        print('ssid : ', end='')
+        # print('ssid : ', end='')
         #### 왜 안되지..
         # wifi_ssid = self.controller.wifi_ssid
-        print(self.controller.wifi_ssid)
-        print('password : ', end='')
-        print(self.password_entry.get())
+        # print(self.controller.wifi_ssid)
+        # print('password : ', end='')
+        # print(self.password_entry.get())
         
-        # wf.connect_wifi('ssid', 'password')
+        # wf.connect_wifi(self.controller.wifi_ssid, self.password_entry.get())
+
+        subprocess.check_output('nmcli dev wifi list', shell=True)
+        cmd = 'nmcli device wifi connect {} password {}'.format(self.controller.wifi_ssid, self.password_entry.get())
+        subprocess.call(cmd, shell=True)
 ##################################################################################################################
     def switch(self):
         if self.pw_visible_state:

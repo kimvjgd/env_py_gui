@@ -1,17 +1,38 @@
+# import subprocess
+# CHANGE_STATE = False
+# def get_wifi_list():
+#     cmd = 'nmcli dev wifi list'
+#     subprocess.call(cmd, shell=True)
+#     CHANGE_STATE = True
+
+# def connect_wifi(name, password):
+#     cmd = 'nmcli device wifi connect {} password {}'.format(name, password)
+#     subprocess.call(cmd, shell=True)
+'''
+위의 코드에서 get_wifi_list() 함수는 subprocess 모듈을 사용하여 
+nmcli dev wifi list 명령을 실행하고 있습니다. 
+이 명령은 Wi-Fi 네트워크 목록을 출력하는 명령어이기 때문에, 
+출력된 결과를 확인하려면 함수가 완료될 때까지 기다려야 합니다.
+
+따라서, subprocess.call() 대신에 subprocess.check_output()을 사용하여 
+명령 실행 결과를 반환받도록 수정하면 됩니다. 
+또한, connect_wifi() 함수를 호출하기 전에 Wi-Fi 네트워크 목록을 출력하도록 하기 위해서는 
+get_wifi_list() 함수의 실행 결과를 변수에 저장한 후, 그 결과를 출력하면 됩니다.
+
+아래는 수정된 코드입니다. => KDH 재수정
+'''
 import subprocess
-CHANGE_STATE = False
 def get_wifi_list():
     cmd = 'nmcli dev wifi list'
-    subprocess.call(cmd, shell=True)
-    CHANGE_STATE = True
+    subprocess.check_output(cmd, shell=True)            # 아 
+
 
 def connect_wifi(name, password):
     cmd = 'nmcli device wifi connect {} password {}'.format(name, password)
     subprocess.call(cmd, shell=True)
 
-
 get_wifi_list()
-connect_wifi('sangsanglab_5G', '0327107179')
+connect_wifi('sangsanglab', '0327107179')
 
 '''
 #####################################################################################

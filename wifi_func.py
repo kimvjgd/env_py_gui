@@ -118,20 +118,20 @@ def Delete(ssid):
         return True
 
     return False
-
 def wifi_Search():
     wifilist = []
 
     cells = wifi.Cell.all('wlan0')
 
     for cell in cells:
-        signal = abs(cell.signal)
-        if signal <= 50:
-            wifilist.append([cell.ssid, 'a'])
-        elif signal <= 65:
-            wifilist.append([cell.ssid, 'b'])
-        else:
-            wifilist.append([cell.ssid, 'c'])
+        if cell.ssid != '':
+            signal = abs(cell.signal)
+            if signal <= 50:
+                wifilist.append([cell.ssid, 'a'])
+            elif signal <= 65:
+                wifilist.append([cell.ssid, 'b'])
+            else:
+                wifilist.append([cell.ssid, 'c'])
     
     '''
     cell.signal
