@@ -8,6 +8,7 @@ from wifi_detail_screen import WifiDetailScreen
 from info_screen import InfoScreen
 from keyboard_screen import KeyboardSreen
 from mac_address import get_mac_address
+
 # 나중에 링크 풀어줘야한다.
 # from uart_data_thread import UartDataThread
 
