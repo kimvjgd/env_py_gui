@@ -165,6 +165,7 @@ def get_current_wifi_info():
                 # signal_strength = wifi_info[4]
                 # print('ssid : ',wifi_info[2])
                 # print('signal_strength', wifi_info[-3])
+                return [wifi_info[2], wifi_info[-3]]
                 # return ssid, bssid, mode, channel, signal_strength
                 
                 # print(wifi_info)
