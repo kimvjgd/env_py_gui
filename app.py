@@ -163,6 +163,7 @@ if __name__== '__main__':
     app.home_frame.get_all_data()
     # app.home_frame.get_temperature(temperature=app.temperature.get())
     app.home_frame.time_update()
+    app.home_frame.lan_connection_update()
     
     # app.home_frame.data_get(u.TVOC,u.CO2,u.PM25,u.PM10,u.CH2O,u.Sm,u.NH3,u.CO,u.NO2,u.H2S,u.LIGHT,u.SOUND,u.Rn,u.O3,u.temperature,u.humidity)
     # temp_number = u.TVOC_VALUE
