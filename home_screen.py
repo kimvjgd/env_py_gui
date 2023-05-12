@@ -171,7 +171,6 @@ class Home(ttk.Frame):
         self.PM25_label = Label(pm25_part, text=self.PM25, bg='black', fg='white', font=('Arial', 15))
         self.PM25_label.grid(row=1, column=0, sticky='NEWS')
         self.PM25_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM25'))
-
         h2s_part = tk.Frame(sensor_part, bg='black')
         h2s_part.grid(row=2,column=4,sticky='NEWS')
         self.set_frame_configure(h2s_part)
@@ -559,52 +558,54 @@ class Home(ttk.Frame):
         self.after(1000, self.lan_connection_update)
         
     def get_all_data(self):
-        self.temperature = self.controller.temperature
-        self.temp_label.config(text=self.temperature)
-        self.humidity = self.controller.humidity
-        self.humidity_label.config(text=self.humidity)
-        # 밑에 마저 해야한다.
-        self.TVOC = self.controller.TVOC
-        self.TVOC_label.config(text=self.TVOC)
-        
-        self.CO2 = self.controller.CO2
-        self.CO2_label.config(text=self.CO2)
-        
-        self.PM25 = self.controller.PM25
-        self.PM25_label.config(text=self.PM25)
-        
-        self.PM10 = self.controller.PM10
-        self.PM10_label.config(text=self.PM10)
-        
-        self.CH2O = self.controller.CH2O
-        self.CH2O_label.config(text=self.CH2O)
-        
-        self.Sm = self.controller.Sm
-        self.Sm_label.config(text=self.Sm)
-        
-        self.NH3 = self.controller.NH3
-        self.NH3_label.config(text=self.NH3)
-        
-        self.CO = self.controller.CO
-        self.CO_label.config(text=self.CO)
-        
-        self.NO2 = self.controller.NO2
-        self.NO2_label.config(text=self.NO2)
-        
-        self.H2S = self.controller.H2S
-        self.H2S_label.config(text=self.H2S)
-        
-        self.LIGHT = self.controller.LIGHT
-        self.Light_label.config(text=self.LIGHT)
-        
-        self.SOUND = self.controller.SOUND
-        self.Sound_label.config(text=self.SOUND)
-        
-        self.Rn = self.controller.Rn
-        self.Rn_label.config(text=self.Rn)
-        
-        self.O3 = self.controller.O3
-        self.O3_label.config(text=self.O3)
+        check_value = str(self.controller.TVOC)
+        if not check_value.startswith('PY'):
+                self.temperature = self.controller.temperature
+                self.temp_label.config(text=self.temperature)
+                self.humidity = self.controller.humidity
+                self.humidity_label.config(text=self.humidity)
+                # 밑에 마저 해야한다.
+                self.TVOC = self.controller.TVOC
+                self.TVOC_label.config(text=self.TVOC)
+                
+                self.CO2 = self.controller.CO2
+                self.CO2_label.config(text=self.CO2)
+                
+                self.PM25 = self.controller.PM25
+                self.PM25_label.config(text=self.PM25)
+                
+                self.PM10 = self.controller.PM10
+                self.PM10_label.config(text=self.PM10)
+                
+                self.CH2O = self.controller.CH2O
+                self.CH2O_label.config(text=self.CH2O)
+                
+                self.Sm = self.controller.Sm
+                self.Sm_label.config(text=self.Sm)
+                
+                self.NH3 = self.controller.NH3
+                self.NH3_label.config(text=self.NH3)
+                
+                self.CO = self.controller.CO
+                self.CO_label.config(text=self.CO)
+                
+                self.NO2 = self.controller.NO2
+                self.NO2_label.config(text=self.NO2)
+                
+                self.H2S = self.controller.H2S
+                self.H2S_label.config(text=self.H2S)
+                
+                self.LIGHT = self.controller.LIGHT
+                self.Light_label.config(text=self.LIGHT)
+                
+                self.SOUND = self.controller.SOUND
+                self.Sound_label.config(text=self.SOUND)
+                
+                self.Rn = self.controller.Rn
+                self.Rn_label.config(text=self.Rn)
+                
+                self.O3 = self.controller.O3
+                self.O3_label.config(text=self.O3)
         
         
         
