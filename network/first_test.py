@@ -18,9 +18,7 @@ client = mqtt.Client()
 client.connect(broker_address, broker_port)
 
 # 전송할 데이터
-data = {"temperature": 25.0, "humidity": 60.0}
-
-{"ts": timestamp,
+data = {"ts": timestamp,
  "values":{
      "S_0_0":0,
      "S_0_1":1,
