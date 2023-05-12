@@ -561,7 +561,7 @@ class Home(ttk.Frame):
         elif connection_state[0] == False and connection_state[1] == True:
                 self.lan_state = 'wlan'
         print(self.lan_state)
-        self.after(1000, self.lan_connection_update)
+        self.after(2000, self.lan_connection_update)
         
     def get_all_data(self):
         check_value = str(self.controller.TVOC)

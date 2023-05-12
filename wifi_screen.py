@@ -14,6 +14,7 @@ class WifiScreen(ttk.Frame):
     def __init__(self, parent, controller, show_home, show_wifi_detail):
         super().__init__(parent)
         
+        
         self.show_home = show_home
         self.show_wifi_detail = show_wifi_detail
         self.controller = controller

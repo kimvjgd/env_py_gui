@@ -9,8 +9,10 @@ from info_screen import InfoScreen
 from keyboard_screen import KeyboardSreen
 from mac_address import get_mac_address
 
+
+
 # 나중에 링크 풀어줘야한다.
-# from uart_data_thread import UartDataThread
+from uart_data_thread import UartDataThread
 
  
 
@@ -155,8 +157,8 @@ if __name__== '__main__':
 
     app = EnvSensor()
     # 나중에 주석을 풀어줘야 한다.
-    # u = UartDataThread(app)
-    # u.start()
+    u = UartDataThread(app)
+    u.start()
 
     # home = app.home_frame
     # app.get_temp()
@@ -164,6 +166,7 @@ if __name__== '__main__':
     # app.home_frame.get_temperature(temperature=app.temperature.get())
     app.home_frame.time_update()
     app.home_frame.lan_connection_update()
+    app.wifi_frame.get_wifi_list()
     
     # app.home_frame.data_get(u.TVOC,u.CO2,u.PM25,u.PM10,u.CH2O,u.Sm,u.NH3,u.CO,u.NO2,u.H2S,u.LIGHT,u.SOUND,u.Rn,u.O3,u.temperature,u.humidity)
     # temp_number = u.TVOC_VALUE
