@@ -4,7 +4,7 @@ from tkinter import *
 from datetime import datetime
 from time import strftime
 import sys
-
+from wifi_func import get_current_connection_state
 
 class Home(ttk.Frame):
     def __init__(self, parent, controller, show_element, show_wifi, show_info):
@@ -550,7 +550,14 @@ class Home(ttk.Frame):
         self.time_label.config(text=time_string)
         self.time_label.after(1000, self.time_update)
         # print(uart_data_thread.TVOC)
+
+
     
+    def lan_connection_update(self):
+        connection_state = get_current_connection_state()
+        print(connection_state)
+        self.after(1000, self.lan_connection_update)
+        
     def get_all_data(self):
         self.temperature = self.controller.temperature
         self.temp_label.config(text=self.temperature)

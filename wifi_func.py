@@ -197,3 +197,40 @@ IN-USE  BSSID              SSID                   MODE   CHAN  RATE        SIGNA
         90:9F:33:A9:0B:8C  sangsanglab            Infra  13    405 Mbit/s  79                           ▂▄▆_  WPA2
 *       90:9F:33:A8:0B:8C  sangsanglab_5G         Infra  149   405 Mbit/s  77                           ▂▄▆_  WPA2
 '''
+
+
+
+
+########################################################################################
+# ehternet or wlan notification
+import psutil
+
+# def check_network_connection():
+#     """Check if Ethernet or Wi-Fi is connected"""
+#     interfaces = psutil.net_if_stats()
+#     print(interfaces)
+#     for interface, stats in interfaces.items():
+#         if interface == 'lo':  # skip localhost
+#             continue
+#         if stats.isup and (interface.startswith('en') or interface.startswith('eth') or interface.startswith('wlan')):
+#             return True
+#     return False
+
+# # Example usage
+# if check_network_connection():
+#     print("Network is connected")
+# else:
+#     print("Network is disconnected")
+
+#############################
+
+def get_current_connection_state():
+    # type - dictionary
+    interfaces = psutil.net_if_stats()
+    # print('eth0: ',interfaces['eth0'].isup)
+    # print('wlan0: ',interfaces['wlan0'].isup)
+
+    eth0_connection = interfaces['eth0'].isup
+    wlan0_connection = interfaces['wlan0'].isup
+    return [eth0_connection, wlan0_connection]
+

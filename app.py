@@ -41,6 +41,10 @@ class EnvSensor(tk.Tk):
         self.mac_address = get_mac_address()
         self.wifi_ssid = tk.StringVar(value='')
         self.wifi_pw = tk.StringVar(value='')
+        
+        self.eth0_connection = False            # 초기값은 0으로 잡아준다.
+        self.wlan0_connection = False
+        
 
         style = ttk.Style(self)
         style.theme_use("clam")
