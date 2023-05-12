@@ -38,7 +38,7 @@ import wifi
 # get_wifi_list()
 # connect_wifi('sangsanglab', '0327107179')
 # get_current_wifi()
-print(get_wifi_list())
+# print(get_wifi_list())
 
 '''
 #####################################################################################

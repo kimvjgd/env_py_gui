@@ -102,8 +102,7 @@ Ctrl_2 = Button(root, text='     Ctrl', padx=20, pady=12, font=("Courier", 22), 
 
 Fn = Button(root, text=' Fn ', padx=20, pady=12, font=("Courier", 22), background='black', foreground='white')
 
-if A:
-    print("A")
+
 
 Button_1.grid(row=2, column=1)
 Button_2.grid(row=2, column=2)

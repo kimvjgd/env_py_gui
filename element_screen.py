@@ -146,7 +146,4 @@ class Element(ttk.Frame):
         img = PhotoImage(file=SENSOR_DICT[sensor_name][1])
         self.img_label.configure(image=img)
         self.img_label.image = img
-        print('######################################')
-        print(sensor_name)
-        print('######################################')
         

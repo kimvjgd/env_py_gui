@@ -555,12 +555,12 @@ class Home(ttk.Frame):
     
     def lan_connection_update(self):
         connection_state = get_current_connection_state()                       # [ethernet, wlan] <- False(미연결) & True(연결)
-        print(connection_state)                                                 # ex) [False, True] -> wlan 연결 [True, True] -> wlan무시 ethernet연결
+        # print(connection_state)                                                 # ex) [False, True] -> wlan 연결 [True, True] -> wlan무시 ethernet연결
         if connection_state[0] == True:         # ethernet mode
                 self.lan_state = 'ethernet'
         elif connection_state[0] == False and connection_state[1] == True:
                 self.lan_state = 'wlan'
-        print(self.lan_state)
+        # print(self.lan_state)
         self.after(2000, self.lan_connection_update)
         
     def get_all_data(self):

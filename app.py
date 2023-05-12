@@ -128,25 +128,6 @@ class EnvSensor(tk.Tk):
         frame = self.frames[container]
         frame.tkraise()
     
-    def get_temp(self):
-        print(self.TVOC)
-        print(self.CO2)
-        print(self.PM25)
-        print(self.PM10)
-        print(self.CH2O)
-        print(self.Sm)
-        print(self.NH3)
-        print(self.CO)
-        print(self.NO2)
-        print(self.H2S)
-        print(self.LIGHT)
-        print(self.SOUND)
-        print(self.Rn)
-        print(self.O3)
-        print(self.temperature)
-        print(self.humidity)
-        
-        self.after(1000, self.get_temp)
         
 
 
@@ -156,23 +137,14 @@ class EnvSensor(tk.Tk):
 if __name__== '__main__':
 
     app = EnvSensor()
-    # 나중에 주석을 풀어줘야 한다.
     u = UartDataThread(app)
     u.start()
 
-    # home = app.home_frame
-    # app.get_temp()
     app.home_frame.get_all_data()
-    # app.home_frame.get_temperature(temperature=app.temperature.get())
     app.home_frame.time_update()
     app.home_frame.lan_connection_update()
     app.wifi_frame.get_wifi_list()
-    
-    # app.home_frame.data_get(u.TVOC,u.CO2,u.PM25,u.PM10,u.CH2O,u.Sm,u.NH3,u.CO,u.NO2,u.H2S,u.LIGHT,u.SOUND,u.Rn,u.O3,u.temperature,u.humidity)
-    # temp_number = u.TVOC_VALUE
-    # print('u.TVOC_VALUE : ', temp_number)
-    # app.home_frame.get_one_data(temp_number)
-    # app.wifi_frame.get_wifi_list()
+    app.wifi_frame.get_current_wifi()
     
     app.geometry("800x480")
     app.attributes('-fullscreen', FULL_SCREEN)

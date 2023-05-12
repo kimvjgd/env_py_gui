@@ -98,7 +98,6 @@ class UartDataThread(Thread):
                 self.last_x = self.x
                 self.last_y = self.y
                 pyautogui.moveTo(self.x, self.y)
-                # print('TVOC ----- in uart_data_thread'+str(TVOC))
             self.lock.release()    
 
 ###################################### self.serial_str ######################################

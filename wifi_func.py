@@ -143,19 +143,6 @@ def wifi_Search():
 
     return wifilist
 
-if __name__ == '__main__':
-    # Search WiFi and return WiFi list
-    # print Search()
-
-    # # Connect WiFi with password & without password
-    # print Connect('OpenWiFi')
-    # print Connect('ClosedWiFi', 'password')
-
-    # # Delete WiFi from auto connect list
-    # print Delete('DeleteWiFi')
-    # print(Search())
-    # Connect('sangsanglab', '0327107179')
-    print(wifi_Search())
     
 
 
@@ -167,7 +154,7 @@ def get_current_wifi_info():
         output = output.decode("utf-8")
         lines = output.split("\n")
         for line in lines:
-            print(line)
+            # print(line)
             if "*" in line:
                 # Extract the Wi-Fi information from the line
                 wifi_info = re.findall(r"\S+", line)
@@ -176,8 +163,8 @@ def get_current_wifi_info():
                 # mode = wifi_info[2]
                 # channel = wifi_info[3]
                 # signal_strength = wifi_info[4]
-                print('ssid : ',wifi_info[2])
-                print('signal_strength', wifi_info[-3])
+                # print('ssid : ',wifi_info[2])
+                # print('signal_strength', wifi_info[-3])
                 # return ssid, bssid, mode, channel, signal_strength
                 
                 # print(wifi_info)

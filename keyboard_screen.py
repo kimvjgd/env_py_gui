@@ -462,14 +462,14 @@ class KeyboardSreen(ttk.Frame):
 
     def enter_func(self):
         self.controller.wifi_pw = self.pw_entry.get()
-        print(self.controller.wifi_pw)
+        # print(self.controller.wifi_pw)
         self.my_entry.delete(0, END)
         self.my_entry.insert(0, str(self.pw_entry.get()))
         self.show_wifi_detail()
 
     def connect_func(self):
         self.controller.wifi_pw = self.pw_entry.get()
-        print(self.controller.wifi_pw)
+        # print(self.controller.wifi_pw)
         self.my_entry.delete(0, END)
         self.my_entry.insert(0, str(self.pw_entry.get()))
         self.show_wifi_detail()

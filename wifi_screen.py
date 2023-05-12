@@ -36,7 +36,7 @@ class WifiScreen(ttk.Frame):
         bad_img = Image.open('img/wifi/Wi-Fi-03.png').resize((40,40), Image.ANTIALIAS)
         self.bad_wifi_signal = ImageTk.PhotoImage(bad_img)
         
-        
+        self.current_wifi_list = []     # list가 여러가지 wifi가 아니고 ssid & signal strength
         
         status_part = tk.Frame(self, bg="black")
         status_part.grid(row=0, column=0, sticky="NEWS")
@@ -112,9 +112,9 @@ class WifiScreen(ttk.Frame):
         
         def nothing_func():
             pass
-        
-        self.get_image(current_wifi_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 0 ,0, 'E', command=nothing_func)
-        
+        # 이것도 빼줘야하네..
+        # self.get_image(current_wifi_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 0 ,0, 'E', command=nothing_func)
+        self.current_wifi_image = self.get_image_instance(current_wifi_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 0 ,0, 'E', command=nothing_func)
         self.current_wifi_label = Label(current_wifi_part, text= 'Sangsanglab 5G', font=('Arial', 18), padx=14, fg='white', bg='black')
         self.current_wifi_label.grid(row=0, column=1, sticky='W')
 
@@ -187,7 +187,7 @@ class WifiScreen(ttk.Frame):
         self.controller.wifi_ssid = self.showing_wifi_list[num][0]
         self.show_wifi_detail()
         # for test
-        print(self.showing_wifi_list[num][0])
+        # print(self.showing_wifi_list[num][0])
 
 
 
@@ -338,5 +338,11 @@ class WifiScreen(ttk.Frame):
         self.second_label.config(text=self.available_wifi_list[1][0])
         self.third_label.config(text=self.available_wifi_list[2][0])
         
+    def get_current_wifi(self):
+        self.current_wifi_list = wf.get_current_wifi_info()
+        self.current_wifi_label.config(text=self.current_wifi_list)
+        print(self.current_wifi_list)
+        
+        self.current_wifi_label.after(2000, self.get_current_wifi)
         
 
