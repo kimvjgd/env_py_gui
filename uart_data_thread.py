@@ -36,9 +36,9 @@ class UartDataThread(Thread):
         self.lock = Lock()
         
     
-    def show_data(self):
-        print(self.TVOC)
-        print(self.CO2)
+    # def show_data(self):
+    #     print(self.TVOC)
+    #     print(self.CO2)
         
         
     def run(self):

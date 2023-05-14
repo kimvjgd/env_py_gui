@@ -22,6 +22,31 @@
 
 import wifi
 import subprocess
+import re
+
+def get_current_wifi_info():
+    try:
+        output = subprocess.check_output(["nmcli", "dev", "wifi", "list"])
+        output = output.decode("utf-8")
+        lines = output.split("\n")
+        for line in lines:
+            # print(line)
+            if "*" in line:
+                # Extract the Wi-Fi information from the line
+                wifi_info = re.findall(r"\S+", line)
+                # ssid = wifi_info[0]
+                # bssid = wifi_info[1]
+                # mode = wifi_info[2]
+                # channel = wifi_info[3]
+                # signal_strength = wifi_info[4]
+                # print('ssid : ',wifi_info[2])
+                # print('signal_strength', wifi_info[-3])
+                return [wifi_info[2], wifi_info[-3]]
+                # return ssid, bssid, mode, channel, signal_strength
+                
+                # print(wifi_info)
+    except subprocess.CalledProcessError:
+        return None
 def Search():
     wifilist = []
 
@@ -120,7 +145,6 @@ def Delete(ssid):
     return False
 def wifi_Search():
     wifilist = []
-
     cells = wifi.Cell.all('wlan0')
 
     for cell in cells:
@@ -146,33 +170,9 @@ def wifi_Search():
     
 
 
-import re
 
-def get_current_wifi_info():
-    try:
-        output = subprocess.check_output(["nmcli", "dev", "wifi", "list"])
-        output = output.decode("utf-8")
-        lines = output.split("\n")
-        for line in lines:
-            # print(line)
-            if "*" in line:
-                # Extract the Wi-Fi information from the line
-                wifi_info = re.findall(r"\S+", line)
-                # ssid = wifi_info[0]
-                # bssid = wifi_info[1]
-                # mode = wifi_info[2]
-                # channel = wifi_info[3]
-                # signal_strength = wifi_info[4]
-                # print('ssid : ',wifi_info[2])
-                # print('signal_strength', wifi_info[-3])
-                return [wifi_info[2], wifi_info[-3]]
-                # return ssid, bssid, mode, channel, signal_strength
-                
-                # print(wifi_info)
-    except subprocess.CalledProcessError:
-        return None
 
-get_current_wifi_info()
+# get_current_wifi_info()
 
 '''
 IN-USE  BSSID              SSID                   MODE   CHAN  RATE        SIGNA                     L  BARS  SECURITY

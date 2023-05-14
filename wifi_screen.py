@@ -36,7 +36,7 @@ class WifiScreen(ttk.Frame):
         bad_img = Image.open('img/wifi/Wi-Fi-03.png').resize((40,40), Image.ANTIALIAS)
         self.bad_wifi_signal = ImageTk.PhotoImage(bad_img)
         
-        self.current_wifi_list = []     # list가 여러가지 wifi가 아니고 ssid & signal strength
+        self.current_wifi_list = ['','']     # list가 여러가지 wifi가 아니고 ssid & signal strength
         
         status_part = tk.Frame(self, bg="black")
         status_part.grid(row=0, column=0, sticky="NEWS")
@@ -339,6 +339,9 @@ class WifiScreen(ttk.Frame):
     
     def get_wifi_list(self):
         self.available_wifi_list = wf.wifi_Search()
+        
+        # self.available_wifi_list = [i for i in self.available_wifi_list if i[0] != self.current_wifi_list[0]]
+        # self.available_wifi_list.remove
         self.available_wifi_list.sort(key = lambda x:x[1])
         self.showing_wifi_list = self.available_wifi_list[0:3]
         self.last_num = len(self.available_wifi_list) -1
@@ -352,6 +355,7 @@ class WifiScreen(ttk.Frame):
         
     def get_current_wifi(self):
         self.current_wifi_list = wf.get_current_wifi_info()
+        
         if self.current_wifi_list == None:
             self.current_wifi_label.config(text='No Wifi...')
         else:
@@ -361,6 +365,6 @@ class WifiScreen(ttk.Frame):
         # print('self.current wifi list')
         # print(self.current_wifi_list)
         
-        self.current_wifi_label.after(2000, self.get_current_wifi)
+        self.current_wifi_label.after(3000, self.get_current_wifi)
         
 
