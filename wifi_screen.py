@@ -27,13 +27,13 @@ class WifiScreen(ttk.Frame):
         self.last_num = len(self.available_wifi_list) - 1
         self.current_start_num = 0
         self.current_end_num = 2
-        good_img = Image.open('img/wifi/Wi-Fi-01.png').resize((40,40), Image.ANTIALIAS)
+        good_img = Image.open('img/wifi/strength/wifi_strength_4.png').resize((40,40), Image.ANTIALIAS)
         self.good_wifi_signal = ImageTk.PhotoImage(good_img)
         
-        soso_img = Image.open('img/wifi/Wi-Fi-02.png').resize((40,40), Image.ANTIALIAS)
+        soso_img = Image.open('img/wifi/strength/wifi_strength_3.png').resize((40,40), Image.ANTIALIAS)
         self.soso_wifi_signal = ImageTk.PhotoImage(soso_img)
         
-        bad_img = Image.open('img/wifi/Wi-Fi-03.png').resize((40,40), Image.ANTIALIAS)
+        bad_img = Image.open('img/wifi/strength/wifi_strength_2.png').resize((40,40), Image.ANTIALIAS)
         self.bad_wifi_signal = ImageTk.PhotoImage(bad_img)
         
         self.current_wifi_list = ['','']     # list가 여러가지 wifi가 아니고 ssid & signal strength
