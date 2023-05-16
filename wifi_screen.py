@@ -140,11 +140,17 @@ class WifiScreen(ttk.Frame):
         available_wifi_part.columnconfigure(0, weight=1)
         available_wifi_part.columnconfigure(1, weight=11)
         available_wifi_part.columnconfigure(2, weight=1)
-        
-        up_button = Button(available_wifi_part, bg='red', command=self.press_up_button)
+        up_btn_img = Image.open('img/parts/btn_up.png')
+        resized_up_btn_img = up_btn_img.resize((20, 20), Image.ANTIALIAS)
+        photo_up_btn = ImageTk.PhotoImage(resized_up_btn_img)
+        up_button = Button(available_wifi_part, bg='red', command=self.press_up_button, image = photo_up_btn)
         up_button.grid(row=0, column=2,sticky='NEWS')
+        down_btn_img = Image.open('img/parts/btn_down.png')
+        resized_down_btn_img = down_btn_img.resize((20, 20), Image.ANTIALIAS)
+        photo_down_btn = ImageTk.PhotoImage(resized_down_btn_img)
+        
 
-        down_button = Button(available_wifi_part, bg='blue', command=self.press_down_button)
+        down_button = Button(available_wifi_part, bg='blue', command=self.press_down_button, image = photo_down_btn)
         down_button.grid(row=1, column=2, sticky='NEWS')
         
         available_wifi_list_part = tk.Frame(available_wifi_part, bg='black')
