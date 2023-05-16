@@ -9,7 +9,26 @@ THINGSBOARD_HOST = "210.117.143.37"
 # THINGSBOARD_HOST = "demo.thingsboard.io"
 ACCESS_TOKEN='51ZFhNEWFXLi4pW758Gy'
 port = 10061
-sensor_data = {'my-temperature': 0}
+i = 0
+sensor_data = {
+                # 'ts':0,
+        'values':{
+                "S_0_0":i,
+                "S_0_1":i,
+                "S_0_2":i,
+                "S_0_3":i,
+                "S_0_4":i,
+                "S_0_5":i,
+                "S_0_6":i,
+                "S_0_7":i,
+                "S_0_8":i,
+                "S_0_9":i,
+                "S_0_10":i,
+                "S_0_11":i,
+                "S_0_12":i,
+                "S_0_13":i,
+                }
+        }
 
 client = mqtt.Client()
 client.username_pw_set(ACCESS_TOKEN)
@@ -18,10 +37,29 @@ client.loop_start()
 
 try:
     while True:
-        senval = random.randrange(0, 180)
-        print(senval)
-        sensor_data['my-temperature'] = senval
-
+        # senval = random.randrange(0, 180)
+        # print(senval)
+        # sensor_data['my-temperature'] = senval
+        sensor_data = {
+            # 'ts':0,
+            'values':{
+                "S_0_0":i,
+                "S_0_1":i,
+                "S_0_2":i,
+                "S_0_3":i,
+                "S_0_4":i,
+                "S_0_5":i,
+                "S_0_6":i,
+                "S_0_7":i,
+                "S_0_8":i,
+                "S_0_9":i,
+                "S_0_10":i,
+                "S_0_11":i,
+                "S_0_12":i,
+                "S_0_13":i,
+            }
+        }
+        i += 1
         client.publish('v1/devices/me/telemetry', json.dumps(sensor_data), 1)
         time.sleep(5)
 except KeyboardInterrupt:

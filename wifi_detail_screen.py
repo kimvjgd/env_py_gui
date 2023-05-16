@@ -91,10 +91,10 @@ class WifiDetailScreen(ttk.Frame):
         Label(self.auto_connection_frame, text='자동으로 연결', font=('Arial',30)).grid(row=0, column=0)
             
         on_img = Image.open('img/parts/toggle_on.png')
-        resized_on_img = on_img.resize((45,35), Image.ANTIALIAS)
+        resized_on_img = on_img.resize((65,55), Image.ANTIALIAS)
         self.on = ImageTk.PhotoImage(resized_on_img)
         off_img = Image.open('img/parts/toggle_off.png')
-        resized_off_img = off_img.resize((80,65), Image.ANTIALIAS)
+        resized_off_img = off_img.resize((65,55), Image.ANTIALIAS)
         self.off = ImageTk.PhotoImage(resized_off_img)
         
         # self.on = PhotoImage(file='img/parts/toggle_on.png')

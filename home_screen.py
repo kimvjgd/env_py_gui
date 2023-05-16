@@ -6,6 +6,32 @@ from time import strftime
 from PIL import Image, ImageTk
 import sys
 from wifi_func import get_current_connection_state
+import paho.mqtt.client as mqtt
+import os
+import json
+from datetime import datetime
+import time
+
+THINGSBOARD_HOST = "210.117.143.37"
+ACCESS_TOKEN='51ZFhNEWFXLi4pW758Gy'
+port = 10061
+sensor_data = {
+        "values":{
+                "S_0_0":0,
+                "S_0_1":0,
+                "S_0_2":0,
+                "S_0_3":0,
+                "S_0_4":0,
+                "S_0_5":0,
+                "S_0_6":0,
+                "S_0_7":0,
+                "S_0_8":0,
+                "S_0_9":0,
+                "S_0_10":0,
+                "S_0_11":0,
+                "S_0_12":0,
+                "S_0_13":0,
+                }}
 
 class Home(ttk.Frame):
     def __init__(self, parent, controller, show_element, show_wifi, show_info):
@@ -31,7 +57,10 @@ class Home(ttk.Frame):
         self.temperature = 0.0
         self.humidity = 0.0
         self.lan_state = 'wlan'         # wlan or ethernet                      <- 나중에 시간되면 class로 뺴서 enum으로 만들자
-        
+        self.client = mqtt.Client()
+        self.client.username_pw_set(ACCESS_TOKEN)
+        self.client.connect(THINGSBOARD_HOST, port, 60)
+        self.client.loop_start()
         
         # self.time_update()
         self.columnconfigure(0, weight=1)
@@ -47,6 +76,7 @@ class Home(ttk.Frame):
         status_part.columnconfigure(1, weight=1)
         status_part.columnconfigure(2, weight=1)
         status_part.columnconfigure(3, weight=1)
+        status_part.columnconfigure(4, weight=1)                        # For MQTT send - gonna be erased soon
         status_part.rowconfigure(0, weight=1)
         
         
@@ -102,6 +132,7 @@ class Home(ttk.Frame):
         # wifi_image = tk.PhotoImage(file='img/wifi/wifi.png')
         quit_image = tk.PhotoImage(file='img/parts/back_button.png')
         
+        
         # Temporary Quit Button for DEBUG!!!!!!!!!!
         quit_button = tk.Button(status_part, image=quit_image, command=controller.destroy, height=20, width=20)
         quit_button.image = quit_image                  # to keep a ref
@@ -117,8 +148,18 @@ class Home(ttk.Frame):
         # info_button.image = info_image                  # to keep a ref
         # info_button.grid(column=3,row=0)
         info_button = self.get_image_instance(status_part, 'img/wifi/info.png', 20, 20, 0, 3, 'NEWS', command=show_info)
+
+        ################################################################################################
+        ################################################################################################
+        ################################################################################################
         
+        # Temporary MQTT Button for DEBUG!!!!!!!!!!
+        mqtt_button = tk.Button(status_part,bg='red',image=quit_image,highlightthickness=0, command=self.send_mqtt_data, height=20, width=20, bd=0, borderwidth=0)
+        mqtt_button.grid(column=4,row=0)
         
+        ################################################################################################
+        ################################################################################################
+        ################################################################################################
         
         # temperature & humidity
         
@@ -544,11 +585,11 @@ class Home(ttk.Frame):
         
         
     def set_frame_configure(self, frame):
-            frame.columnconfigure(0, weight=1)
-            frame.rowconfigure(0,weight=2)
-            frame.rowconfigure(1,weight=1)
-            frame.rowconfigure(2,weight=1)
-            frame.rowconfigure(3,weight=1)
+        frame.columnconfigure(0, weight=1)
+        frame.rowconfigure(0,weight=2)
+        frame.rowconfigure(1,weight=1)
+        frame.rowconfigure(2,weight=1)
+        frame.rowconfigure(3,weight=1)
 
     def set_label(self, frame, title,row=2, column=0, font_size=15):
         common_label = Label(frame, text=title, bg='black', fg='white', font=('Arial',font_size))
@@ -590,6 +631,42 @@ class Home(ttk.Frame):
         def local_click(event):
             command()
         img_label.bind("<Button-1>", local_click)
+    
+    def send_mqtt_data(self):
+        timestamp = time.time()
+        sensor_data = {
+        'values':{
+                "S_0_0":int(self.TVOC),
+                "S_0_1":int(self.CO2),
+                "S_0_2":int(self.PM10),
+                "S_0_3":int(self.PM25),
+                "S_0_4":int(self.CH2O),
+                "S_0_5":int(self.NH3),
+                "S_0_6":int(self.Sm),
+                "S_0_7":int(self.CO),
+                "S_0_8":int(self.NO2),
+                "S_0_9":int(self.LIGHT),
+                "S_0_10":int(self.SOUND),
+                "S_0_11":int(self.Rn),
+                "S_0_12":int(self.temperature),
+                "S_0_13":int(self.humidity),
+                }
+        }
+        print("S_0_0 : ",self.TVOC)
+        print("S_0_1 : ",self.CO2)
+        print("S_0_2 : ",self.PM25)
+        print("S_0_3 : ",self.PM10)
+        print("S_0_4 : ",self.CH2O)
+        print("S_0_5 : ",self.Sm)
+        print("S_0_6 : ",self.NH3)
+        print("S_0_7 : ",self.CO)
+        print("S_0_8 : ",self.NO2)
+        print("S_0_9 : ",self.H2S)
+        print("S_0_10 : ",self.LIGHT)
+        print("S_0_11 : ",self.SOUND)
+        print("S_0_12 : ",self.temperature)
+        print("S_0_13 : ",self.humidity)
+        self.client.publish('v1/devices/me/telemetry', json.dumps(sensor_data), 1)
         
     def get_all_data(self):
         check_value = str(self.controller.TVOC)

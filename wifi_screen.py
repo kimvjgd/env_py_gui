@@ -19,10 +19,10 @@ class WifiScreen(ttk.Frame):
         self.show_wifi_detail = show_wifi_detail
         self.controller = controller
         self.columnconfigure(0, weight=1)
-        self.rowconfigure(0, weight=1)
-        self.rowconfigure(1, weight=6)
+        self.rowconfigure(0, weight=4)
+        self.rowconfigure(1, weight=15)
         
-        self.available_wifi_list = ['aaaa', 'bbbb', 'cccc', 'dddd', 'eeee', 'ffff', 'gggg', 'hhhh', 'iiii', 'jjjj', 'kkkk']
+        self.available_wifi_list = ['aaaa', 'bbbb', 'cccc', 'dddd', 'eeee']
         self.showing_wifi_list = self.available_wifi_list[0:3]
         self.last_num = len(self.available_wifi_list) - 1
         self.current_start_num = 0
@@ -101,7 +101,7 @@ class WifiScreen(ttk.Frame):
         current_wifi_title_part = tk.Frame(main_part, bg='black')
         current_wifi_title_part.grid(row=1, column=0,sticky='NEWS')
         
-        current_wifi_title_label = Label(current_wifi_title_part, text='현재 네트워크',fg='white', bg='black', font=('Arial',18), padx=30)
+        current_wifi_title_label = Label(current_wifi_title_part, text='현재 네트워크',fg='white', bg='black', font=('Arial',25), padx=30)
         current_wifi_title_label.grid(row=0, column=0)
 
         current_wifi_part = tk.Frame(main_part, bg='black')
@@ -124,7 +124,7 @@ class WifiScreen(ttk.Frame):
         available_wifi_title_part.columnconfigure(0, weight=10)
         available_wifi_title_part.columnconfigure(1, weight=1)
 
-        available_wifi_title_label = Label(available_wifi_title_part, text='사용 가능한 네트워크',fg='white', bg='black', font=('Arial',20), padx=30)
+        available_wifi_title_label = Label(available_wifi_title_part, text='사용 가능한 네트워크',fg='white', bg='black', font=('Arial',25), padx=30)
         available_wifi_title_label.grid(row=0, column=0, sticky='W')
         
         self.get_image(available_wifi_title_part, 'img/wifi/refresh_wifi.png', 25, 25, 0, 1, "NEWS",self.get_wifi_list)
@@ -140,6 +140,9 @@ class WifiScreen(ttk.Frame):
         available_wifi_part.columnconfigure(0, weight=1)
         available_wifi_part.columnconfigure(1, weight=11)
         available_wifi_part.columnconfigure(2, weight=1)
+        
+        
+        
         up_btn_img = Image.open('img/parts/btn_up.png')
         resized_up_btn_img = up_btn_img.resize((20, 20), Image.ANTIALIAS)
         photo_up_btn = ImageTk.PhotoImage(resized_up_btn_img)
@@ -156,7 +159,7 @@ class WifiScreen(ttk.Frame):
         
         available_wifi_list_part = tk.Frame(available_wifi_part, bg='black')
         # available_wifi_list_part.grid(row=0, column=1, rowspan=2, sticky='NEWS')
-        available_wifi_list_part.grid(row=0, column=1, rowspan=2, sticky='NEWS')
+        available_wifi_list_part.grid(row=0, column=1, rowspan=2, sticky='NWS')
         available_wifi_list_part.columnconfigure(0, weight=1)
         available_wifi_list_part.columnconfigure(1, weight=15)
         available_wifi_list_part.rowconfigure(0, weight=1)
@@ -346,9 +349,11 @@ class WifiScreen(ttk.Frame):
     
     def get_wifi_list(self):
         self.available_wifi_list = wf.wifi_Search()
+        self.current_wifi_list = wf.get_current_wifi_info()
         
-        # self.available_wifi_list = [i for i in self.available_wifi_list if i[0] != self.current_wifi_list[0]]
+        self.available_wifi_list = [i for i in self.available_wifi_list if i[0] != self.current_wifi_list[0]]
         # self.available_wifi_list.remove
+        
         self.available_wifi_list.sort(key = lambda x:x[1])
         self.showing_wifi_list = self.available_wifi_list[0:3]
         self.last_num = len(self.available_wifi_list) -1
