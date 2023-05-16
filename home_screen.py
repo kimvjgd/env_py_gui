@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import *
 from datetime import datetime
 from time import strftime
+from PIL import Image, ImageTk
 import sys
 from wifi_func import get_current_connection_state
 
@@ -100,41 +101,45 @@ class Home(ttk.Frame):
 
         # wifi_image = tk.PhotoImage(file='img/wifi/wifi.png')
         quit_image = tk.PhotoImage(file='img/parts/back_button.png')
-        info_image = tk.PhotoImage(file='img/wifi/info.png')
         
-        wifi_button = tk.Button(status_part, image=photo_connection_status,highlightthickness=0, command=show_wifi, height=20, width=20, bg='black', bd=0, borderwidth=0)
-        wifi_button.image = photo_connection_status                  # to keep a ref
-        wifi_button.grid(column=1,row=0)
-        
-        # Temporary Quit Button
+        # Temporary Quit Button for DEBUG!!!!!!!!!!
         quit_button = tk.Button(status_part, image=quit_image, command=controller.destroy, height=20, width=20)
         quit_button.image = quit_image                  # to keep a ref
-        quit_button.grid(column=2,row=0)
+        quit_button.grid(column=1,row=0)
+
+        wifi_button = tk.Button(status_part, image=photo_connection_status,highlightthickness=0, command=show_wifi, height=20, width=20, bg='black', bd=0, borderwidth=0)
+        wifi_button.image = photo_connection_status                  # to keep a ref
+        wifi_button.grid(column=2,row=0)
+        
         
         # Info Screen
-        info_button = tk.Button(status_part, image=info_image, command=show_info, height=20, width=20)
-        info_button.image = info_image                  # to keep a ref
-        info_button.grid(column=3,row=0)
-        
-        
+        # info_button = tk.Button(status_part, image=info_image, command=show_info, height=20, width=20)
+        # info_button.image = info_image                  # to keep a ref
+        # info_button.grid(column=3,row=0)
+        info_button = self.get_image_instance(status_part, 'img/wifi/info.png', 20, 20, 0, 3, 'NEWS', command=show_info)
         
         
         
         # temperature & humidity
         
         # temperature
-        self.set_image(temp_hum_part, 'img/temperature/temp_img.png', row=0, column=0, height=40)
+        # self.set_image(temp_hum_part, 'img/temperature/temp_img.png', row=0, column=0, height=40)
+        self.get_image(temp_hum_part,'img/temperature/temp_img.png', 35, 35, 0, 0, 'NEWS')
         # self.set_label(temp_hum_part, self.temperature, row=0, column=1)
         self.temp_label = Label(temp_hum_part, text=self.temperature, bg='black', fg='white', font=('Arial', 15))
         self.temp_label.grid(row=0, column=1, sticky='NEWS')
-        self.set_image(temp_hum_part, 'img/temperature/temp5.png', row=0, column=2, height=20)
+        # self.set_image(temp_hum_part, 'img/temperature/temp5.png', row=0, column=2, height=20)
+        self.get_image(temp_hum_part,'img/temperature/temp5.png', 240, 35, 0, 2, 'NEWS')
+
 
         # humidity
-        self.set_image(temp_hum_part, 'img/humidity/humidity_img.png', row=0, column=3, height=40)
+        # self.set_image(temp_hum_part, 'img/humidity/humidity_img.png', row=0, column=3, height=40)
+        self.get_image(temp_hum_part,'img/humidity/humidity_img.png', 35, 35, 0, 3, 'NEWS')
         # self.set_label(temp_hum_part, '53%', row=0, column=4)
         self.humidity_label = Label(temp_hum_part, text=self.humidity, bg='black', fg='white', font=('Arial', 15))
         self.humidity_label.grid(row=0, column=4, sticky='NEWS')
-        self.set_image(temp_hum_part, 'img/humidity/humidity5.png', row=0, column=5, height=20)
+        # self.set_image(temp_hum_part, 'img/humidity/humidity5.png', row=0, column=5, height=20)
+        self.get_image(temp_hum_part,'img/humidity/humidity5.png', 240, 35, 0, 5, 'NEWS')
         
         
         
@@ -563,6 +568,28 @@ class Home(ttk.Frame):
                 self.lan_state = 'wlan'
         # print(self.lan_state)
         self.after(2000, self.lan_connection_update)
+    def get_image_instance(self, frame, path, width, height, row, column,sticky, command=None):
+        img = Image.open(path)
+        resized_img = img.resize((width,height), Image.ANTIALIAS)
+        photo_img = ImageTk.PhotoImage(resized_img)
+        img_label = Label(frame, image=photo_img, bg='black')
+        img_label.image = photo_img
+        img_label.grid(row=row, column=column, sticky=sticky)
+        def local_click(event):
+            command()
+        img_label.bind("<Button-1>", local_click)
+        return img_label
+    
+    def get_image(self, frame, path, width, height, row, column,sticky, command=None):
+        img = Image.open(path)
+        resized_img = img.resize((width,height), Image.ANTIALIAS)
+        photo_img = ImageTk.PhotoImage(resized_img)
+        img_label = Label(frame, image=photo_img, bg='black')
+        img_label.image = photo_img
+        img_label.grid(row=row, column=column, sticky=sticky)
+        def local_click(event):
+            command()
+        img_label.bind("<Button-1>", local_click)
         
     def get_all_data(self):
         check_value = str(self.controller.TVOC)
@@ -617,7 +644,7 @@ class Home(ttk.Frame):
         
         
         self.after(1000, self.get_all_data)
-        
+
 
     def quit_program(self):
         sys.exit()

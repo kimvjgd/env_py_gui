@@ -69,9 +69,15 @@ class WifiDetailScreen(ttk.Frame):
         self.password_entry.grid(row=0, column=0)
         self.password_entry.config(show='*')
         self.password_entry.bind('<Button-1>', entry_click)
-
-        self.show_image = ImageTk.PhotoImage(file='img/parts/visible_on.png')
-        self.hide_image = ImageTk.PhotoImage(file='img/parts/visible_off.png')
+        show_img = Image.open('img/parts/visible_on.png')
+        resized_show_img = show_img.resize((45,35), Image.ANTIALIAS)
+        self.show_image = ImageTk.PhotoImage(resized_show_img)
+        hide_img = Image.open('img/parts/visible_off.png')
+        resized_hide_img = hide_img.resize((45,35), Image.ANTIALIAS)
+        self.hide_image = ImageTk.PhotoImage(resized_hide_img)
+        
+        # self.show_image = ImageTk.PhotoImage(file='img/parts/visible_on.png')
+        # self.hide_image = ImageTk.PhotoImage(file='img/parts/visible_off.png')
         
         self.show_button = Button(self.pw_core_frame, image=self.show_image, command=self.show, relief=FLAT, activebackground='black', bd=0, background='black')
         self.show_button.grid(row=0, column=1)
@@ -84,9 +90,15 @@ class WifiDetailScreen(ttk.Frame):
 
         Label(self.auto_connection_frame, text='자동으로 연결', font=('Arial',30)).grid(row=0, column=0)
             
+        on_img = Image.open('img/parts/toggle_on.png')
+        resized_on_img = on_img.resize((45,35), Image.ANTIALIAS)
+        self.on = ImageTk.PhotoImage(resized_on_img)
+        off_img = Image.open('img/parts/toggle_off.png')
+        resized_off_img = off_img.resize((80,65), Image.ANTIALIAS)
+        self.off = ImageTk.PhotoImage(resized_off_img)
         
-        self.on = PhotoImage(file='img/parts/toggle_on.png')
-        self.off = PhotoImage(file='img/parts/toggle_off.png')
+        # self.on = PhotoImage(file='img/parts/toggle_on.png')
+        # self.off = PhotoImage(file='img/parts/toggle_off.png')
         self.auto_btn = Button(self.auto_connection_frame, image=self.on, bd=0, command=self.switch)
         self.auto_btn.grid(row=0, column=1)
 ############################################################################################################################################################################################################################################
@@ -133,3 +145,16 @@ class WifiDetailScreen(ttk.Frame):
         def local_click(event):
             command()
         img_label.bind("<Button-1>", local_click)
+    
+    def get_image_instance(self, frame, path, width, height, row, column,sticky, command=None):
+        img = Image.open(path)
+        resized_img = img.resize((width,height), Image.ANTIALIAS)
+        photo_img = ImageTk.PhotoImage(resized_img)
+        img_label = Label(frame, image=photo_img, bg='black')
+        img_label.image = photo_img
+        img_label.grid(row=row, column=column, sticky=sticky)
+        def local_click(event):
+            command()
+        img_label.bind("<Button-1>", local_click)
+    
+    
