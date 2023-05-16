@@ -70,13 +70,13 @@ class WifiDetailScreen(ttk.Frame):
         self.password_entry.config(show='*')
         self.password_entry.bind('<Button-1>', entry_click)
 
-        self.show_image = ImageTk.PhotoImage(file='img/wifi/info.png')
-        self.hide_image = ImageTk.PhotoImage(file='img/wifi/refresh_wifi.png')
+        self.show_image = ImageTk.PhotoImage(file='img/parts/visible_on.png')
+        self.hide_image = ImageTk.PhotoImage(file='img/parts/visible_off.png')
         
-        self.show_button = Button(self.pw_core_frame, image=self.show_image, command=self.show, relief=FLAT, activebackground='white', bd=0, background='white')
+        self.show_button = Button(self.pw_core_frame, image=self.show_image, command=self.show, relief=FLAT, activebackground='black', bd=0, background='black')
         self.show_button.grid(row=0, column=1)
         
-        self.auto_connection_frame = Frame(pw_part, bg='blue')
+        self.auto_connection_frame = Frame(pw_part, bg='black')
         self.auto_connection_frame.grid(row=2, column=0)
         self.auto_connection_frame.rowconfigure(0, weight=1)
         self.auto_connection_frame.columnconfigure(0, weight=6)
@@ -85,8 +85,8 @@ class WifiDetailScreen(ttk.Frame):
         Label(self.auto_connection_frame, text='자동으로 연결', font=('Arial',30)).grid(row=0, column=0)
             
         
-        self.on = PhotoImage(file='img/wifi/on.png')
-        self.off = PhotoImage(file='img/wifi/off.png')
+        self.on = PhotoImage(file='img/parts/toggle_on.png')
+        self.off = PhotoImage(file='img/parts/toggle_off.png')
         self.auto_btn = Button(self.auto_connection_frame, image=self.on, bd=0, command=self.switch)
         self.auto_btn.grid(row=0, column=1)
 ############################################################################################################################################################################################################################################

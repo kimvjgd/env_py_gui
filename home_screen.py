@@ -94,12 +94,16 @@ class Home(ttk.Frame):
         self.time_label.grid(column=0, row=0,sticky="W")
         
         
-        wifi_image = tk.PhotoImage(file='img/wifi/wifi.png')
-        quit_image = tk.PhotoImage(file='img/wifi/refresh_wifi.png')
+        connection_status_img = Image.open('img/wifi/strength/wifi_strength_1.png')
+        resized_connection_status_img = connection_status_img.resize((20, 20), Image.ANTIALIAS)
+        photo_connection_status = ImageTk.PhotoImage(resized_connection_status_img)
+
+        # wifi_image = tk.PhotoImage(file='img/wifi/wifi.png')
+        quit_image = tk.PhotoImage(file='img/parts/back_button.png')
         info_image = tk.PhotoImage(file='img/wifi/info.png')
         
-        wifi_button = tk.Button(status_part, image=wifi_image, command=show_wifi, height=20, width=20)
-        wifi_button.image = wifi_image                  # to keep a ref
+        wifi_button = tk.Button(status_part, image=photo_connection_status,highlightthickness=0, command=show_wifi, height=20, width=20, bg='black', bd=0, borderwidth=0)
+        wifi_button.image = photo_connection_status                  # to keep a ref
         wifi_button.grid(column=1,row=0)
         
         # Temporary Quit Button
@@ -549,9 +553,6 @@ class Home(ttk.Frame):
         time_string = strftime('%Y-%m-%d %H:%M:%S')
         self.time_label.config(text=time_string)
         self.time_label.after(1000, self.time_update)
-        # print(uart_data_thread.TVOC)
-
-
     
     def lan_connection_update(self):
         connection_state = get_current_connection_state()                       # [ethernet, wlan] <- False(미연결) & True(연결)
@@ -565,7 +566,7 @@ class Home(ttk.Frame):
         
     def get_all_data(self):
         check_value = str(self.controller.TVOC)
-        if not check_value.startswith('PY'):
+        if not check_value.startswith('PY'):                    # 원래 이렇게 처리하는게 아닌데.. 시간이 없어서 나중에 고칠 것...
                 self.temperature = self.controller.temperature
                 self.temp_label.config(text=self.temperature)
                 self.humidity = self.controller.humidity
