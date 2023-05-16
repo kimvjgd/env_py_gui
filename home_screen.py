@@ -138,9 +138,9 @@ class Home(ttk.Frame):
         quit_button.image = quit_image                  # to keep a ref
         quit_button.grid(column=1,row=0)
 
-        wifi_button = tk.Button(status_part, image=photo_connection_status,highlightthickness=0, command=show_wifi, height=20, width=20, bg='black', bd=0, borderwidth=0)
-        wifi_button.image = photo_connection_status                  # to keep a ref
-        wifi_button.grid(column=2,row=0)
+        self.wifi_button = tk.Button(status_part, image=photo_connection_status,highlightthickness=0, command=show_wifi, height=20, width=20, bg='black', bd=0, borderwidth=0)
+        self.wifi_button.image = photo_connection_status                  # to keep a ref
+        self.wifi_button.grid(column=2,row=0)
         
         
         # Info Screen
@@ -149,17 +149,11 @@ class Home(ttk.Frame):
         # info_button.grid(column=3,row=0)
         info_button = self.get_image_instance(status_part, 'img/wifi/info.png', 20, 20, 0, 3, 'NEWS', command=show_info)
 
-        ################################################################################################
-        ################################################################################################
-        ################################################################################################
         
         # Temporary MQTT Button for DEBUG!!!!!!!!!!
         mqtt_button = tk.Button(status_part,bg='red',image=quit_image,highlightthickness=0, command=self.send_mqtt_data, height=20, width=20, bd=0, borderwidth=0)
         mqtt_button.grid(column=4,row=0)
         
-        ################################################################################################
-        ################################################################################################
-        ################################################################################################
         
         # temperature & humidity
         
@@ -605,10 +599,12 @@ class Home(ttk.Frame):
         # print(connection_state)                                                 # ex) [False, True] -> wlan 연결 [True, True] -> wlan무시 ethernet연결
         if connection_state[0] == True:         # ethernet mode
                 self.lan_state = 'ethernet'
+                self.wifi_button.config(image='',command=None)
         elif connection_state[0] == False and connection_state[1] == True:
                 self.lan_state = 'wlan'
         # print(self.lan_state)
-        self.after(2000, self.lan_connection_update)
+        self.after(3000, self.lan_connection_update)
+        
     def get_image_instance(self, frame, path, width, height, row, column,sticky, command=None):
         img = Image.open(path)
         resized_img = img.resize((width,height), Image.ANTIALIAS)
@@ -633,7 +629,7 @@ class Home(ttk.Frame):
         img_label.bind("<Button-1>", local_click)
     
     def send_mqtt_data(self):
-        timestamp = time.time()
+        # 오히려 ts를 넣지 않는 것이 더 좋은 것 같다.
         sensor_data = {
         'values':{
                 "S_0_0":int(self.TVOC),
@@ -652,20 +648,6 @@ class Home(ttk.Frame):
                 "S_0_13":int(self.humidity),
                 }
         }
-        print("S_0_0 : ",self.TVOC)
-        print("S_0_1 : ",self.CO2)
-        print("S_0_2 : ",self.PM25)
-        print("S_0_3 : ",self.PM10)
-        print("S_0_4 : ",self.CH2O)
-        print("S_0_5 : ",self.Sm)
-        print("S_0_6 : ",self.NH3)
-        print("S_0_7 : ",self.CO)
-        print("S_0_8 : ",self.NO2)
-        print("S_0_9 : ",self.H2S)
-        print("S_0_10 : ",self.LIGHT)
-        print("S_0_11 : ",self.SOUND)
-        print("S_0_12 : ",self.temperature)
-        print("S_0_13 : ",self.humidity)
         self.client.publish('v1/devices/me/telemetry', json.dumps(sensor_data), 1)
         
     def get_all_data(self):

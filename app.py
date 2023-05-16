@@ -7,6 +7,7 @@ from wifi_connection_screen import WifiConnectionScreen
 from wifi_detail_screen import WifiDetailScreen
 from info_screen import InfoScreen
 from keyboard_screen import KeyboardSreen
+from ethernet_screen import EthernetScreen
 from mac_address import get_mac_address
 
 
@@ -100,11 +101,18 @@ class EnvSensor(tk.Tk):
         self.info_frame = InfoScreen(container, self, lambda:self.show_frame(Home))
         self.info_frame.grid(row=0, column=0, sticky='NEWS')
         ############################################################################################################################################
+
+        # For Ethernet Screen
+        self.ethernet_frame = InfoScreen(container, self, lambda:self.show_frame(Home))
+        self.ethernet_frame.grid(row=0, column=0, sticky='NEWS')
+        ############################################################################################################################################
         
         # For Keyboard Screen
         self.keyboard_frame = KeyboardSreen(container, self, self.wifi_detail_frame.password_entry, lambda:self.show_frame(WifiDetailScreen))
         self.keyboard_frame.grid(row=0, column=0, sticky='NEWS')
         ############################################################################################################################################
+
+        
         
         self.frames[Home] = self.home_frame
         self.frames[Element] = self.element_frame
@@ -112,6 +120,7 @@ class EnvSensor(tk.Tk):
         self.frames[WifiConnectionScreen] = self.wifi_connection_frame
         self.frames[WifiDetailScreen] = self.wifi_detail_frame
         self.frames[InfoScreen] = self.info_frame
+        self.frames[EthernetScreen] = self.ethernet_frame
         self.frames[KeyboardSreen] = self.keyboard_frame
         
         # First Screenu
