@@ -34,10 +34,12 @@ sensor_data = {
                 }}
 
 class Home(ttk.Frame):
-    def __init__(self, parent, controller, show_element, show_wifi, show_info):
+    def __init__(self, parent, controller, show_element, show_wifi, show_info,show_ethernet):
         super().__init__(parent)
         
         self.controller = controller
+        self.show_wifi = show_wifi
+        self.show_ethernet = show_ethernet
         
         self.TVOC = 0.0
         # self.TVOC = tk.StringVar(value=123)
@@ -57,6 +59,7 @@ class Home(ttk.Frame):
         self.temperature = 0.0
         self.humidity = 0.0
         self.lan_state = 'wlan'         # wlan or ethernet                      <- 나중에 시간되면 class로 뺴서 enum으로 만들자
+        self.pre_lan_state = 'wlan'                     # 하드 코딩의 묘미//
         self.client = mqtt.Client()
         self.client.username_pw_set(ACCESS_TOKEN)
         self.client.connect(THINGSBOARD_HOST, port, 60)
@@ -598,10 +601,16 @@ class Home(ttk.Frame):
         connection_state = get_current_connection_state()                       # [ethernet, wlan] <- False(미연결) & True(연결)
         # print(connection_state)                                                 # ex) [False, True] -> wlan 연결 [True, True] -> wlan무시 ethernet연결
         if connection_state[0] == True:         # ethernet mode
-                self.lan_state = 'ethernet'
-                self.wifi_button.config(image='',command=None)
-        elif connection_state[0] == False and connection_state[1] == True:
+                self.lan_state = 'ethernet'                                     # todo : enum으로 나중에 빼면 좋음
+                # self.wifi_button.config(image='img/',command=None)
+                if self.pre_lan_state != self.lan_state:
+                        self.wifi_button.config('img/wifi/wifi_strength_1.png', command=self.show_ethernet)
+                self.pre_lan_state = 'ethernet'
+        elif connection_state[0] == False and connection_state[1] == True:              # wifi 연결
                 self.lan_state = 'wlan'
+                if self.pre_lan_state != self.lan_state:
+                        self.wifi_button.config('img/wifi/strength.png', command=self.show_wifi)
+                self.pre_lan_state = 'wlan'
         # print(self.lan_state)
         self.after(3000, self.lan_connection_update)
         

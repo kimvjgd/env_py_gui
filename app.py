@@ -73,7 +73,7 @@ class EnvSensor(tk.Tk):
         #### frames ####
         
         # For Home
-        self.home_frame = Home(container, self, lambda: self.show_element_frame(Element), lambda: self.show_frame(WifiScreen), lambda: self.show_frame(InfoScreen))
+        self.home_frame = Home(container, self, lambda: self.show_element_frame(Element), lambda: self.show_frame(WifiScreen), lambda: self.show_frame(InfoScreen), lambda: self.show_frame(EthernetScreen))
         self.home_frame.grid(row=0, column=0, sticky="NESW")
         ############################################################################################################################################
         
