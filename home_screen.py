@@ -34,7 +34,7 @@ sensor_data = {
                 }}
 
 class Home(ttk.Frame):
-    def __init__(self, parent, controller, show_element, show_wifi, show_info,show_ethernet):
+    def __init__(self, parent, controller, show_element, show_wifi, show_info, show_ethernet):
         super().__init__(parent)
         
         self.controller = controller
@@ -130,7 +130,13 @@ class Home(ttk.Frame):
         
         connection_status_img = Image.open('img/wifi/strength/wifi_strength_1.png')
         resized_connection_status_img = connection_status_img.resize((20, 20), Image.ANTIALIAS)
-        photo_connection_status = ImageTk.PhotoImage(resized_connection_status_img)
+        self.photo_connection_status = ImageTk.PhotoImage(resized_connection_status_img)
+        
+        ethernet_connection_status_img = Image.open('img/wifi/ethernet.png')
+        resized_ethernet_connection_status_img = ethernet_connection_status_img.resize((20, 20), Image.ANTIALIAS)
+        self.photo_ethernet_connection_status = ImageTk.PhotoImage(resized_ethernet_connection_status_img)
+        
+        
 
         # wifi_image = tk.PhotoImage(file='img/wifi/wifi.png')
         quit_image = tk.PhotoImage(file='img/parts/back_button.png')
@@ -141,8 +147,8 @@ class Home(ttk.Frame):
         quit_button.image = quit_image                  # to keep a ref
         quit_button.grid(column=1,row=0)
 
-        self.wifi_button = tk.Button(status_part, image=photo_connection_status,highlightthickness=0, command=show_wifi, height=20, width=20, bg='black', bd=0, borderwidth=0)
-        self.wifi_button.image = photo_connection_status                  # to keep a ref
+        self.wifi_button = tk.Button(status_part, image=self.photo_connection_status,highlightthickness=0, command=show_wifi, height=20, width=20, bg='black', bd=0, borderwidth=0)
+        self.wifi_button.image = self.photo_connection_status                  # to keep a ref
         self.wifi_button.grid(column=2,row=0)
         
         
@@ -602,14 +608,27 @@ class Home(ttk.Frame):
         # print(connection_state)                                                 # ex) [False, True] -> wlan 연결 [True, True] -> wlan무시 ethernet연결
         if connection_state[0] == True:         # ethernet mode
                 self.lan_state = 'ethernet'                                     # todo : enum으로 나중에 빼면 좋음
+                print('first case pass')
                 # self.wifi_button.config(image='img/',command=None)
                 if self.pre_lan_state != self.lan_state:
-                        self.wifi_button.config('img/wifi/wifi_strength_1.png', command=self.show_ethernet)
+                        self.wifi_button.config(image=self.photo_ethernet_connection_status, command=self.show_ethernet)
+                        self.wifi_button.image = self.photo_ethernet_connection_status
+                        print(' ---first case--- ')
+                        print('pre : ', self.pre_lan_state)
+                        print('current : ', self.lan_state)
+
+                        
                 self.pre_lan_state = 'ethernet'
         elif connection_state[0] == False and connection_state[1] == True:              # wifi 연결
                 self.lan_state = 'wlan'
+                print('second case pass')
                 if self.pre_lan_state != self.lan_state:
-                        self.wifi_button.config('img/wifi/strength.png', command=self.show_wifi)
+                        self.wifi_button.config(image=self.photo_connection_status, command=self.show_wifi)
+                        self.wifi_button.image = self.photo_connection_status
+                        print(' ---second case--- ')
+                        print('pre : ', self.pre_lan_state)
+                        print('current : ', self.lan_state)
+                        
                 self.pre_lan_state = 'wlan'
         # print(self.lan_state)
         self.after(3000, self.lan_connection_update)
