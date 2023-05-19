@@ -40,6 +40,10 @@ class WifiScreen(ttk.Frame):
         
         bad_img = Image.open('img/wifi/strength/wifi_strength_2.png').resize((40,40), Image.ANTIALIAS)
         self.bad_wifi_signal = ImageTk.PhotoImage(bad_img)
+
+        non_conncetion_img = Image.open('img/wifi/strength/wifi_strength_0.png').resize((40,40), Image.ANTIALIAS)
+        self.non_connection_signal = ImageTk.PhotoImage(non_conncetion_img)
+        
         
         self.current_wifi_list = ['','']     # list가 여러가지 wifi가 아니고 ssid & signal strength
         
@@ -373,11 +377,24 @@ class WifiScreen(ttk.Frame):
         
     def get_current_wifi(self):
         self.current_wifi_list = wf.get_current_wifi_info()
+        print(self.current_wifi_list)
         
         if self.current_wifi_list == None:
             self.current_wifi_label.config(text='No Wifi...')
+            self.current_wifi_image.config(image=self.non_connection_signal)
+            self.current_wifi_image = self.non_connection_signal
         else:
             self.current_wifi_label.config(text=self.current_wifi_list[0])
+            if self.current_wifi_list[1] > 70:      # strength
+                self.current_wifi_image.config(image=self.good_wifi_signal)
+                self.current_wifi_image = self.good_wifi_signal
+            elif self.current_wifi_list[1] > 60:
+                self.current_wifi_image.config(image=self.soso_wifi_signal)
+                self.current_wifi_image = self.soso_wifi_signal
+            elif self.current_wifi_list[1] > 20:
+                self.current_wifi_image.config(image=self.bad_wifi_signal)
+                self.current_wifi_image = self.bad_wifi_signal
+            
         # 꼭 고쳐줘야 한다.         self.current_wifi_list[1] 이 신호 세기(str값)니깐 그에 따라 고쳐줘야한다. 
         # self.current_wifi_image.config()
         # print('self.current wifi list')

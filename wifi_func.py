@@ -34,15 +34,8 @@ def get_current_wifi_info():
             if "*" in line:
                 # Extract the Wi-Fi information from the line
                 wifi_info = re.findall(r"\S+", line)
-                # ssid = wifi_info[0]
-                # bssid = wifi_info[1]
-                # mode = wifi_info[2]
-                # channel = wifi_info[3]
-                # signal_strength = wifi_info[4]
-                # print('ssid : ',wifi_info[2])
-                # print('signal_strength', wifi_info[-3])
-                return [wifi_info[2], wifi_info[-3]]
-                # return ssid, bssid, mode, channel, signal_strength
+                return [wifi_info[2], wifi_info[-3]]            # name & strength를 반환
+                
                 
                 # print(wifi_info)
     except subprocess.CalledProcessError:
