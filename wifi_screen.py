@@ -184,17 +184,17 @@ class WifiScreen(ttk.Frame):
                 ############### available wifi list ###############
         
 # command=lambda: self.show_wifi_detail_with_ssid(0)    
-        self.first_image_label = self.get_image_instance(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 0 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(0))
+        self.first_image_label = self.get_image_instance(available_wifi_list_part, 'img/wifi/strength/wifi_strength_0.png', 40, 40, 0 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(0))
         self.first_label = Label(available_wifi_list_part, text=self.showing_wifi_list[0], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.first_label.grid(row=0, column=1, sticky='W')
         self.first_label.bind("<Button-1>", lambda event: self.event_func(event, num=0))
         
-        self.second_image_label = self.get_image_instance(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 1 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(1))
+        self.second_image_label = self.get_image_instance(available_wifi_list_part, 'img/wifi/strength/wifi_strength_0.png', 40, 40, 1 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(1))
         self.second_label = Label(available_wifi_list_part, text=self.showing_wifi_list[1], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.second_label.grid(row=1, column=1, sticky='W')
         self.second_label.bind("<Button-1>", lambda event: self.event_func(event, num=1))
         
-        self.third_image_label = self.get_image_instance(available_wifi_list_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 2 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(2))
+        self.third_image_label = self.get_image_instance(available_wifi_list_part, 'img/wifi/strength/wifi_strength_0.png', 40, 40, 2 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(2))
         self.third_label = Label(available_wifi_list_part, text=self.showing_wifi_list[2], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.third_label.grid(row=2, column=1, sticky='W')
         self.third_label.bind("<Button-1>", lambda event: self.event_func(event, num=2))
@@ -361,7 +361,7 @@ class WifiScreen(ttk.Frame):
         # self.available_wifi_list.remove
         
         self.available_wifi_list.sort(key = lambda x:x[1])
-        self.showing_wifi_list = self.available_wifi_list[0:3]
+        self.showing_wifi_list = self.available_wifi_list[0:3]              # 여기서 2 ele로 바꿔주는구나...    # 근데 3개보다 많았다가 refresh했는데 그보다 작은 경우 문제가 된다.
         self.last_num = len(self.available_wifi_list) -1
         self.current_start_num = 0
         self.current_end_num = 2
