@@ -37,9 +37,6 @@ client.loop_start()
 
 try:
     while True:
-        # senval = random.randrange(0, 180)
-        # print(senval)
-        # sensor_data['my-temperature'] = senval
         sensor_data = {
             # 'ts':0,
             'values':{

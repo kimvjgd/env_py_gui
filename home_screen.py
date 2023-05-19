@@ -9,8 +9,7 @@ from wifi_func import get_current_connection_state
 import paho.mqtt.client as mqtt
 import os
 import json
-from datetime import datetime
-import time
+import math
 
 THINGSBOARD_HOST = "210.117.143.37"
 ACCESS_TOKEN='51ZFhNEWFXLi4pW758Gy'
@@ -612,38 +611,26 @@ class Home(ttk.Frame):
         # print(connection_state)                                                 # ex) [False, True] -> wlan 연결 [True, True] -> wlan무시 ethernet연결
         if connection_state[0] == True:         # ethernet mode
                 self.lan_state = 'ethernet'                                     # todo : enum으로 나중에 빼면 좋음
-                print('first case pass')
                 # self.wifi_button.config(image='img/',command=None)
                 if self.pre_lan_state != self.lan_state:
                         self.wifi_button.config(image=self.photo_ethernet_connection_status, command=self.show_ethernet)
                         self.wifi_button.image = self.photo_ethernet_connection_status
-                        print(' ---first case--- ')
-                        print('pre : ', self.pre_lan_state)
-                        print('current : ', self.lan_state)
 
                         
                 self.pre_lan_state = 'ethernet'
         elif connection_state[0] == False and connection_state[1] == True:              # wifi 연결
                 self.lan_state = 'wlan'
-                print('second case pass')
                 if self.pre_lan_state != self.lan_state:
                         self.wifi_button.config(image=self.photo_wifi_connection_status, command=self.show_wifi)
                         self.wifi_button.image = self.photo_wifi_connection_status
-                        print(' ---second case--- ')
-                        print('pre : ', self.pre_lan_state)
-                        print('current : ', self.lan_state)
                         
                 self.pre_lan_state = 'wlan'
         elif connection_state[0] == False and connection_state[1] == False:
                 self.lan_state = 'none'
-                print('third case pass')
                 if self.pre_lan_state != self.lan_state:
-                        self.wifi_button.config(image=self.photo_non_connection_status, command=None)
+                        self.wifi_button.config(image=self.photo_non_connection_status, command=self.show_wifi)
                         self.wifi_button.image = self.photo_non_connection_status
-                        print(' ---second case--- ')
-                        print('pre : ', self.pre_lan_state)
-                        print('current : ', self.lan_state)
-
+                self.pre_lan_state = 'none'
         # print(self.lan_state)
         self.after(3000, self.lan_connection_update)
         
@@ -671,8 +658,24 @@ class Home(ttk.Frame):
         img_label.bind("<Button-1>", local_click)
     
     def send_mqtt_data(self):
-        # 오히려 ts를 넣지 않는 것이 더 좋은 것 같다.
+
+# import math
+# a = 12345.6789876
+# rounded_value = math.floor(a*1000)
+# print(rounded_value)
+        # ct = datetime.now()
+# ts = ct.timestamp()
+# # ct stores current time
+# print("current time:-", ct)
+
+# # ts store timestamp of current time
+# ts = ct.timestamp()
+# print("timestamp:-", ts)
+        ct = datetime.now()
+        ts = ct.timestamp()
+        ts = math.floor(ts*1000)
         sensor_data = {
+        'ts': ts,
         'values':{
                 "S_0_0":int(self.TVOC),
                 "S_0_1":int(self.CO2),
@@ -690,6 +693,7 @@ class Home(ttk.Frame):
                 "S_0_13":int(self.humidity),
                 }
         }
+        print(sensor_data)
         self.client.publish('v1/devices/me/telemetry', json.dumps(sensor_data), 1)
         
     def get_all_data(self):
