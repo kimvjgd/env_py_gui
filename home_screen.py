@@ -58,7 +58,7 @@ class Home(ttk.Frame):
         self.O3 = 0.0
         self.temperature = 0.0
         self.humidity = 0.0
-        self.lan_state = 'wlan'         # wlan or ethernet                      <- 나중에 시간되면 class로 뺴서 enum으로 만들자
+        self.lan_state = 'wlan'         # wlan or ethernet or non_connection                     <- 나중에 시간되면 class로 뺴서 enum으로 만들자
         self.pre_lan_state = 'wlan'                     # 하드 코딩의 묘미//
         self.client = mqtt.Client()
         self.client.username_pw_set(ACCESS_TOKEN)
@@ -127,10 +127,14 @@ class Home(ttk.Frame):
         self.time_label = tk.Label(status_part,bg='black',text='', fg='white', font=('Arial', 20))
         self.time_label.grid(column=0, row=0,sticky="W")
         
+        non_connection_status_img = Image.open('img/wifi/non_connection.png')
+        resized_non_connection_status_img = non_connection_status_img.resize((20, 20), Image.ANTIALIAS)
+        self.photo_non_connection_status = ImageTk.PhotoImage(resized_non_connection_status_img)
         
-        connection_status_img = Image.open('img/wifi/strength/wifi_strength_1.png')
-        resized_connection_status_img = connection_status_img.resize((20, 20), Image.ANTIALIAS)
-        self.photo_connection_status = ImageTk.PhotoImage(resized_connection_status_img)
+        
+        wifi_connection_status_img = Image.open('img/wifi/strength/wifi_strength_4.png')
+        resized_wifi_connection_status_img = wifi_connection_status_img.resize((20, 20), Image.ANTIALIAS)
+        self.photo_wifi_connection_status = ImageTk.PhotoImage(resized_wifi_connection_status_img)
         
         ethernet_connection_status_img = Image.open('img/wifi/ethernet.png')
         resized_ethernet_connection_status_img = ethernet_connection_status_img.resize((20, 20), Image.ANTIALIAS)
@@ -147,8 +151,8 @@ class Home(ttk.Frame):
         quit_button.image = quit_image                  # to keep a ref
         quit_button.grid(column=1,row=0)
 
-        self.wifi_button = tk.Button(status_part, image=self.photo_connection_status,highlightthickness=0, command=show_wifi, height=20, width=20, bg='black', bd=0, borderwidth=0)
-        self.wifi_button.image = self.photo_connection_status                  # to keep a ref
+        self.wifi_button = tk.Button(status_part, image=self.photo_wifi_connection_status,highlightthickness=0, command=show_wifi, height=20, width=20, bg='black', bd=0, borderwidth=0)
+        self.wifi_button.image = self.photo_wifi_connection_status                  # to keep a ref
         self.wifi_button.grid(column=2,row=0)
         
         
@@ -623,13 +627,23 @@ class Home(ttk.Frame):
                 self.lan_state = 'wlan'
                 print('second case pass')
                 if self.pre_lan_state != self.lan_state:
-                        self.wifi_button.config(image=self.photo_connection_status, command=self.show_wifi)
-                        self.wifi_button.image = self.photo_connection_status
+                        self.wifi_button.config(image=self.photo_wifi_connection_status, command=self.show_wifi)
+                        self.wifi_button.image = self.photo_wifi_connection_status
                         print(' ---second case--- ')
                         print('pre : ', self.pre_lan_state)
                         print('current : ', self.lan_state)
                         
                 self.pre_lan_state = 'wlan'
+        elif connection_state[0] == False and connection_state[1] == False:
+                self.lan_state = 'none'
+                print('third case pass')
+                if self.pre_lan_state != self.lan_state:
+                        self.wifi_button.config(image=self.photo_non_connection_status, command=None)
+                        self.wifi_button.image = self.photo_non_connection_status
+                        print(' ---second case--- ')
+                        print('pre : ', self.pre_lan_state)
+                        print('current : ', self.lan_state)
+
         # print(self.lan_state)
         self.after(3000, self.lan_connection_update)
         
