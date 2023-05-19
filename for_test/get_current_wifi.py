@@ -33,3 +33,4 @@ IN-USE  BSSID              SSID                   MODE   CHAN  RATE        SIGNA
         90:9F:33:A9:0B:8C  sangsanglab            Infra  13    405 Mbit/s  79                           ▂▄▆_  WPA2
 *       90:9F:33:A8:0B:8C  sangsanglab_5G         Infra  149   405 Mbit/s  77                           ▂▄▆_  WPA2
 '''
+

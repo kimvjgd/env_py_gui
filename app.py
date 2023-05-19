@@ -151,9 +151,11 @@ if __name__== '__main__':
 
     app.home_frame.get_all_data()
     app.home_frame.time_update()
-    app.home_frame.lan_connection_update()
-    app.wifi_frame.get_wifi_list()
-    app.wifi_frame.get_current_wifi()
+    
+    # 꼭 풀어줘야함 519
+    # app.home_frame.lan_connection_update()
+    # app.wifi_frame.get_wifi_list()
+    # app.wifi_frame.get_current_wifi()
     
     app.geometry("800x480")
     app.attributes('-fullscreen', FULL_SCREEN)

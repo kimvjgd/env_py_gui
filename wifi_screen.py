@@ -22,7 +22,12 @@ class WifiScreen(ttk.Frame):
         self.rowconfigure(0, weight=4)
         self.rowconfigure(1, weight=15)
         
-        self.available_wifi_list = ['aaaa', 'bbbb', 'cccc', 'dddd', 'eeee']
+        # 꼭 풀어줘야함 519
+        self.available_wifi_list = [' ', ' ', ' ']
+        # self.available_wifi_list = ['aaaa', 'bbbb']
+        # if len(self.available_wifi_list) > 3:
+        #     for wifi in self.available_wifi_list:
+        #         self.showing_wifi_list.append(wifi)
         self.showing_wifi_list = self.available_wifi_list[0:3]
         self.last_num = len(self.available_wifi_list) - 1
         self.current_start_num = 0
@@ -221,7 +226,8 @@ class WifiScreen(ttk.Frame):
             self.first_label.config(text=self.showing_wifi_list[0][0])
             self.second_label.config(text=self.showing_wifi_list[1][0])
             self.third_label.config(text=self.showing_wifi_list[2][0])
-            # what the... test code인데 나중에 다 고쳐줘야지
+
+            # 여기서의 a, b, c는 signal의 강도를 임의로 잡음 a: good, b: soso, c: bad
             if self.showing_wifi_list[0][1] == 'a':
                 self.first_image_label.config(image=self.good_wifi_signal)
                 self.first_image_label.image = self.good_wifi_signal
@@ -351,7 +357,7 @@ class WifiScreen(ttk.Frame):
         self.available_wifi_list = wf.wifi_Search()
         self.current_wifi_list = wf.get_current_wifi_info()
         
-        self.available_wifi_list = [i for i in self.available_wifi_list if i[0] != self.current_wifi_list[0]]
+        self.available_wifi_list = [i for i in self.available_wifi_list if i[0] != self.current_wifi_list[0]]           # 연결중인 와이파이는 제외시킨다.
         # self.available_wifi_list.remove
         
         self.available_wifi_list.sort(key = lambda x:x[1])
