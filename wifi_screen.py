@@ -385,13 +385,13 @@ class WifiScreen(ttk.Frame):
             self.current_wifi_image = self.non_connection_signal
         else:
             self.current_wifi_label.config(text=self.current_wifi_list[0])
-            if self.current_wifi_list[1] > 70:      # strength
+            if int(self.current_wifi_list[1]) > 60:      # strength
                 self.current_wifi_image.config(image=self.good_wifi_signal)
                 self.current_wifi_image = self.good_wifi_signal
-            elif self.current_wifi_list[1] > 60:
+            elif int(self.current_wifi_list[1]) > 50:
                 self.current_wifi_image.config(image=self.soso_wifi_signal)
                 self.current_wifi_image = self.soso_wifi_signal
-            elif self.current_wifi_list[1] > 20:
+            elif int(self.current_wifi_list[1]) > 20:
                 self.current_wifi_image.config(image=self.bad_wifi_signal)
                 self.current_wifi_image = self.bad_wifi_signal
             
