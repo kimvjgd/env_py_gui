@@ -102,10 +102,7 @@ class UartDataThread(Thread):
                     self.two_pos = [[self.last_x, self.last_y],[self.x, self.y]]
                     self.last_x = self.x
                     self.last_y = self.y
-                    print('x : ')
-                    print(self.x)
-                    print('y : ')
-                    print(self.y)
+                    
                     
                     if self.x > 0 and self.y > 0:
                         pyautogui.moveTo(self.x, self.y)
@@ -130,7 +127,3 @@ class UartDataThread(Thread):
 # 15 - O3
 # 16 - Temperature
 # 17 - Humidity
-
-
-
-

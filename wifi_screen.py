@@ -28,7 +28,8 @@ class WifiScreen(ttk.Frame):
         # if len(self.available_wifi_list) > 3:
         #     for wifi in self.available_wifi_list:
         #         self.showing_wifi_list.append(wifi)
-        self.current_available_wifi_list = []
+        self.current_available_wifi_list = []           # wifi_search_new_ver -> [current_wifi, available_wifilist]
+        
         self.showing_wifi_list = self.available_wifi_list[0:3]
         self.last_num = len(self.available_wifi_list) - 1
         self.current_start_num = 0
@@ -77,7 +78,12 @@ class WifiScreen(ttk.Frame):
         
         back_label.bind("<Button-1>", back_click)
         
-        
+        def get_wifi(event):
+            self.new_ver_wifi_func()
+            
+        get_wifi_label = Label(status_part, text='get wifi!', fg='white', bg='black')
+        get_wifi_label.grid(row=0, column=2)
+        get_wifi_label.bind("<Button-1>", get_wifi)
         
         
         
@@ -362,18 +368,27 @@ class WifiScreen(ttk.Frame):
     
     
     
+################################################################################################################
+################################################################################################################
+################################################################################################################
+################################################################################################################
+################################################################################################################
+################################################################################################################
+################################################################################################################
     
-    
-    
-    
-    
-    
+    # 무조건 이걸로 바꿔야해 -> 비번이 없는 것을 알기 위해서 다른 방법이 없다...
+    # 후........ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
     def new_ver_wifi_func(self):
-        print('hihihi')
-    
-    
-    
-    
+        # self.current_wifi_list = wf.get_current_wifi_info() # ssid & signal strength
+        # 생각해보니 wf.wifi_search_new_ver 안에서 현재 연결된 와이파이를 뺴준다.
+        self.current_available_wifi_list = wf.wifi_search_new_ver()     # [current_wifi, available_wifilist]
+        print(self.current_available_wifi_list[1])  # <- available_wifilist
+
+        
+        
+        
+        
+        
     
     
     

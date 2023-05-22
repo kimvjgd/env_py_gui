@@ -68,19 +68,19 @@ def wifi_search_new_ver():
         
         output = output.decode("utf-8")
         lines = output.split("\n")
-        print(lines)
+        # print(lines)
         for line in lines:
             if "SSID" not in line and "MODE" not in line and "*" not in line and line != '':
                 # print('* not in line')
                 wifi_info = re.findall(r"\S+", line)
                 # wifi SSID가 띄워쓰기가 있으면 매우 곤란한데...
                 if wifi_info[1] != '--':
-                    print('Available list')
-                    print(wifi_info[1])
-                    print(wifi_info[6])
-                    print(wifi_info[-1])
-                    print()
-                    available_wifilist.append([wifi_info[2], wifi_info[-3], wifi_info[-1]])
+                    # print('Available list')
+                    # print(wifi_info[1])
+                    # print(wifi_info[6])
+                    # print(wifi_info[-1])
+                    # print()
+                    available_wifilist.append([wifi_info[1], wifi_info[6], wifi_info[-1]])
 
             elif "*" in line:
                 # Extract the Wi-Fi information from the line
@@ -88,12 +88,12 @@ def wifi_search_new_ver():
                 
                 # print('10:',end='')
                 # print(wifi_info[9])         # <- 여기가 security인데 '--' 나오면 비번이 없는 것..? 맞을꺼야
-                print('Current list')
-                print(wifi_info[2])
-                print(wifi_info[7])
-                print(wifi_info[-1])
-                print()
-                current_wifi.append([wifi_info[2], wifi_info[-3], wifi_info[-1]])
+                # print('Current list')
+                # print(wifi_info[2])
+                # print(wifi_info[7])
+                # print(wifi_info[-1])
+                # print()
+                current_wifi.append([wifi_info[2], wifi_info[7], wifi_info[-1]])
                 
                 
                 
@@ -299,4 +299,4 @@ def get_current_connection_state():
     wlan0_connection = interfaces['wlan0'].isup
     return [eth0_connection, wlan0_connection]
 
-wifi_search_new_ver()
+# wifi_search_new_ver()
