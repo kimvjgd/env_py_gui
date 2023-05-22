@@ -28,6 +28,7 @@ class WifiScreen(ttk.Frame):
         # if len(self.available_wifi_list) > 3:
         #     for wifi in self.available_wifi_list:
         #         self.showing_wifi_list.append(wifi)
+        self.current_available_wifi_list = []
         self.showing_wifi_list = self.available_wifi_list[0:3]
         self.last_num = len(self.available_wifi_list) - 1
         self.current_start_num = 0
@@ -188,17 +189,17 @@ class WifiScreen(ttk.Frame):
                 ############### available wifi list ###############
         
 # command=lambda: self.show_wifi_detail_with_ssid(0)    
-        self.first_image_label = self.get_image_instance(available_wifi_list_part, 'img/wifi/strength/wifi_strength_0.png', 40, 40, 0 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(0))
+        self.first_image_label = self.get_image_instance(available_wifi_list_part, 'img/wifi/strength/wifi_strength_4.png', 40, 40, 0 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(0))
         self.first_label = Label(available_wifi_list_part, text=self.showing_wifi_list[0], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.first_label.grid(row=0, column=1, sticky='W')
         self.first_label.bind("<Button-1>", lambda event: self.event_func(event, num=0))
         
-        self.second_image_label = self.get_image_instance(available_wifi_list_part, 'img/wifi/strength/wifi_strength_0.png', 40, 40, 1 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(1))
+        self.second_image_label = self.get_image_instance(available_wifi_list_part, 'img/wifi/strength/wifi_strength_4.png', 40, 40, 1 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(1))
         self.second_label = Label(available_wifi_list_part, text=self.showing_wifi_list[1], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.second_label.grid(row=1, column=1, sticky='W')
         self.second_label.bind("<Button-1>", lambda event: self.event_func(event, num=1))
         
-        self.third_image_label = self.get_image_instance(available_wifi_list_part, 'img/wifi/strength/wifi_strength_0.png', 40, 40, 2 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(2))
+        self.third_image_label = self.get_image_instance(available_wifi_list_part, 'img/wifi/strength/wifi_strength_4.png', 40, 40, 2 ,0, 'E', command=lambda: self.show_wifi_detail_with_ssid(2))
         self.third_label = Label(available_wifi_list_part, text=self.showing_wifi_list[2], font=('Arial', 20), padx=14, fg='white', bg='black')
         self.third_label.grid(row=2, column=1, sticky='W')
         self.third_label.bind("<Button-1>", lambda event: self.event_func(event, num=2))
@@ -357,6 +358,26 @@ class WifiScreen(ttk.Frame):
         img_label.grid(row=row, column=column, sticky=sticky)
         
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    def new_ver_wifi_func(self):
+        print('hihihi')
+    
+    
+    
+    
+    
+    
+    
+    
     def get_wifi_list(self):
         self.available_wifi_list = wf.wifi_Search()
         self.current_wifi_list = wf.get_current_wifi_info()
@@ -370,14 +391,38 @@ class WifiScreen(ttk.Frame):
         self.current_start_num = 0
         self.current_end_num = 2
         
-        
+        # 여기서 계속 에러가 떠서 실행이 안되는 때가 있는데 한번 확인해보자
+        print('available_wifi_list[0][0] : ', end=' ')
+        print(self.available_wifi_list[0][0])
+        # print('available_wifi_list[0][0] signal : ', end=' ')
+        # print(self.available_wifi_list[0][2])
+
+        print('available_wifi_list[1][0] : ', end=' ')
+        print(self.available_wifi_list[1][0])
+        # print('available_wifi_list[1][0] signal : ', end=' ')
+        # print(self.available_wifi_list[1][2])
+
+        print('available_wifi_list[2][0] : ', end=' ')
+        print(self.available_wifi_list[2][0])
+        # print('available_wifi_list[2][0] signal : ', end=' ')
+        # print(self.available_wifi_list[2][2])
+
+
         self.first_label.config(text=self.available_wifi_list[0][0])
         self.second_label.config(text=self.available_wifi_list[1][0])
         self.third_label.config(text=self.available_wifi_list[2][0])
         
+    
+    
+    
     def get_current_wifi(self):
         self.current_wifi_list = wf.get_current_wifi_info()
-        print(self.current_wifi_list)
+        # print(self.current_wifi_list)
+        
+        # print('######## Test Start ########')
+        # print(wf.wifi_search_new_ver())
+        # print('######## Test End ########')
+        
         
         if self.current_wifi_list == None:
             self.current_wifi_label.config(text='No Wifi...')
@@ -385,13 +430,13 @@ class WifiScreen(ttk.Frame):
             self.current_wifi_image = self.non_connection_signal
         else:
             self.current_wifi_label.config(text=self.current_wifi_list[0])
-            if self.current_wifi_list[1] > 70:      # strength
+            if int(self.current_wifi_list[1]) > 60:      # strength
                 self.current_wifi_image.config(image=self.good_wifi_signal)
                 self.current_wifi_image = self.good_wifi_signal
-            elif self.current_wifi_list[1] > 60:
+            elif int(self.current_wifi_list[1]) > 50:
                 self.current_wifi_image.config(image=self.soso_wifi_signal)
                 self.current_wifi_image = self.soso_wifi_signal
-            elif self.current_wifi_list[1] > 20:
+            elif int(self.current_wifi_list[1]) > 20:
                 self.current_wifi_image.config(image=self.bad_wifi_signal)
                 self.current_wifi_image = self.bad_wifi_signal
             

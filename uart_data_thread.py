@@ -5,6 +5,8 @@ import pyautogui
 
 pyautogui.FAILSAFE = False
 
+# 나중에 음수로 오면 error이니깐 -> 핸들링 작업 해야함
+
 
 class UartDataThread(Thread):
     def __init__(self, controller):
@@ -54,50 +56,59 @@ class UartDataThread(Thread):
                 self.last_y = -1
                 
             else:
+                
                 serial_list = self.serial_str.split(',')
                 print(serial_list)
-                self.x, self.y = float(serial_list[0]), float(serial_list[1])
-                self.x = int((self.x-180)/3740*799)
-                self.y = int((self.y-400)/3410*479)
-                self.TVOC = float(serial_list[2])
-                self.CO2 = float(serial_list[3])
-                self.PM25 = float(serial_list[4])
-                self.PM10 = float(serial_list[5])
-                self.CH2O = float(serial_list[6])
-                self.Sm = float(serial_list[7])
-                self.NH3 = float(serial_list[8])
-                self.CO = float(serial_list[9])
-                self.NO2 = float(serial_list[10])
-                self.H2S = float(serial_list[11])
-                self.LIGHT = float(serial_list[12])
-                self.SOUND = float(serial_list[13])
-                self.Rn = float(serial_list[14])
-                self.O3 = float(serial_list[15])
-                self.temperature = float(serial_list[16])
-                self.humidity = float(serial_list[17])
-                
-                self.controller.TVOC = serial_list[2]
-                self.controller.CO2 = serial_list[3]
-                self.controller.PM25 = serial_list[4]
-                self.controller.PM10 = serial_list[5]
-                self.controller.CH2O = serial_list[6]
-                self.controller.Sm = serial_list[7]
-                self.controller.NH3 = serial_list[8]
-                self.controller.CO = serial_list[9]
-                self.controller.NO2 = serial_list[10]
-                self.controller.H2S = serial_list[11]
-                self.controller.LIGHT = serial_list[12]
-                self.controller.SOUND = serial_list[13]
-                self.controller.Rn = serial_list[14]
-                self.controller.O3 = serial_list[15]
-                self.controller.temperature = serial_list[16]
-                self.controller.humidity = serial_list[17]
+                # print(len(serial_list))
+                if len(serial_list) == 18:
+                    self.x, self.y = float(serial_list[0]), float(serial_list[1])
+                    self.x = int((self.x-180)/3740*799)
+                    self.y = int((self.y-400)/3410*479)
+                    self.TVOC = float(serial_list[2])
+                    self.CO2 = float(serial_list[3])
+                    self.PM25 = float(serial_list[4])
+                    self.PM10 = float(serial_list[5])
+                    self.CH2O = float(serial_list[6])
+                    self.Sm = float(serial_list[7])
+                    self.NH3 = float(serial_list[8])
+                    self.CO = float(serial_list[9])
+                    self.NO2 = float(serial_list[10])
+                    self.H2S = float(serial_list[11])
+                    self.LIGHT = float(serial_list[12])
+                    self.SOUND = float(serial_list[13])
+                    self.Rn = float(serial_list[14])
+                    self.O3 = float(serial_list[15])
+                    self.temperature = float(serial_list[16])
+                    self.humidity = float(serial_list[17])
+                    
+                    self.controller.TVOC = serial_list[2]
+                    self.controller.CO2 = serial_list[3]
+                    self.controller.PM25 = serial_list[4]
+                    self.controller.PM10 = serial_list[5]
+                    self.controller.CH2O = serial_list[6]
+                    self.controller.Sm = serial_list[7]
+                    self.controller.NH3 = serial_list[8]
+                    self.controller.CO = serial_list[9]
+                    self.controller.NO2 = serial_list[10]
+                    self.controller.H2S = serial_list[11]
+                    self.controller.LIGHT = serial_list[12]
+                    self.controller.SOUND = serial_list[13]
+                    self.controller.Rn = serial_list[14]
+                    self.controller.O3 = serial_list[15]
+                    self.controller.temperature = serial_list[16]
+                    self.controller.humidity = serial_list[17]
 
-                
-                self.two_pos = [[self.last_x, self.last_y],[self.x, self.y]]
-                self.last_x = self.x
-                self.last_y = self.y
-                pyautogui.moveTo(self.x, self.y)
+                    
+                    self.two_pos = [[self.last_x, self.last_y],[self.x, self.y]]
+                    self.last_x = self.x
+                    self.last_y = self.y
+                    print('x : ')
+                    print(self.x)
+                    print('y : ')
+                    print(self.y)
+                    
+                    if self.x > 0 and self.y > 0:
+                        pyautogui.moveTo(self.x, self.y)
             self.lock.release()    
 
 ###################################### self.serial_str ######################################

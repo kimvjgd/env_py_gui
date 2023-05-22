@@ -198,6 +198,9 @@ class Home(ttk.Frame):
         self.TVOC_label = Label(tvoc_part, text=self.TVOC, bg='black', fg='white', font=('Arial', 15))
         self.TVOC_label.grid(row=1, column=0, sticky='NEWS')
         self.TVOC_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='TVOC'))
+        self.TVOC_unit_label = Label(tvoc_part, text='ug/m3', bg='black', fg='white', font=('Arial', 11))
+        self.TVOC_unit_label.grid(row=2,column=0)
+
         
         
         co_part = tk.Frame(sensor_part, bg='black')
@@ -206,6 +209,8 @@ class Home(ttk.Frame):
         self.CO_label = Label(co_part, text=self.CO, bg='black', fg='white', font=('Arial', 15))
         self.CO_label.grid(row=1, column=0, sticky='NEWS')
         self.CO_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO'))
+        self.CO_unit_label = Label(co_part, text='PPM', bg='black', fg='white', font=('Arial', 11))
+        self.CO_unit_label.grid(row=2,column=0)
         
 
         co2_part = tk.Frame(sensor_part, bg='black')
@@ -214,26 +219,35 @@ class Home(ttk.Frame):
         self.CO2_label = Label(co2_part, text=self.CO2, bg='black', fg='white', font=('Arial', 15))
         self.CO2_label.grid(row=1, column=0, sticky='NEWS')
         self.CO2_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO2'))
-
+        self.CO2_unit_label = Label(co2_part, text='PPM', bg='black', fg='white', font=('Arial', 11))
+        self.CO2_unit_label.grid(row=2,column=0)
+        
         no2_part = tk.Frame(sensor_part, bg='black')
         no2_part.grid(row=2,column=2,sticky='NEWS')
         self.set_frame_configure(no2_part)
         self.NO2_label = Label(no2_part, text=self.NO2, bg='black', fg='white', font=('Arial', 15))
         self.NO2_label.grid(row=1, column=0, sticky='NEWS')
         self.NO2_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='NO2'))
-
+        self.NO2_unit_label = Label(no2_part, text='PPM', bg='black', fg='white', font=('Arial', 11))
+        self.NO2_unit_label.grid(row=2,column=0)
+        
         pm25_part = tk.Frame(sensor_part, bg='black')
         pm25_part.grid(row=0,column=4,sticky='NEWS')
         self.set_frame_configure(pm25_part)
         self.PM25_label = Label(pm25_part, text=self.PM25, bg='black', fg='white', font=('Arial', 15))
         self.PM25_label.grid(row=1, column=0, sticky='NEWS')
         self.PM25_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM25'))
+        self.PM25_unit_label = Label(pm25_part, text='ug/m3', bg='black', fg='white', font=('Arial', 11))
+        self.PM25_unit_label.grid(row=2,column=0)
+
         h2s_part = tk.Frame(sensor_part, bg='black')
         h2s_part.grid(row=2,column=4,sticky='NEWS')
         self.set_frame_configure(h2s_part)
         self.H2S_label = Label(h2s_part, text=self.H2S, bg='black', fg='white', font=('Arial', 15))
         self.H2S_label.grid(row=1, column=0, sticky='NEWS')
         self.H2S_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='H2S'))
+        self.H2S_unit_label = Label(h2s_part, text='PPM', bg='black', fg='white', font=('Arial', 11))
+        self.H2S_unit_label.grid(row=2,column=0)
 
         pm10_part = tk.Frame(sensor_part, bg='black')
         pm10_part.grid(row=0,column=6,sticky='NEWS')
@@ -241,6 +255,8 @@ class Home(ttk.Frame):
         self.PM10_label = Label(pm10_part, text=self.PM10, bg='black', fg='white', font=('Arial', 15))
         self.PM10_label.grid(row=1, column=0, sticky='NEWS')
         self.PM10_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM10'))
+        self.PM10_unit_label = Label(pm10_part, text='ug/m3', bg='black', fg='white', font=('Arial', 11))
+        self.PM10_unit_label.grid(row=2,column=0)
 
         light_part = tk.Frame(sensor_part, bg='black')
         light_part.grid(row=2,column=6,sticky='NEWS')
@@ -248,6 +264,9 @@ class Home(ttk.Frame):
         self.Light_label = Label(light_part, text=self.LIGHT, bg='black', fg='white', font=('Arial', 15))
         self.Light_label.grid(row=1, column=0, sticky='NEWS')
         self.Light_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='LIGHT'))
+        self.Light_unit_label = Label(light_part, text='Lux', bg='black', fg='white', font=('Arial', 11))
+        self.Light_unit_label.grid(row=2,column=0)
+        
 
         ch2o_part = tk.Frame(sensor_part, bg='black')
         ch2o_part.grid(row=0,column=8,sticky='NEWS')
@@ -255,6 +274,8 @@ class Home(ttk.Frame):
         self.CH2O_label = Label(ch2o_part, text=self.CH2O, bg='black', fg='white', font=('Arial', 15))
         self.CH2O_label.grid(row=1, column=0, sticky='NEWS')
         self.CH2O_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CH2O'))
+        self.CH2O_unit_label = Label(ch2o_part, text='ug/m3', bg='black', fg='white', font=('Arial', 11))
+        self.CH2O_unit_label.grid(row=2,column=0)
 
 
 
@@ -264,6 +285,8 @@ class Home(ttk.Frame):
         self.Sound_label = Label(sound_part, text=self.SOUND, bg='black', fg='white', font=('Arial', 15))
         self.Sound_label.grid(row=1, column=0, sticky='NEWS')
         self.Sound_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='SOUND'))
+        self.Sound_unit_label = Label(sound_part, text='dB', bg='black', fg='white', font=('Arial', 11))
+        self.Sound_unit_label.grid(row=2,column=0)
 
 
 
@@ -273,6 +296,8 @@ class Home(ttk.Frame):
         self.Sm_label = Label(sm_part, text=self.Sm, bg='black', fg='white', font=('Arial', 15))
         self.Sm_label.grid(row=1, column=0, sticky='NEWS')
         self.Sm_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='SM'))
+        self.Sm_unit_label = Label(sm_part, text='PPM', bg='black', fg='white', font=('Arial', 11))
+        self.Sm_unit_label.grid(row=2,column=0)
 
 
         rn_part = tk.Frame(sensor_part, bg='black')
@@ -281,6 +306,8 @@ class Home(ttk.Frame):
         self.Rn_label = Label(rn_part, text=self.Rn, bg='black', fg='white', font=('Arial', 15))
         self.Rn_label.grid(row=1, column=0, sticky='NEWS')
         self.Rn_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='RN'))
+        self.Rn_unit_label = Label(rn_part, text='Bq/m3', bg='black', fg='white', font=('Arial', 11))
+        self.Rn_unit_label.grid(row=2,column=0)
 
 
         nh3_part = tk.Frame(sensor_part, bg='black')
@@ -289,6 +316,8 @@ class Home(ttk.Frame):
         self.NH3_label = Label(nh3_part, text=self.NH3, bg='black', fg='white', font=('Arial', 15))
         self.NH3_label.grid(row=1, column=0, sticky='NEWS')
         self.NH3_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='NH3'))
+        self.NH3_unit_label = Label(nh3_part, text='PPM', bg='black', fg='white', font=('Arial', 11))
+        self.NH3_unit_label.grid(row=2,column=0)
 
 
         o3_part = tk.Frame(sensor_part, bg='black')
@@ -297,6 +326,8 @@ class Home(ttk.Frame):
         self.O3_label = Label(o3_part, text=self.O3, bg='black', fg='white', font=('Arial', 15))
         self.O3_label.grid(row=1, column=0, sticky='NEWS')
         self.O3_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='O3'))
+        self.O3_unit_label = Label(o3_part, text='O3', bg='black', fg='white', font=('Arial', 11))
+        self.O3_unit_label.grid(row=2,column=0)
         
         
 
@@ -333,7 +364,7 @@ class Home(ttk.Frame):
         tvoc_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='TVOC'))
 
         tvoc_label = Label(tvoc_part, text='TVOC', bg='black', fg='white', font=('Arial', 15))
-        tvoc_label.grid(row=2, column=0, sticky='NEWS')
+        tvoc_label.grid(row=3, column=0, sticky='NEWS')
         tvoc_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='TVOC'))
 ###########################################################################################################
         #co_part - contents
@@ -349,7 +380,7 @@ class Home(ttk.Frame):
         co_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO'))
 
         co_label = Label(co_part, text='CO', bg='black', fg='white', font=('Arial', 15))
-        co_label.grid(row=2, column=0, sticky='NEWS')
+        co_label.grid(row=3, column=0, sticky='NEWS')
         co_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO'))
 ###########################################################################################################
         #co2_part - contents
@@ -365,7 +396,7 @@ class Home(ttk.Frame):
         co2_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO2'))
 
         co2_label = Label(co2_part, text='CO2', bg='black', fg='white', font=('Arial', 15))
-        co2_label.grid(row=2, column=0, sticky='NEWS')
+        co2_label.grid(row=3, column=0, sticky='NEWS')
         co2_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO2'))
 ###########################################################################################################
         #no2_part - contents
@@ -381,7 +412,7 @@ class Home(ttk.Frame):
         no2_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='NO2'))
 
         no2_label = Label(no2_part, text='NO2', bg='black', fg='white', font=('Arial', 15))
-        no2_label.grid(row=2, column=0, sticky='NEWS')
+        no2_label.grid(row=3, column=0, sticky='NEWS')
         no2_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='NO2'))
 ###########################################################################################################
         #pm25_part - contents
@@ -397,7 +428,7 @@ class Home(ttk.Frame):
         pm25_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM25'))
 
         pm25_label = Label(pm25_part, text='PM2.5', bg='black', fg='white', font=('Arial', 15))
-        pm25_label.grid(row=2, column=0, sticky='NEWS')
+        pm25_label.grid(row=3, column=0, sticky='NEWS')
         pm25_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM25'))
 ###########################################################################################################
         #h2s_part - contents
@@ -413,7 +444,7 @@ class Home(ttk.Frame):
         h2s_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='H2S'))
 
         h2s_label = Label(h2s_part, text='H2S', bg='black', fg='white', font=('Arial', 15))
-        h2s_label.grid(row=2, column=0, sticky='NEWS')
+        h2s_label.grid(row=3, column=0, sticky='NEWS')
         h2s_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='H2S'))
 ###########################################################################################################
         #pm10_part - contents
@@ -429,7 +460,7 @@ class Home(ttk.Frame):
         pm10_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM10'))
 
         pm10_label = Label(pm10_part, text='PM10', bg='black', fg='white', font=('Arial', 15))
-        pm10_label.grid(row=2, column=0, sticky='NEWS')
+        pm10_label.grid(row=3, column=0, sticky='NEWS')
         pm10_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM10'))
 ###########################################################################################################
         #light_part - contents
@@ -445,7 +476,7 @@ class Home(ttk.Frame):
         light_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='LIGHT'))
 
         light_label = Label(light_part, text='Light', bg='black', fg='white', font=('Arial', 15))
-        light_label.grid(row=2, column=0, sticky='NEWS')
+        light_label.grid(row=3, column=0, sticky='NEWS')
         light_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='LIGHT'))
 ###########################################################################################################
         #ch2o_part - contents
@@ -461,7 +492,7 @@ class Home(ttk.Frame):
         CH2O_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CH2O'))
 
         CH2O_label = Label(ch2o_part, text='CH2O', bg='black', fg='white', font=('Arial', 15))
-        CH2O_label.grid(row=2, column=0, sticky='NEWS')
+        CH2O_label.grid(row=3, column=0, sticky='NEWS')
         CH2O_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CH2O'))
 ###########################################################################################################
         #sound_part - contents
@@ -477,7 +508,7 @@ class Home(ttk.Frame):
         sound_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='SOUND'))
 
         sound_label = Label(sound_part, text='Sound', bg='black', fg='white', font=('Arial', 15))
-        sound_label.grid(row=2, column=0, sticky='NEWS')
+        sound_label.grid(row=3, column=0, sticky='NEWS')
         sound_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='SOUND'))
 ###########################################################################################################
         #sm_part - contents
@@ -493,7 +524,7 @@ class Home(ttk.Frame):
         Sm_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='SM'))
 
         Sm_label = Label(sm_part, text='Sm', bg='black', fg='white', font=('Arial', 15))
-        Sm_label.grid(row=2, column=0, sticky='NEWS')
+        Sm_label.grid(row=3, column=0, sticky='NEWS')
         Sm_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='SM'))
 ###########################################################################################################
         #rn_part - contents
@@ -509,7 +540,7 @@ class Home(ttk.Frame):
         Rn_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='RN'))
 
         Rn_label = Label(rn_part, text='Rn', bg='black', fg='white', font=('Arial', 15))
-        Rn_label.grid(row=2, column=0, sticky='NEWS')
+        Rn_label.grid(row=3, column=0, sticky='NEWS')
         Rn_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='RN'))
 ###########################################################################################################
         #nh3_part - contents
@@ -525,7 +556,7 @@ class Home(ttk.Frame):
         NH3_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='NH3'))
 
         NH3_label = Label(nh3_part, text='NH3', bg='black', fg='white', font=('Arial', 15))
-        NH3_label.grid(row=2, column=0, sticky='NEWS')
+        NH3_label.grid(row=3, column=0, sticky='NEWS')
         NH3_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='NH3'))
 ###########################################################################################################
         #o3_part - contents
@@ -541,7 +572,7 @@ class Home(ttk.Frame):
         O3_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='O3'))
 
         O3_label = Label(o3_part, text='O3', bg='black', fg='white', font=('Arial', 15))
-        O3_label.grid(row=2, column=0, sticky='NEWS')
+        O3_label.grid(row=3, column=0, sticky='NEWS')
         O3_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='O3'))
 ###########################################################################################################  
         ########################################### Separator ###########################################

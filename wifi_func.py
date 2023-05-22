@@ -24,6 +24,90 @@ import wifi
 import subprocess
 import re
 
+def wifi_Search():
+    wifilist = []
+    cells = wifi.Cell.all('wlan0')
+
+    for cell in cells:
+        if cell.ssid != '':
+            signal = abs(cell.signal)
+            if signal <= 50:
+                wifilist.append([cell.ssid, 'a'])
+            elif signal <= 65:
+                wifilist.append([cell.ssid, 'b'])
+            else:
+                wifilist.append([cell.ssid, 'c'])
+    
+    '''
+    cell.signal
+                <= 50           -> Good connection strength => a
+                50 < && < 65    -> SoSo connection strength => b
+                65 <=           -> Bad  connection strength => c
+
+    '''
+
+    return wifilist
+
+'''
+IN-USE  BSSID              SSID                   MODE   CHAN  RATE        SIGNA                     L  BARS  SECURITY
+        2C:D2:6B:61:C9:7C  NEXT340-ca5305         Infra  6     65 Mbit/s   100                          ▂▄▆█  WPA2
+        B4:B0:24:C3:96:2E  mirresys               Infra  7     405 Mbit/s  100                          ▂▄▆█  WPA2
+        B6:B0:24:A3:96:2E  --                     Infra  7     405 Mbit/s  100                          ▂▄▆█  WPA1 WPA2
+        88:36:6C:FD:19:9E  DIRECT-ABOFFIEPCmsJP   Infra  7     270 Mbit/s  100                          ▂▄▆█  WPA2
+        B4:B0:24:C3:96:30  mirresys               Infra  161   405 Mbit/s  90                           ▂▄▆█  WPA2
+        B6:B0:24:D3:96:2E  --                     Infra  161   405 Mbit/s  90                           ▂▄▆█  WPA1 WPA2
+        90:9F:33:A9:0B:8C  sangsanglab            Infra  13    405 Mbit/s  79                           ▂▄▆_  WPA2
+*       90:9F:33:A8:0B:8C  sangsanglab_5G         Infra  149   405 Mbit/s  77                           ▂▄▆_  WPA2
+'''
+
+def wifi_search_new_ver():
+    available_wifilist = []
+    current_wifi = []
+    try:
+        output = subprocess.check_output(["nmcli", "dev", "wifi", "list"])
+        
+        output = output.decode("utf-8")
+        lines = output.split("\n")
+        print(lines)
+        for line in lines:
+            if "SSID" not in line and "MODE" not in line and "*" not in line and line != '':
+                # print('* not in line')
+                wifi_info = re.findall(r"\S+", line)
+                # wifi SSID가 띄워쓰기가 있으면 매우 곤란한데...
+                if wifi_info[1] != '--':
+                    print('Available list')
+                    print(wifi_info[1])
+                    print(wifi_info[6])
+                    print(wifi_info[-1])
+                    print()
+                    available_wifilist.append([wifi_info[2], wifi_info[-3], wifi_info[-1]])
+
+            elif "*" in line:
+                # Extract the Wi-Fi information from the line
+                wifi_info = re.findall(r"\S+", line)
+                
+                # print('10:',end='')
+                # print(wifi_info[9])         # <- 여기가 security인데 '--' 나오면 비번이 없는 것..? 맞을꺼야
+                print('Current list')
+                print(wifi_info[2])
+                print(wifi_info[7])
+                print(wifi_info[-1])
+                print()
+                current_wifi.append([wifi_info[2], wifi_info[-3], wifi_info[-1]])
+                
+                
+                
+                # return [wifi_info[2], wifi_info[-3], wifi_info[-1]]            # name & strength를 반환
+                
+                
+                # print(wifi_info)
+        return [current_wifi, available_wifilist]
+    except subprocess.CalledProcessError:
+        return None
+    
+    
+    
+
 def get_current_wifi_info():
     try:
         output = subprocess.check_output(["nmcli", "dev", "wifi", "list"])
@@ -34,7 +118,30 @@ def get_current_wifi_info():
             if "*" in line:
                 # Extract the Wi-Fi information from the line
                 wifi_info = re.findall(r"\S+", line)
-                return [wifi_info[2], wifi_info[-3]]            # name & strength를 반환
+                # print('1:',end='')
+                # print(wifi_info[0])
+                # print('2:',end='')
+                # print(wifi_info[1])
+                # print('3:',end='')
+                # print(wifi_info[2])
+                # print('4:',end='')
+                # print(wifi_info[3])
+                # print('5:',end='')
+                # print(wifi_info[4])
+                # print('6:',end='')
+                # print(wifi_info[5])
+                # print('7:',end='')
+                # print(wifi_info[6])
+                # print('8:',end='')
+                # print(wifi_info[7])
+                # print('9:',end='')
+                # print(wifi_info[8])
+                # print('10:',end='')
+                # print(wifi_info[9])         # <- 여기가 security인데 '--' 나오면 비번이 없는 것..? 맞을꺼야
+                
+                
+                
+                return [wifi_info[2], wifi_info[-3], wifi_info[-1]]            # name & strength를 반환
                 
                 
                 # print(wifi_info)
@@ -136,29 +243,6 @@ def Delete(ssid):
         return True
 
     return False
-def wifi_Search():
-    wifilist = []
-    cells = wifi.Cell.all('wlan0')
-
-    for cell in cells:
-        if cell.ssid != '':
-            signal = abs(cell.signal)
-            if signal <= 50:
-                wifilist.append([cell.ssid, 'a'])
-            elif signal <= 65:
-                wifilist.append([cell.ssid, 'b'])
-            else:
-                wifilist.append([cell.ssid, 'c'])
-    
-    '''
-    cell.signal
-                <= 50           -> Good connection strength => a
-                50 < && < 65    -> SoSo connection strength => b
-                65 <=           -> Bad  connection strength => c
-
-    '''
-
-    return wifilist
 
     
 
@@ -215,3 +299,4 @@ def get_current_connection_state():
     wlan0_connection = interfaces['wlan0'].isup
     return [eth0_connection, wlan0_connection]
 
+wifi_search_new_ver()
