@@ -143,7 +143,8 @@ class WifiScreen(ttk.Frame):
         available_wifi_title_label = Label(available_wifi_title_part, text='사용 가능한 네트워크',fg='white', bg='black', font=('Arial',25), padx=30)
         available_wifi_title_label.grid(row=0, column=0, sticky='W')
         
-        self.get_image(available_wifi_title_part, 'img/wifi/refresh_wifi.png', 25, 25, 0, 1, "NEWS",self.get_wifi_list)
+        # self.get_image(available_wifi_title_part, 'img/wifi/refresh_wifi.png', 25, 25, 0, 1, "NEWS",self.get_wifi_list)
+        self.get_image(available_wifi_title_part, 'img/wifi/refresh_wifi.png', 25, 25, 0, 1, "NEWS",self.new_ver_wifi_func)
         
         
         # available_wifi_title_label = Label(available_wifi_title_part, text='available_wifi_title_part')
@@ -383,23 +384,30 @@ class WifiScreen(ttk.Frame):
         # 생각해보니 wf.wifi_search_new_ver 안에서 현재 연결된 와이파이를 뺴준다.
         self.current_available_wifi_list = wf.wifi_search_new_ver()     # [current_wifi, available_wifilist]
         print(self.current_available_wifi_list[1])  # <- available_wifilist
+        _available_list = self.current_available_wifi_list[1]
+        _available_list.sort(key= lambda x:x[1])
+        # 3개보다 작을 때를 고려해야 한다.
+        self.showing_wifi_list = _available_list[0:3]
+        self.last_num = len(_available_list) - 1
+        self.current_start_num = 0
+        self.current_end_num = 2
+        
+        
 
-        
-        
-        
-        
-        
+        self.first_label.config(text=_available_list[0][0])
+        self.second_label.config(text=_available_list[1][0])
+        self.third_label.config(text=_available_list[2][0])
     
     
     
     
     def get_wifi_list(self):
-        self.available_wifi_list = wf.wifi_Search()
+        self.available_wifi_list = wf.wifi_Search()         # ex) available_wifi_list = [['sangsang', 'a'],['iptime', 'c']]
         self.current_wifi_list = wf.get_current_wifi_info()
         
         self.available_wifi_list = [i for i in self.available_wifi_list if i[0] != self.current_wifi_list[0]]           # 연결중인 와이파이는 제외시킨다.
         # self.available_wifi_list.remove
-        
+#####################################################################################################################
         self.available_wifi_list.sort(key = lambda x:x[1])
         self.showing_wifi_list = self.available_wifi_list[0:3]              # 여기서 2 ele로 바꿔주는구나...    # 근데 3개보다 많았다가 refresh했는데 그보다 작은 경우 문제가 된다.
         self.last_num = len(self.available_wifi_list) -1
