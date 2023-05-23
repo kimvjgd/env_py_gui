@@ -10,6 +10,8 @@ import paho.mqtt.client as mqtt
 import os
 import json
 import math
+from sensor_list import SENSOR_DICT
+
 
 THINGSBOARD_HOST = "210.117.143.37"
 ACCESS_TOKEN='51ZFhNEWFXLi4pW758Gy'
@@ -122,6 +124,7 @@ class Home(ttk.Frame):
         ##### put modules in frames #####
 ################################################################################################################################################################
         from PIL import Image, ImageTk
+
         #status
         self.time_label = tk.Label(status_part,bg='black',text='', fg='white', font=('Arial', 20))
         self.time_label.grid(column=0, row=0,sticky="W")
@@ -342,18 +345,29 @@ class Home(ttk.Frame):
         # element_button.grid(row=0, column=1, sticky="NEWS", pady = (10,0))
 
         
-        
-        def event_func(event, sensor_name):
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+
+        def event_func(event, sensor_name, sensor_value):
             # 순서 바꾸면 안돼!!!!
+        #     print('Value : ', end='')
+        #     print(sensor_value)
+        #     print('Range : ', end='')
+        #     print(SENSOR_DICT[sensor_name][2:5])
             controller.sensor_name = sensor_name
+            controller.selected_sensor_range = SENSOR_DICT[sensor_name][2:5]
             show_element()
+            
         
         
             
 ###########################################################################################################            
         #tvoc_part - contents
         
-        tvoc_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='TVOC'))
+        tvoc_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='TVOC', sensor_value=self.controller.TVOC))
         # self.set_image(tvoc_part, 'img/sensor/Main-TVOC.png')
         # self.set_label(tvoc_part, 'TVOC')
 
@@ -361,15 +375,15 @@ class Home(ttk.Frame):
         tvoc_img_label = Label(tvoc_part, image=tvoc_img, bg='black', height=80)
         tvoc_img_label.image = tvoc_img
         tvoc_img_label.grid(row=0, column=0)
-        tvoc_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='TVOC'))
+        tvoc_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='TVOC', sensor_value=self.controller.TVOC))
 
         tvoc_label = Label(tvoc_part, text='TVOC', bg='black', fg='white', font=('Arial', 15))
         tvoc_label.grid(row=3, column=0, sticky='NEWS')
-        tvoc_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='TVOC'))
+        tvoc_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='TVOC', sensor_value=self.controller.TVOC))
 ###########################################################################################################
         #co_part - contents
 
-        co_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO'))
+        co_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO', sensor_value=self.controller.CO))
         # self.set_image(co_part, 'img/sensor/Main-CO.png')
         # self.set_label(co_part, 'CO')
 
@@ -377,15 +391,15 @@ class Home(ttk.Frame):
         co_img_label = Label(co_part, image=co_img, bg='black', height=80)
         co_img_label.image = co_img
         co_img_label.grid(row=0, column=0)
-        co_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO'))
+        co_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO', sensor_value=self.controller.CO))
 
         co_label = Label(co_part, text='CO', bg='black', fg='white', font=('Arial', 15))
         co_label.grid(row=3, column=0, sticky='NEWS')
-        co_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO'))
+        co_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO', sensor_value=self.controller.CO))
 ###########################################################################################################
         #co2_part - contents
 
-        co2_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO2'))
+        co2_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO2',sensor_value=self.controller.CO2))
         # self.set_image(co2_part, 'img/sensor/Main-CO2.png')
         # self.set_label(co2_part, 'CO2')
 
@@ -393,15 +407,15 @@ class Home(ttk.Frame):
         co2_img_label = Label(co2_part, image=co2_img, bg='black', height=80)
         co2_img_label.image = co2_img
         co2_img_label.grid(row=0, column=0)
-        co2_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO2'))
+        co2_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO2',sensor_value=self.controller.CO2))
 
         co2_label = Label(co2_part, text='CO2', bg='black', fg='white', font=('Arial', 15))
         co2_label.grid(row=3, column=0, sticky='NEWS')
-        co2_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO2'))
+        co2_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CO2',sensor_value=self.controller.CO2))
 ###########################################################################################################
         #no2_part - contents
 
-        no2_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='NO2'))
+        no2_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='NO2', sensor_value=self.controller.NO2))
         # self.set_image(no2_part, 'img/sensor/Main-NO2.png')
         # self.set_label(no2_part, 'NO2')
 
@@ -409,15 +423,15 @@ class Home(ttk.Frame):
         no2_img_label = Label(no2_part, image=no2_img, bg='black', height=80)
         no2_img_label.image = no2_img
         no2_img_label.grid(row=0, column=0)
-        no2_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='NO2'))
+        no2_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='NO2', sensor_value=self.controller.NO2))
 
         no2_label = Label(no2_part, text='NO2', bg='black', fg='white', font=('Arial', 15))
         no2_label.grid(row=3, column=0, sticky='NEWS')
-        no2_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='NO2'))
+        no2_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='NO2', sensor_value=self.controller.NO2))
 ###########################################################################################################
         #pm25_part - contents
 
-        pm25_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM25'))
+        pm25_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM25', sensor_value=self.controller.PM25))
         # self.set_image(pm25_part, 'img/sensor/Main-PM2.5.png')
         # self.set_label(pm25_part, 'PM2.5')
 
@@ -425,15 +439,15 @@ class Home(ttk.Frame):
         pm25_img_label = Label(pm25_part, image=pm25_img, bg='black', height=80)
         pm25_img_label.image = pm25_img
         pm25_img_label.grid(row=0, column=0)
-        pm25_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM25'))
+        pm25_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM25', sensor_value=self.controller.PM25))
 
         pm25_label = Label(pm25_part, text='PM2.5', bg='black', fg='white', font=('Arial', 15))
         pm25_label.grid(row=3, column=0, sticky='NEWS')
-        pm25_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM25'))
+        pm25_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM25', sensor_value=self.controller.PM25))
 ###########################################################################################################
         #h2s_part - contents
 
-        h2s_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='H2S'))
+        h2s_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='H2S', sensor_value=self.controller.H2S))
         # self.set_image(h2s_part, 'img/sensor/Main-H2S.png')
         # self.set_label(h2s_part, 'H2S')
 
@@ -441,15 +455,15 @@ class Home(ttk.Frame):
         h2s_img_label = Label(h2s_part, image=h2s_img, bg='black', height=80)
         h2s_img_label.image = h2s_img
         h2s_img_label.grid(row=0, column=0)
-        h2s_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='H2S'))
+        h2s_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='H2S', sensor_value=self.controller.H2S))
 
         h2s_label = Label(h2s_part, text='H2S', bg='black', fg='white', font=('Arial', 15))
         h2s_label.grid(row=3, column=0, sticky='NEWS')
-        h2s_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='H2S'))
+        h2s_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='H2S', sensor_value=self.controller.H2S))
 ###########################################################################################################
         #pm10_part - contents
 
-        pm10_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM10'))
+        pm10_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM10', sensor_value=self.controller.PM10))
         # self.set_image(pm10_part, 'img/sensor/Main-PM10.png')
         # self.set_label(pm10_part, 'PM10')
 
@@ -457,15 +471,15 @@ class Home(ttk.Frame):
         pm10_img_label = Label(pm10_part, image=pm10_img, bg='black', height=80)
         pm10_img_label.image = pm10_img
         pm10_img_label.grid(row=0, column=0)
-        pm10_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM10'))
+        pm10_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM10', sensor_value=self.controller.PM10))
 
         pm10_label = Label(pm10_part, text='PM10', bg='black', fg='white', font=('Arial', 15))
         pm10_label.grid(row=3, column=0, sticky='NEWS')
-        pm10_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM10'))
+        pm10_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM10', sensor_value=self.controller.PM10))
 ###########################################################################################################
         #light_part - contents
 
-        light_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='LIGHT'))
+        light_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='LIGHT', sensor_value=self.controller.LIGHT))
         # self.set_image(light_part, 'img/sensor/Main-Light.png')
         # self.set_label(light_part, 'Light')
 
@@ -473,15 +487,15 @@ class Home(ttk.Frame):
         light_img_label = Label(light_part, image=light_img, bg='black', height=80)
         light_img_label.image = light_img
         light_img_label.grid(row=0, column=0)
-        light_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='LIGHT'))
+        light_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='LIGHT', sensor_value=self.controller.LIGHT))
 
         light_label = Label(light_part, text='Light', bg='black', fg='white', font=('Arial', 15))
         light_label.grid(row=3, column=0, sticky='NEWS')
-        light_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='LIGHT'))
+        light_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='LIGHT', sensor_value=self.controller.LIGHT))
 ###########################################################################################################
         #ch2o_part - contents
 
-        ch2o_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='CH2O'))
+        ch2o_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='CH2O', sensor_value=self.controller.CH2O))
         # self.set_image(ch2o_part, 'img/sensor/Main-CH2O.png')
         # self.set_label(ch2o_part, 'CH2O')
 
@@ -489,15 +503,15 @@ class Home(ttk.Frame):
         CH2O_img_label = Label(ch2o_part, image=CH2O_img, bg='black', height=80)
         CH2O_img_label.image = CH2O_img
         CH2O_img_label.grid(row=0, column=0)
-        CH2O_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CH2O'))
+        CH2O_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CH2O', sensor_value=self.controller.CH2O))
 
         CH2O_label = Label(ch2o_part, text='CH2O', bg='black', fg='white', font=('Arial', 15))
         CH2O_label.grid(row=3, column=0, sticky='NEWS')
-        CH2O_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CH2O'))
+        CH2O_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='CH2O', sensor_value=self.controller.CH2O))
 ###########################################################################################################
         #sound_part - contents
 
-        sound_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='SOUND'))
+        sound_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='SOUND', sensor_value=self.controller.SOUND))
         # self.set_image(sound_part, 'img/sensor/Main-Sound.png')
         # self.set_label(sound_part, 'Sound')
 
@@ -505,15 +519,15 @@ class Home(ttk.Frame):
         sound_img_label = Label(sound_part, image=sound_img, bg='black', height=80)
         sound_img_label.image = sound_img
         sound_img_label.grid(row=0, column=0)
-        sound_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='SOUND'))
+        sound_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='SOUND', sensor_value=self.controller.SOUND))
 
         sound_label = Label(sound_part, text='Sound', bg='black', fg='white', font=('Arial', 15))
         sound_label.grid(row=3, column=0, sticky='NEWS')
-        sound_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='SOUND'))
+        sound_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='SOUND', sensor_value=self.controller.SOUND))
 ###########################################################################################################
         #sm_part - contents
 
-        sm_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='SM'))
+        sm_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='SM', sensor_value=self.controller.SM))
         # self.set_image(sm_part, 'img/sensor/Main-Sm.png')
         # self.set_label(sm_part, 'Sm')
 
@@ -521,15 +535,15 @@ class Home(ttk.Frame):
         Sm_img_label = Label(sm_part, image=Sm_img, bg='black', height=80)
         Sm_img_label.image = Sm_img
         Sm_img_label.grid(row=0, column=0)
-        Sm_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='SM'))
+        Sm_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='SM', sensor_value=self.controller.SM))
 
         Sm_label = Label(sm_part, text='Sm', bg='black', fg='white', font=('Arial', 15))
         Sm_label.grid(row=3, column=0, sticky='NEWS')
-        Sm_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='SM'))
+        Sm_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='SM', sensor_value=self.controller.SM))
 ###########################################################################################################
         #rn_part - contents
 
-        rn_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='RN'))
+        rn_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='RN', sensor_value=self.controller.RN))
         # self.set_image(rn_part, 'img/sensor/Main-Rn.png')
         # self.set_label(rn_part, 'Rn')
 
@@ -537,15 +551,15 @@ class Home(ttk.Frame):
         Rn_img_label = Label(rn_part, image=Rn_img, bg='black', height=80)
         Rn_img_label.image = Rn_img
         Rn_img_label.grid(row=0, column=0)
-        Rn_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='RN'))
+        Rn_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='RN', sensor_value=self.controller.RN))
 
         Rn_label = Label(rn_part, text='Rn', bg='black', fg='white', font=('Arial', 15))
         Rn_label.grid(row=3, column=0, sticky='NEWS')
-        Rn_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='RN'))
+        Rn_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='RN', sensor_value=self.controller.RN))
 ###########################################################################################################
         #nh3_part - contents
 
-        nh3_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='NH3'))
+        nh3_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='NH3', sensor_value=self.controller.NH3))
         # self.set_image(nh3_part, 'img/sensor/Main-NH3.png')
         # self.set_label(nh3_part, 'NH3')
 
@@ -553,15 +567,15 @@ class Home(ttk.Frame):
         NH3_img_label = Label(nh3_part, image=NH3_img, bg='black', height=80)
         NH3_img_label.image = NH3_img
         NH3_img_label.grid(row=0, column=0)
-        NH3_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='NH3'))
+        NH3_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='NH3', sensor_value=self.controller.NH3))
 
         NH3_label = Label(nh3_part, text='NH3', bg='black', fg='white', font=('Arial', 15))
         NH3_label.grid(row=3, column=0, sticky='NEWS')
-        NH3_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='NH3'))
+        NH3_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='NH3', sensor_value=self.controller.NH3))
 ###########################################################################################################
         #o3_part - contents
 
-        o3_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='O3'))
+        o3_part.bind("<Button-1>", lambda event: event_func(event, sensor_name='O3', sensor_value=self.controller.O3))
         # self.set_image(o3_part, 'img/sensor/Main-O3.png')
         # self.set_label(o3_part, 'O3')
 
@@ -569,11 +583,11 @@ class Home(ttk.Frame):
         O3_img_label = Label(o3_part, image=O3_img, bg='black', height=80)
         O3_img_label.image = O3_img
         O3_img_label.grid(row=0, column=0)
-        O3_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='O3'))
+        O3_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='O3', sensor_value=self.controller.O3))
 
         O3_label = Label(o3_part, text='O3', bg='black', fg='white', font=('Arial', 15))
         O3_label.grid(row=3, column=0, sticky='NEWS')
-        O3_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='O3'))
+        O3_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='O3', sensor_value=self.controller.O3))
 ###########################################################################################################  
         ########################################### Separator ###########################################
         # horizontal

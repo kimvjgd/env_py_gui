@@ -5,7 +5,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 
 class Element(ttk.Frame):
-    def __init__(self,parent, controller, show_home, sensor):
+    def __init__(self,parent, controller, show_home, sensor, sensor_range):
         super().__init__(parent)
         self.controller = controller
         self.sensor_name = sensor
@@ -151,9 +151,6 @@ class Element(ttk.Frame):
         # }
         
         
-    def change_image(self, sensor_name):    
-        
-        pass
     
     def change_image(self,sensor_name):
         img = PhotoImage(file=SENSOR_DICT[sensor_name][1])
