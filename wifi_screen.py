@@ -386,7 +386,7 @@ class WifiScreen(ttk.Frame):
         print(self.current_available_wifi_list[1])  # <- available_wifilist
         _available_list = self.current_available_wifi_list[1]
         _available_list.sort(key= lambda x:x[1])
-        # 3개보다 작을 때를 고려해야 한다.
+        # todo 나중에 3개보다 작을 때를 고려해야 한다.
         self.showing_wifi_list = _available_list[0:3]
         self.last_num = len(_available_list) - 1
         self.current_start_num = 0

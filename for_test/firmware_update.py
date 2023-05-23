@@ -70,12 +70,6 @@ def firmware_update():
         print('Process well done')
     except subprocess.CalledProcessError as e:
         print(e)
-    # execute_cmd('cd /home/orangepi/python/core')
-    # print('cd 완료')
-    # execute_cmd('mkdir temp_test')
-    # print('mkdir 완료')
-    # execute_cmd('git clone "https://github.com/kimvjgd/521pyinstaller"')
-    # print('git clone 완료')
 
 update_btn = Button(root, text='업데이트', command= firmware_update)
 update_btn.pack()

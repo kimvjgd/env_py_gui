@@ -154,7 +154,7 @@ if __name__== '__main__':
     
     # 꼭 풀어줘야함 519
     app.home_frame.lan_connection_update()
-    app.wifi_frame.get_wifi_list()
+    app.wifi_frame.new_ver_wifi_func()
     app.wifi_frame.get_current_wifi()
     
     app.geometry("800x480")
