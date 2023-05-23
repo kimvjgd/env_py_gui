@@ -18,7 +18,7 @@
 
 # sensorname : ['main에서 쓰이는 img.png', 'element_page에서 쓰이는 img.png']
 SENSOR_DICT = {
-    'TVOC':['img/sensor/Main-TVOC.png','img/sensor/TVOC.png', 200, 600, 2000],
+    'TVOC':['img/sensor/Main-TVOC.png','img/sensor/TVOC.png', 200, 600, 2000],  # ~200 : 좋음(1) || ~600 : 보통(2) || ~2000 : 나쁨(3) || 2000~ : 아주나쁨(4)
     'CO':['img/sensor/Main-CO.png','img/sensor/CO.png', 2, 9, 15],
     'CO2':['img/sensor/Main-CO2.png','img/sensor/CO2.png', 450, 1000, 2000],
     'NO2':['img/sensor/Main-NO2.png','img/sensor/NO2.png', 0.03, 0.05, 0.2],

@@ -57,7 +57,7 @@ class Home(ttk.Frame):
         self.O3 = 0.0
         self.temperature = 0.0
         self.humidity = 0.0
-        self.lan_state = 'wlan'         # wlan or ethernet or non_connection                     <- 나중에 시간되면 class로 뺴서 enum으로 만들자
+        self.lan_state = 'wlan'         # wlan or ethernet or non_connection    <-    나중에 시간되면 class로 뺴서 enum으로 만들자
         self.pre_lan_state = 'wlan'                     # 하드 코딩의 묘미//
         self.client = mqtt.Client()
         self.client.username_pw_set(ACCESS_TOKEN)

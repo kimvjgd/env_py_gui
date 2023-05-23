@@ -45,6 +45,23 @@ class EnvSensor(tk.Tk):
         self.wifi_ssid = tk.StringVar(value='')
         self.wifi_pw = tk.StringVar(value='')
         
+        self.TVOC_level = tk.StringVar(value=0)             # 0 - 제대로 된 센서 값을 받아오지 못하는 것이다.
+        self.CO2_level = tk.StringVar(value=0)              # 1 - 좋음
+        self.PM25_level = tk.StringVar(value=0)             # 2 - 보통
+        self.PM10_level = tk.StringVar(value=0)             # 3 - 나쁨
+        self.CH2O_level = tk.StringVar(value=0)             # 4 - 아주 나쁨
+        self.Sm_level = tk.StringVar(value=0)   
+        self.NH3_level = tk.StringVar(value=0)  
+        self.CO_level = tk.StringVar(value=0)   
+        self.NO2_level = tk.StringVar(value=0)  
+        self.H2S_level = tk.StringVar(value=0)  
+        self.LIGHT_level = tk.StringVar(value=0)    
+        self.SOUND_level = tk.StringVar(value=0)    
+        self.Rn_level = tk.StringVar(value=0)   
+        self.O3_level = tk.StringVar(value=0)   
+        
+        
+        
         self.eth0_connection = False            # 초기값은 0으로 잡아준다.
         self.wlan0_connection = False
         

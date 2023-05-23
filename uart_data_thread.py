@@ -97,6 +97,41 @@ class UartDataThread(Thread):
                     self.controller.O3 = serial_list[15]
                     self.controller.temperature = serial_list[16]
                     self.controller.humidity = serial_list[17]
+                    
+                    
+                    # SENSOR_DICT = {
+                    #     'TVOC':['img/sensor/Main-TVOC.png','img/sensor/TVOC.png', 200, 600, 2000],  # ~200 : 좋음(1) || ~600 : 보통(2) || ~2000 : 나쁨(3) || 2000~ : 아주나쁨(4)
+                    #     'CO':['img/sensor/Main-CO.png','img/sensor/CO.png', 2, 9, 15],
+                    #     'CO2':['img/sensor/Main-CO2.png','img/sensor/CO2.png', 450, 1000, 2000],
+                    #     'NO2':['img/sensor/Main-NO2.png','img/sensor/NO2.png', 0.03, 0.05, 0.2],
+                    #     'PM25':['img/sensor/Main-PM2.5.png','img/sensor/PM2.5.png', 15, 35, 75],
+                    #     'H2S':['img/sensor/Main-H2S.png','img/sensor/H2S.png', 0.005, 0.02, 0.3],
+                    #     'PM10':['img/sensor/Main-PM10.png','img/sensor/PM10.png', 30, 80, 150],
+                    #     'LIGHT':['img/sensor/Main-LIGHT.png','img/sensor/LIGHT.png', 3, 5, 10],
+                    #     'CH2O':['img/sensor/Main-CH2O.png','img/sensor/CH2O.png', 0.001, 0.01, 0.08],
+                    #     'SOUND':['img/sensor/Main-SOUND.png','img/sensor/SOUND.png', 35, 40, 60],
+                    #     'SM':['img/sensor/Main-Sm.png','img/sensor/Sm.png', 0, 1, 2],  # temp
+                    #     'RN':['img/sensor/Main-Rn.png','img/sensor/Rn.png', 50, 100, 150],  # unit 설정 필수 일단 pCi/l
+                    #     'NH3':['img/sensor/Main-NH3.png','img/sensor/NH3.png', 0.15, 1, 5],
+                    #     'O3':['img/sensor/Main-O3.png','img/sensor/O3.png', 0.03, 0.09, 0.15],
+                    # }
+                    # level 을 여기서 측정하면 CPU 과부하가 너무 심해진다.
+                    # self.controller.TVOC_level = 0
+                    # self.controller.CO2_level = 0
+                    # self.controller.PM25_level = 0
+                    # self.controller.PM10_level = 0
+                    # self.controller.CH2O_level = 0
+                    # self.controller.Sm_level = 0
+                    # self.controller.NH3_level = 0
+                    # self.controller.CO_level = 0
+                    # self.controller.NO2_level = 0
+                    # self.controller.H2S_level = 0
+                    # self.controller.LIGHT_level = 0
+                    # self.controller.SOUND_level = 0
+                    # self.controller.Rn_level = 0
+                    # self.controller.O3_level = 0
+                    
+                    
 
                     
                     self.two_pos = [[self.last_x, self.last_y],[self.x, self.y]]
