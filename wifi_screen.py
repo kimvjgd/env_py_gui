@@ -131,6 +131,7 @@ class WifiScreen(ttk.Frame):
         # 이것도 빼줘야하네..
         # self.get_image(current_wifi_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 0 ,0, 'E', command=nothing_func)
         self.current_wifi_image = self.get_image_instance(current_wifi_part, 'img/wifi/Wi-Fi-01.png', 40, 40, 0 ,0, 'E', command=nothing_func)
+        
         self.current_wifi_label = Label(current_wifi_part, text= 'Sangsanglab 5G', font=('Arial', 18), padx=14, fg='white', bg='black')
         self.current_wifi_label.grid(row=0, column=1, sticky='W')
 
@@ -218,18 +219,41 @@ class WifiScreen(ttk.Frame):
     def event_func(self,event, num):    
         self.show_wifi_detail_with_ssid(num)
 
-        
+########################################################################################################################################################################################################################################
+########################################################################################################################################################################################################################################
+########################################################################################################################################################################################################################################
+########################################################################################################################################################################################################################################
+########################################################################################################################################################################################################################################
+########################################################################################################################################################################################################################################
+
     def show_wifi_detail_with_ssid(self, num):
-        self.controller.wifi_ssid = self.showing_wifi_list[num][0]
-        print(self.controller.wifi_ssid)
-        self.show_wifi_detail()
+        # print('@@@@@@@@@@@@@@@@@@@@@@@@@available wifi list@@@@@@@@@@@@@@@@@@@@@@@@@')
+        # print(self.available_wifi_list)
+        for wifi_info in self.available_wifi_list:
+            # print(wifi_info[0], self.showing_wifi_list[num])
+            if wifi_info[0] == self.showing_wifi_list[num][0]:
+                # print('여기론 안들어온다고..?')
+                # 같은 것을 클릭한 showing_wifi_list의 name인 wifi info
+                if wifi_info[2] == '--':
+                    wf.connect_non_pw_wifi(self.showing_wifi_list[num][0])
+                    print('비밀번호가 없다!! ')
+                    break
+                else:
+                    # print('else로 들어왔다.')
+                    self.controller.wifi_ssid = self.showing_wifi_list[num][0]
+                    print(self.controller.wifi_ssid)
+                    self.show_wifi_detail()
+                    break
+            else:
+                pass
+                # print('왜 여기로 들어오는 거야..?')
         # for test
         # print(self.showing_wifi_list[num][0])
 
 
 
     def press_up_button(self):
-        if self.current_start_num>0:
+        if self.current_start_num > 0:
             self.current_start_num -= 1
             self.current_end_num -= 1
             
@@ -368,15 +392,6 @@ class WifiScreen(ttk.Frame):
     
     
     
-    
-################################################################################################################
-################################################################################################################
-################################################################################################################
-################################################################################################################
-################################################################################################################
-################################################################################################################
-################################################################################################################
-    
     # 무조건 이걸로 바꿔야해 -> 비번이 없는 것을 알기 위해서 다른 방법이 없다...
     # 후........ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
     def new_ver_wifi_func(self):
@@ -384,56 +399,64 @@ class WifiScreen(ttk.Frame):
         # 생각해보니 wf.wifi_search_new_ver 안에서 현재 연결된 와이파이를 뺴준다.
         self.current_available_wifi_list = wf.wifi_search_new_ver()     # [current_wifi, available_wifilist]
         print(self.current_available_wifi_list[1])  # <- available_wifilist
-        _available_list = self.current_available_wifi_list[1]
-        _available_list.sort(key= lambda x:x[1])
+        self.available_wifi_list = self.current_available_wifi_list[1]
+        self.available_wifi_list.sort(key= lambda x:x[1])
         # todo 나중에 3개보다 작을 때를 고려해야 한다.
-        self.showing_wifi_list = _available_list[0:3]
-        self.last_num = len(_available_list) - 1
+        self.showing_wifi_list = self.available_wifi_list[0:3]
+        print('len : ')
+        print(len(self.available_wifi_list))
+        self.last_num = len(self.available_wifi_list) - 1
         self.current_start_num = 0
         self.current_end_num = 2
         
         
-
-        self.first_label.config(text=_available_list[0][0])
-        self.second_label.config(text=_available_list[1][0])
-        self.third_label.config(text=_available_list[2][0])
-    
-    
-    
-    
-    def get_wifi_list(self):
-        self.available_wifi_list = wf.wifi_Search()         # ex) available_wifi_list = [['sangsang', 'a'],['iptime', 'c']]
-        self.current_wifi_list = wf.get_current_wifi_info()
-        
-        self.available_wifi_list = [i for i in self.available_wifi_list if i[0] != self.current_wifi_list[0]]           # 연결중인 와이파이는 제외시킨다.
-        # self.available_wifi_list.remove
-#####################################################################################################################
-        self.available_wifi_list.sort(key = lambda x:x[1])
-        self.showing_wifi_list = self.available_wifi_list[0:3]              # 여기서 2 ele로 바꿔주는구나...    # 근데 3개보다 많았다가 refresh했는데 그보다 작은 경우 문제가 된다.
-        self.last_num = len(self.available_wifi_list) -1
-        self.current_start_num = 0
-        self.current_end_num = 2
-        
-        # 여기서 계속 에러가 떠서 실행이 안되는 때가 있는데 한번 확인해보자
-        print('available_wifi_list[0][0] : ', end=' ')
+        print('first : ')
         print(self.available_wifi_list[0][0])
-        # print('available_wifi_list[0][0] signal : ', end=' ')
-        # print(self.available_wifi_list[0][2])
-
-        print('available_wifi_list[1][0] : ', end=' ')
+        print('second : ')
         print(self.available_wifi_list[1][0])
-        # print('available_wifi_list[1][0] signal : ', end=' ')
-        # print(self.available_wifi_list[1][2])
-
-        print('available_wifi_list[2][0] : ', end=' ')
+        print('third : ')
         print(self.available_wifi_list[2][0])
-        # print('available_wifi_list[2][0] signal : ', end=' ')
-        # print(self.available_wifi_list[2][2])
-
-
+        
         self.first_label.config(text=self.available_wifi_list[0][0])
         self.second_label.config(text=self.available_wifi_list[1][0])
         self.third_label.config(text=self.available_wifi_list[2][0])
+    
+    
+    
+    
+#     def get_wifi_list(self):
+#         self.available_wifi_list = wf.wifi_Search()         # ex) available_wifi_list = [['sangsang', 'a'],['iptime', 'c']]
+#         self.current_wifi_list = wf.get_current_wifi_info()
+        
+#         self.available_wifi_list = [i for i in self.available_wifi_list if i[0] != self.current_wifi_list[0]]           # 연결중인 와이파이는 제외시킨다.
+#         # self.available_wifi_list.remove
+# #####################################################################################################################
+#         self.available_wifi_list.sort(key = lambda x:x[1])
+#         self.showing_wifi_list = self.available_wifi_list[0:3]              # 여기서 2 ele로 바꿔주는구나...    # 근데 3개보다 많았다가 refresh했는데 그보다 작은 경우 문제가 된다.
+#         self.last_num = len(self.available_wifi_list) -1
+#         self.current_start_num = 0
+#         self.current_end_num = 2
+        
+#         # 여기서 계속 에러가 떠서 실행이 안되는 때가 있는데 한번 확인해보자
+#         print('available_wifi_list[0][0] : ', end=' ')
+#         print(self.available_wifi_list[0][0])
+#         # print('available_wifi_list[0][0] signal : ', end=' ')
+#         # print(self.available_wifi_list[0][2])
+
+#         print('available_wifi_list[1][0] : ', end=' ')
+#         print(self.available_wifi_list[1][0])
+#         # print('available_wifi_list[1][0] signal : ', end=' ')
+#         # print(self.available_wifi_list[1][2])
+
+#         print('available_wifi_list[2][0] : ', end=' ')
+#         print(self.available_wifi_list[2][0])
+#         # print('available_wifi_list[2][0] signal : ', end=' ')
+#         # print(self.available_wifi_list[2][2])
+
+
+#         self.first_label.config(text=self.available_wifi_list[0][0])
+#         self.second_label.config(text=self.available_wifi_list[1][0])
+#         self.third_label.config(text=self.available_wifi_list[2][0])
         
     
     
@@ -450,18 +473,18 @@ class WifiScreen(ttk.Frame):
         if self.current_wifi_list == None:
             self.current_wifi_label.config(text='No Wifi...')
             self.current_wifi_image.config(image=self.non_connection_signal)
-            self.current_wifi_image = self.non_connection_signal
+            self.current_wifi_image.image = self.non_connection_signal
         else:
             self.current_wifi_label.config(text=self.current_wifi_list[0])
             if int(self.current_wifi_list[1]) > 60:      # strength
                 self.current_wifi_image.config(image=self.good_wifi_signal)
-                self.current_wifi_image = self.good_wifi_signal
+                self.current_wifi_image.image = self.good_wifi_signal
             elif int(self.current_wifi_list[1]) > 50:
                 self.current_wifi_image.config(image=self.soso_wifi_signal)
-                self.current_wifi_image = self.soso_wifi_signal
+                self.current_wifi_image.image = self.soso_wifi_signal
             elif int(self.current_wifi_list[1]) > 20:
                 self.current_wifi_image.config(image=self.bad_wifi_signal)
-                self.current_wifi_image = self.bad_wifi_signal
+                self.current_wifi_image.image = self.bad_wifi_signal
             
         # 꼭 고쳐줘야 한다.         self.current_wifi_list[1] 이 신호 세기(str값)니깐 그에 따라 고쳐줘야한다. 
         # self.current_wifi_image.config()

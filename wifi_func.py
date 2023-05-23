@@ -120,7 +120,9 @@ def wifi_search_new_ver():
         return None
     
     
-    
+def connect_non_pw_wifi(ssid):
+    cmd = f"nmcli device wifi connect '{ssid}'"
+    subprocess.call(cmd, shell=True)
 
 def get_current_wifi_info():
     try:
