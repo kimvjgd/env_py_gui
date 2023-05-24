@@ -1,7 +1,7 @@
 from threading import Thread, Lock
 import serial
 import pyautogui
-
+from sensor_list import SENSOR_DICT
 
 pyautogui.FAILSAFE = False
 
@@ -13,11 +13,11 @@ class UartDataThread(Thread):
         Thread.__init__(self)
         self.serialport = serial.Serial('/dev/ttyS5', 115200, timeout=0.1)
         self.two_pos = [[0,0],[0,0]]
-        self.last_x = 0
-        self.last_y = 0
+        self.last_x = 1
+        self.last_y = 1
         self.serial_str = ''
-        self.x = 0
-        self.y = 0
+        self.x = 1
+        self.y = 1
         self.TVOC = 1.0
         self.CO2 = 0
         self.PM25 = 0
@@ -37,6 +37,20 @@ class UartDataThread(Thread):
         self.controller = controller
         self.lock = Lock()
         
+        self.TVOC_level = 0                 # 0 - 제대로 된 센서 값을 받아오지 못하는 것이다.
+        self.CO2_level = 0                  # 1 - 좋음
+        self.PM25_level = 0                 # 2 - 보통
+        self.PM10_level = 0                 # 3 - 나쁨
+        self.CH2O_level = 0                 # 4 - 아주 나쁨
+        self.Sm_level = 0
+        self.NH3_level = 0
+        self.CO_level = 0
+        self.NO2_level = 0
+        self.H2S_level = 0
+        self.LIGHT_level = 0
+        self.SOUND_level = 0
+        self.Rn_level = 0
+        self.O3_level = 0
     
     # def show_data(self):
     #     print(self.TVOC)
@@ -81,6 +95,9 @@ class UartDataThread(Thread):
                     self.temperature = float(serial_list[16])
                     self.humidity = float(serial_list[17])
                     
+                    
+                    # if self.x ==0 and self.y ==0:       # 터치를 하고 있지 않을때
+                    
                     self.controller.TVOC = serial_list[2]
                     self.controller.CO2 = serial_list[3]
                     self.controller.PM25 = serial_list[4]
@@ -97,7 +114,20 @@ class UartDataThread(Thread):
                     self.controller.O3 = serial_list[15]
                     self.controller.temperature = serial_list[16]
                     self.controller.humidity = serial_list[17]
+                    self.key_value_list = [[],[]]
+                    self.key_list = []
+                    self.value_list = []
+                    for k, v in SENSOR_DICT.items():
+                        # print('key : ', k)
+                        # print('value : ', v[2:5])
+                        # self.key_list.append(k)
+                        # self.value_list.append(v[2:5])
+                        self.key_value_list[0].append(k)
+                        self.key_value_list[1].append(v)
+                    print(self.key_value_list)
                     
+                        
+                        
                     
                     # SENSOR_DICT = {
                     #     'TVOC':['img/sensor/Main-TVOC.png','img/sensor/TVOC.png', 200, 600, 2000],  # ~200 : 좋음(1) || ~600 : 보통(2) || ~2000 : 나쁨(3) || 2000~ : 아주나쁨(4)
