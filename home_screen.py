@@ -703,7 +703,10 @@ class Home(ttk.Frame):
         img_label.image = photo_img
         img_label.grid(row=row, column=column, sticky=sticky)
         def local_click(event):
-            command()
+            if command == None:
+                pass
+            else:
+                command()
         img_label.bind("<Button-1>", local_click)
         return img_label
     
@@ -715,7 +718,10 @@ class Home(ttk.Frame):
         img_label.image = photo_img
         img_label.grid(row=row, column=column, sticky=sticky)
         def local_click(event):
-            command()
+            if command == None:
+                pass
+            else:
+                command()
         img_label.bind("<Button-1>", local_click)
     
     def send_mqtt_data(self):
@@ -770,6 +776,9 @@ class Home(ttk.Frame):
                 
                 self.CO2 = self.controller.CO2
                 self.CO2_label.config(text=self.CO2)
+                
+                self.PM1 = self.controller.PM1
+                self.PM1_label.config(text=self.PM1)
                 
                 self.PM25 = self.controller.PM25
                 self.PM25_label.config(text=self.PM25)
