@@ -93,6 +93,7 @@ def wifi_search_new_ver():
                         temp_grade = 'e'
                         print('wifi signal error')
                     
+                    
                     # available_wifilist.append([wifi_info[1], wifi_info[6], wifi_info[-1]])
                     available_wifilist.append([wifi_info[1], temp_grade, wifi_info[-1]])
 
