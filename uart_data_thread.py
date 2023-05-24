@@ -153,271 +153,271 @@ class UartDataThread(Thread):
                             if k == 'TVOC':
                                 if self.TVOC >= 0:
                                     if self.TVOC < v[2]:
-                                        self.TVOC_level = 1
+                                        self.controller.TVOC_level = 1
                                         continue
                                     elif self.TVOC < v[3]:
-                                        self.TVOC_level = 2
+                                        self.controller.TVOC_level = 2
                                         continue
                                     elif self.TVOC < v[4]:
-                                        self.TVOC_level = 3
+                                        self.controller.TVOC_level = 3
                                         continue
                                     else:
-                                        self.TVOC_level = 4
+                                        self.controller.TVOC_level = 4
                                         continue
                                 else:
-                                    self.TVOC_level = 0
+                                    self.controller.TVOC_level = 0
                                     print('TVOC error')
                                     continue
                             elif k == 'CO2':
                                 if self.CO2 >= 0:
                                     if self.CO2 < v[2]:
-                                        self.CO2_level = 1
+                                        self.controller.CO2_level = 1
                                         continue
                                     elif self.CO2 < v[3]:
-                                        self.CO2_level = 2
+                                        self.controller.CO2_level = 2
                                         continue
                                     elif self.CO2 < v[4]:
-                                        self.CO2_level = 3
+                                        self.controller.CO2_level = 3
                                         continue
                                     else:
-                                        self.CO2_level = 4
+                                        self.controller.CO2_level = 4
                                         continue
                                 else:
-                                    self.CO2_level = 0
+                                    self.controller.CO2_level = 0
                                     print('CO2 error')
                                     continue
                             elif k == 'PM1':
                                 if self.PM1 >= 0:
                                     if self.PM1 < v[2]:
-                                        self.PM1_level = 1
+                                        self.controller.PM1_level = 1
                                         continue
                                     elif self.PM1 < v[3]:
-                                        self.PM1_level = 2
+                                        self.controller.PM1_level = 2
                                         continue
                                     elif self.PM1 < v[4]:
-                                        self.PM1_level = 3
+                                        self.controller.PM1_level = 3
                                         continue
                                     else:
-                                        self.PM1_level = 4
+                                        self.controller.PM1_level = 4
                                         continue
                                 else:
-                                    self.PM1_level = 0
+                                    self.controller.PM1_level = 0
                                     print('PM1 error')
                                     continue
                             elif k == 'PM25':
                                 if self.PM25 >= 0:
                                     if self.PM25 < v[2]:
-                                        self.PM25_level = 1
+                                        self.controller.PM25_level = 1
                                         continue
                                     elif self.PM25 < v[3]:
-                                        self.PM25_level = 2
+                                        self.controller.PM25_level = 2
                                         continue
                                     elif self.PM25 < v[4]:
-                                        self.PM25_level = 3
+                                        self.controller.PM25_level = 3
                                         continue
                                     else:
-                                        self.PM25_level = 4
+                                        self.controller.PM25_level = 4
                                         continue
                                 else:
-                                    self.PM25_level = 0
+                                    self.controller.PM25_level = 0
                                     print('PM25 error')
                                     continue
                             elif k == 'PM10':
                                 if self.PM10 >= 0:
                                     if self.PM10 < v[2]:
-                                        self.PM10_level = 1
+                                        self.controller.PM10_level = 1
                                         continue
                                     elif self.PM10 < v[3]:
-                                        self.PM10_level = 2
+                                        self.controller.PM10_level = 2
                                         continue
                                     elif self.PM10 < v[4]:
-                                        self.PM10_level = 3
+                                        self.controller.PM10_level = 3
                                         continue
                                     else:
-                                        self.PM10_level = 4
+                                        self.controller.PM10_level = 4
                                         continue
                                 else:
-                                    self.PM10_level = 0
+                                    self.controller.PM10_level = 0
                                     print('PM10 error')
                                     continue
                             elif k == 'CH2O':
                                 if self.CH2O >= 0:
                                     if self.CH2O < v[2]:
-                                        self.CH2O_level = 1
+                                        self.controller.CH2O_level = 1
                                         continue
                                     elif self.CH2O < v[3]:
-                                        self.CH2O_level = 2
+                                        self.controller.CH2O_level = 2
                                         continue
                                     elif self.CH2O < v[4]:
-                                        self.CH2O_level = 3
+                                        self.controller.CH2O_level = 3
                                         continue
                                     else:
-                                        self.CH2O_level = 4
+                                        self.controller.CH2O_level = 4
                                         continue
                                 else:
-                                    self.CH2O_level = 0
+                                    self.controller.CH2O_level = 0
                                     print('CH2O error')
                                     continue
                             elif k == 'SM':
                                 if self.Sm >= 0:
                                     if self.Sm < v[2]:
-                                        self.SM_level = 1
+                                        self.controller.Sm_level = 1
                                         continue
                                     elif self.Sm < v[3]:
-                                        self.SM_level = 2
+                                        self.controller.Sm_level = 2
                                         continue
                                     elif self.Sm < v[4]:
-                                        self.SM_level = 3
+                                        self.controller.Sm_level = 3
                                         continue
                                     else:
-                                        self.SM_level = 4
+                                        self.controller.Sm_level = 4
                                         continue
                                 else:
-                                    self.SM_level = 0
+                                    self.controller.Sm_level = 0
                                     print('SM error')
                                     continue
                             elif k == 'NH3':
                                 if self.NH3 >= 0:
                                     if self.NH3 < v[2]:
-                                        self.NH3_level = 1
+                                        self.controller.NH3_level = 1
                                         continue
                                     elif self.NH3 < v[3]:
-                                        self.NH3_level = 2
+                                        self.controller.NH3_level = 2
                                         continue
                                     elif self.NH3 < v[4]:
-                                        self.NH3_level = 3
+                                        self.controller.NH3_level = 3
                                         continue
                                     else:
-                                        self.NH3_level = 4
+                                        self.controller.NH3_level = 4
                                         continue
                                 else:
-                                    self.NH3_level = 0
+                                    self.controller.NH3_level = 0
                                     print('NH3 error')
                                     continue
                             elif k == 'CO':
                                 if self.CO >= 0:
                                     if self.CO < v[2]:
-                                        self.CO_level = 1
+                                        self.controller.CO_level = 1
                                         continue
                                     elif self.CO < v[3]:
-                                        self.CO_level = 2
+                                        self.controller.CO_level = 2
                                         continue
                                     elif self.CO < v[4]:
-                                        self.CO_level = 3
+                                        self.controller.CO_level = 3
                                         continue
                                     else:
-                                        self.CO_level = 4
+                                        self.controller.CO_level = 4
                                         continue
                                 else:
-                                    self.CO_level = 0
+                                    self.controller.CO_level = 0
                                     print('CO error')
                                     continue
                             elif k == 'NO2':
                                 if self.NO2 >= 0:
                                     if self.NO2 < v[2]:
-                                        self.NO2_level = 1
+                                        self.controller.NO2_level = 1
                                         continue
                                     elif self.NO2 < v[3]:
-                                        self.NO2_level = 2
+                                        self.controller.NO2_level = 2
                                         continue
                                     elif self.NO2 < v[4]:
-                                        self.NO2_level = 3
+                                        self.controller.NO2_level = 3
                                         continue
                                     else:
-                                        self.NO2_level = 4
+                                        self.controller.NO2_level = 4
                                         continue
                                 else:
-                                    self.NO2_level = 0
+                                    self.controller.NO2_level = 0
                                     print('NO2 error')
                                     continue
                             elif k == 'H2S':
                                 if self.H2S >= 0:
                                     if self.H2S < v[2]:
-                                        self.H2S_level = 1
+                                        self.controller.H2S_level = 1
                                         continue
                                     elif self.H2S < v[3]:
-                                        self.H2S_level = 2
+                                        self.controller.H2S_level = 2
                                         continue
                                     elif self.H2S < v[4]:
-                                        self.H2S_level = 3
+                                        self.controller.H2S_level = 3
                                         continue
                                     else:
-                                        self.H2S_level = 4
+                                        self.controller.H2S_level = 4
                                         continue
                                 else:
-                                    self.H2S_level = 0
+                                    self.controller.H2S_level = 0
                                     print('H2S error')
                                     continue
                             elif k == 'LIGHT':
                                 if self.LIGHT >= 0:
                                     if self.LIGHT < v[2]:
-                                        self.LIGHT_level = 1
+                                        self.controller.LIGHT_level = 1
                                         continue
                                     elif self.LIGHT < v[3]:
-                                        self.LIGHT_level = 2
+                                        self.controller.LIGHT_level = 2
                                         continue
                                     elif self.LIGHT < v[4]:
-                                        self.LIGHT_level = 3
+                                        self.controller.LIGHT_level = 3
                                         continue
                                     else:
-                                        self.LIGHT_level = 4
+                                        self.controller.LIGHT_level = 4
                                         continue
                                 else:
-                                    self.LIGHT_level = 0
+                                    self.controller.LIGHT_level = 0
                                     print('LIGHT error')
                                     continue
                             elif k == 'SOUND':
                                 if self.SOUND >= 0:
                                     if self.SOUND < v[2]:
-                                        self.SOUND_level = 1
+                                        self.controller.SOUND_level = 1
                                         continue
                                     elif self.SOUND < v[3]:
-                                        self.SOUND_level = 2
+                                        self.controller.SOUND_level = 2
                                         continue
                                     elif self.SOUND < v[4]:
-                                        self.SOUND_level = 3
+                                        self.controller.SOUND_level = 3
                                         continue
                                     else:
-                                        self.SOUND_level = 4
+                                        self.controller.SOUND_level = 4
                                         continue
                                 else:
-                                    self.SOUND_level = 0
+                                    self.controller.SOUND_level = 0
                                     print('SOUND error')
                                     continue
                             elif k == 'RN':
                                 if self.Rn >= 0:
                                     if self.Rn < v[2]:
-                                        self.RN_level = 1
+                                        self.controller.Rn_level = 1
                                         continue
                                     elif self.Rn < v[3]:
-                                        self.RN_level = 2
+                                        self.controller.Rn_level = 2
                                         continue
                                     elif self.Rn < v[4]:
-                                        self.RN_level = 3
+                                        self.controller.Rn_level = 3
                                         continue
                                     else:
-                                        self.RN_level = 4
+                                        self.controller.Rn_level = 4
                                         continue
                                 else:
-                                    self.RN_level = 0
+                                    self.controller.Rn_level = 0
                                     print('RN error')
                                     continue
                             elif k == 'O3':
                                 if self.O3 >= 0:
                                     if self.O3 < v[2]:
-                                        self.O3_level = 1
+                                        self.controller.O3_level = 1
                                         continue
                                     elif self.O3 < v[3]:
-                                        self.O3_level = 2
+                                        self.controller.O3_level = 2
                                         continue
                                     elif self.O3 < v[4]:
-                                        self.O3_level = 3
+                                        self.controller.O3_level = 3
                                         continue
                                     else:
-                                        self.O3_level = 4
+                                        self.controller.O3_level = 4
                                         continue
                                 else:
-                                    self.O3_level = 0
+                                    self.controller.O3_level = 0
                                     print('O3 error')
                                     continue
                             else:

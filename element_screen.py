@@ -57,7 +57,7 @@ class Element(ttk.Frame):
         ######################## 1 2 1 1 1 ########################
         
         ### Sensor Description Part
-        sensor_description_part = tk.Frame(main_part, bg='green')
+        sensor_description_part = tk.Frame(main_part, bg='black')
         sensor_description_part.grid(row=0, column=0, sticky='NEWS')
         sensor_description_part.columnconfigure(0, weight=2)
         sensor_description_part.columnconfigure(1, weight=9)
@@ -74,7 +74,7 @@ class Element(ttk.Frame):
         sensor_img = Image.open(image_path)
         resized_img = sensor_img.resize((70, 70), Image.ANTIALIAS)
         sensor_image = ImageTk.PhotoImage(resized_img)
-        self.img_label = Label(sensor_description_part, image=sensor_image, bg='green')
+        self.img_label = Label(sensor_description_part, image=sensor_image, bg='black')
         self.img_label.image = sensor_image
         self.img_label.grid(row=0, column=0, rowspan=2, sticky='NEWS')
         
