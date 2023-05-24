@@ -815,11 +815,387 @@ class Home(ttk.Frame):
                 
                 self.O3 = self.controller.O3
                 self.O3_label.config(text=self.O3)
-        
-        
-        
-        self.after(1000, self.get_all_data)
+                
+                self.change_text_color(self.controller.TVOC_level, self.TVOC_label)
+                # if self.controller.TVOC_level == 1:
+                #         self.TVOC_label.config(fg='blue')
+                # elif self.controller.TVOC_level == 2:
+                #         self.TVOC_label.config(fg='green')
+                # elif self.controller.TVOC_level ==3:
+                #         self.TVOC_label.config(fg='brown')
+                # else:
+                #         self.TVOC_label.config(fg='red')
 
+                # def change_text_color():
+                        
+                # if self.controller.CO2_level == 1:
+                #         self.CO2_label.config(fg='')
+                # elif self.controller.CO2_level == 2:
+                #         self.CO2_label.config(fg='')
+                # elif self.controller.CO2_level == 3:
+                #         self.CO2_label.config(fg='')
+                # else:
+                #         self.CO2_label.config(fg='')
+                # if self.controller.PM1_level == 1:
+                #         self.PM1_label.config(fg='')
+                # elif self.controller.PM1_level == 2:
+                #         self.PM1_label.config(fg='')
+                # elif self.controller.PM1_level == 3:
+                #         self.PM1_label.config(fg='')
+                # else:
+                #         self.PM1_label.config(fg='')
+                # if self.controller.PM25_level == 1:
+                #         self.PM25_label.config(fg='')
+                # elif self.controller.PM25_level == 2:
+                #         self.PM25_label.config(fg='')
+                # elif self.controller.PM25_level == 3:
+                #         self.PM25_label.config(fg='')
+                # else:
+                #         self.PM25_label.config(fg='')
+                # if self.controller.PM10_level == 1:
+                #         self.PM10_label.config(fg='')
+                # elif self.controller.PM10_level == 2:
+                #         self.PM10_label.config(fg='')
+                # elif self.controller.PM10_level == 3:
+                #         self.PM10_label.config(fg='')
+                # else:
+                #         self.PM10_label.config(fg='')
+                # if self.controller.CH2O_level == 1:
+                #         self.CH2O_label.config(fg='')
+                # elif self.controller.CH2O_level == 2:
+                #         self.CH2O_label.config(fg='')
+                # elif self.controller.CH2O_level == 3:
+                #         self.CH2O_label.config(fg='')
+                # else:
+                #         self.CH2O_label.config(fg='')
+                # if self.controller.Sm_level == 1:
+                # elif self.controller.Sm_level == 2:
+                # elif self.controller.Sm_level == 3:
+                # else:
+                # if self.controller.NH3_level == 1:
+                # elif self.controller.NH3_level == 2:
+                # elif self.controller.NH3_level == 3:
+                # else:
+                # if self.controller.CO_level == 1:
+                # elif self.controller.CO_level == 2:
+                # elif self.controller.CO_level == 3:
+                # else:
+                # if self.controller.NO2_level == 1:
+                # elif self.controller.NO2_level == 2:
+                # elif self.controller.NO2_level == 3:
+                # else:
+                # if self.controller.H2S_level == 1:
+                # elif self.controller.H2S_level == 2:
+                # elif self.controller.H2S_level == 3:
+                # else:
+                # if self.controller.LIGHT_level == 1:
+                # elif self.controller.LIGHT_level == 2:
+                # elif self.controller.LIGHT_level == 3:
+                # else:
+                # if self.controller.SOUND_level == 1:
+                # elif self.controller.SOUND_level == 2:
+                # elif self.controller.SOUND_level == 3:
+                # else:
+                # if self.controller.Rn_level == 1:
+                # elif self.controller.Rn_level == 2:
+                # elif self.controller.Rn_level == 3:
+                # else:
+                # if self.controller.O3_level == 1:
+                # elif self.controller.O3_level == 2:
+                # elif self.controller.O3_level == 3:
+                # else:
+                
+                # for k, v in SENSOR_DICT.items():
+                #         if k == 'TVOC':
+                #                 if int(self.TVOC) >= 0:
+                #                     if int(self.TVOC) < v[2]:
+                #                         self.TVOC_label.config(fg='red')
+                #                         continue
+                #                     elif int(self.TVOC) < v[3]:
+                                        
+                #                         continue
+                #                     elif int(self.TVOC) < v[4]:
+                                        
+                #                         continue
+                #                     else:
+                                        
+                #                         continue
+                #                 else:
+                                    
+                #                     print('TVOC error')
+                #                     continue
+                        # elif k == 'CO2':
+                        #         if self.CO2 >= 0:
+                        #             if self.CO2 < v[2]:
+                                        
+                        #                 continue
+                        #             elif self.CO2 < v[3]:
+                                        
+                        #                 continue
+                        #             elif self.CO2 < v[4]:
+                                        
+                        #                 continue
+                        #             else:
+                                        
+                        #                 continue
+                        #         else:
+                                    
+                        #             print('CO2 error')
+                        #             continue
+                        # elif k == 'PM1':
+                        #         if self.PM1 >= 0:
+                        #             if self.PM1 < v[2]:
+                                        
+                        #                 continue
+                        #             elif self.PM1 < v[3]:
+                                        
+                        #                 continue
+                        #             elif self.PM1 < v[4]:
+                                        
+                        #                 continue
+                        #             else:
+                                        
+                        #                 continue
+                        #         else:
+                                    
+                        #             print('PM1 error')
+                        #             continue
+                        # elif k == 'PM25':
+                        #         if self.PM25 >= 0:
+                        #             if self.PM25 < v[2]:
+                                        
+                        #                 continue
+                        #             elif self.PM25 < v[3]:
+                                        
+                        #                 continue
+                        #             elif self.PM25 < v[4]:
+                                        
+                        #                 continue
+                        #             else:
+                                        
+                        #                 continue
+                        #         else:
+                                    
+                        #             print('PM25 error')
+                        #             continue
+                        # elif k == 'PM10':
+                        #         if self.PM10 >= 0:
+                        #             if self.PM10 < v[2]:
+                                        
+                        #                 continue
+                        #             elif self.PM10 < v[3]:
+                                        
+                        #                 continue
+                        #             elif self.PM10 < v[4]:
+                                        
+                        #                 continue
+                        #             else:
+                                        
+                        #                 continue
+                        #         else:
+                                    
+                        #             print('PM10 error')
+                        #             continue
+                        # elif k == 'CH2O':
+                        #         if self.CH2O >= 0:
+                        #             if self.CH2O < v[2]:
+                                        
+                        #                 continue
+                        #             elif self.CH2O < v[3]:
+                                        
+                        #                 continue
+                        #             elif self.CH2O < v[4]:
+                                        
+                        #                 continue
+                        #             else:
+                                        
+                        #                 continue
+                        #         else:
+                                    
+                        #             print('CH2O error')
+                        #             continue
+                        # elif k == 'SM':
+                        #         if self.Sm >= 0:
+                        #             if self.Sm < v[2]:
+                                        
+                        #                 continue
+                        #             elif self.Sm < v[3]:
+                                        
+                        #                 continue
+                        #             elif self.Sm < v[4]:
+                                        
+                        #                 continue
+                        #             else:
+                                        
+                        #                 continue
+                        #         else:
+                                    
+                        #             print('SM error')
+                        #             continue
+                        # elif k == 'NH3':
+                        #         if self.NH3 >= 0:
+                        #             if self.NH3 < v[2]:
+                                        
+                        #                 continue
+                        #             elif self.NH3 < v[3]:
+                                        
+                        #                 continue
+                        #             elif self.NH3 < v[4]:
+                                        
+                        #                 continue
+                        #             else:
+                                        
+                        #                 continue
+                        #         else:
+                                    
+                        #             print('NH3 error')
+                        #             continue
+                        # elif k == 'CO':
+                        #         if self.CO >= 0:
+                        #             if self.CO < v[2]:
+                                        
+                        #                 continue
+                        #             elif self.CO < v[3]:
+                                        
+                        #                 continue
+                        #             elif self.CO < v[4]:
+                                        
+                        #                 continue
+                        #             else:
+                                        
+                        #                 continue
+                        #         else:
+                                    
+                        #             print('CO error')
+                        #             continue
+                        # elif k == 'NO2':
+                        #         if self.NO2 >= 0:
+                        #             if self.NO2 < v[2]:
+                                        
+                        #                 continue
+                        #             elif self.NO2 < v[3]:
+                                        
+                        #                 continue
+                        #             elif self.NO2 < v[4]:
+                                        
+                        #                 continue
+                        #             else:
+                                        
+                        #                 continue
+                        #         else:
+                                    
+                        #             print('NO2 error')
+                        #             continue
+                        # elif k == 'H2S':
+                        #         if self.H2S >= 0:
+                        #             if self.H2S < v[2]:
+                                        
+                        #                 continue
+                        #             elif self.H2S < v[3]:
+                                        
+                        #                 continue
+                        #             elif self.H2S < v[4]:
+                                        
+                        #                 continue
+                        #             else:
+                                        
+                        #                 continue
+                        #         else:
+                                    
+                        #             print('H2S error')
+                        #             continue
+                        # elif k == 'LIGHT':
+                        #         if self.LIGHT >= 0:
+                        #             if self.LIGHT < v[2]:
+                                        
+                        #                 continue
+                        #             elif self.LIGHT < v[3]:
+                                        
+                        #                 continue
+                        #             elif self.LIGHT < v[4]:
+                                        
+                        #                 continue
+                        #             else:
+                                        
+                        #                 continue
+                        #         else:
+                                    
+                        #             print('LIGHT error')
+                        #             continue
+                        # elif k == 'SOUND':
+                        #         if self.SOUND >= 0:
+                        #             if self.SOUND < v[2]:
+                                        
+                        #                 continue
+                        #             elif self.SOUND < v[3]:
+                                        
+                        #                 continue
+                        #             elif self.SOUND < v[4]:
+                                        
+                        #                 continue
+                        #             else:
+                                        
+                        #                 continue
+                        #         else:
+                                    
+                        #             print('SOUND error')
+                        #             continue
+                        # elif k == 'RN':
+                        #         if self.Rn >= 0:
+                        #             if self.Rn < v[2]:
+                                        
+                        #                 continue
+                        #             elif self.Rn < v[3]:
+                                        
+                        #                 continue
+                        #             elif self.Rn < v[4]:
+                                        
+                        #                 continue
+                        #             else:
+                                        
+                        #                 continue
+                        #         else:
+                                    
+                        #             print('RN error')
+                        #             continue
+                        # elif k == 'O3':
+                        #         if self.O3 >= 0:
+                        #             if self.O3 < v[2]:
+                                        
+                        #                 continue
+                        #             elif self.O3 < v[3]:
+                                        
+                        #                 continue
+                        #             elif self.O3 < v[4]:
+                                        
+                        #                 continue
+                        #             else:
+                                        
+                        #                 continue
+                        #         else:
+                                    
+                        #             print('O3 error')
+                        #             continue
+                        # else:
+                        #         print('uart k, v 에서 잘못되었다... 왜?')
+        
+        
+        self.after(2000, self.get_all_data)
 
+    def change_text_color(self,level, label):
+        print('level : ', level)
+        print('label : ', label)
+        if level == 1:
+                label.config(fg='blue')
+        elif level == 2:
+                label.config(fg='green')    
+        elif level == 3:
+                label.config(fg='brown')    
+        elif level == 4:
+                label.config(fg='red')
+        else:
+                pass
+    
+    
     def quit_program(self):
         sys.exit()
