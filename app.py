@@ -26,6 +26,7 @@ class EnvSensor(tk.Tk):
         super().__init__(*args, **kwargs)
         self.TVOC = tk.StringVar(value=0)
         self.CO2 = tk.StringVar(value=0)
+        self.PM1 = tk.StringVar(value=0)
         self.PM25 = tk.StringVar(value=0)
         self.PM10 = tk.StringVar(value=0)
         self.CH2O = tk.StringVar(value=0)
@@ -47,6 +48,7 @@ class EnvSensor(tk.Tk):
         
         self.TVOC_level = tk.StringVar(value=0)             # 0 - 제대로 된 센서 값을 받아오지 못하는 것이다.
         self.CO2_level = tk.StringVar(value=0)              # 1 - 좋음
+        self.PM1_level = tk.StringVar(value=0)
         self.PM25_level = tk.StringVar(value=0)             # 2 - 보통
         self.PM10_level = tk.StringVar(value=0)             # 3 - 나쁨
         self.CH2O_level = tk.StringVar(value=0)             # 4 - 아주 나쁨

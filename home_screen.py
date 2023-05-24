@@ -16,6 +16,7 @@ from sensor_list import SENSOR_DICT
 THINGSBOARD_HOST = "210.117.143.37"
 ACCESS_TOKEN='51ZFhNEWFXLi4pW758Gy'
 port = 10061
+# temp
 sensor_data = {
         "values":{
                 "S_0_0":0,
@@ -45,6 +46,7 @@ class Home(ttk.Frame):
         self.TVOC = 0.0
         # self.TVOC = tk.StringVar(value=123)
         self.CO2 = 0.0
+        self.PM1 = 0.0
         self.PM25 = 0.0
         self.PM10 = 0.0
         self.CH2O = 0.0
@@ -236,12 +238,25 @@ class Home(ttk.Frame):
         
         pm25_part = tk.Frame(sensor_part, bg='black')
         pm25_part.grid(row=0,column=4,sticky='NEWS')
-        self.set_frame_configure(pm25_part)
-        self.PM25_label = Label(pm25_part, text=self.PM25, bg='black', fg='white', font=('Arial', 15))
-        self.PM25_label.grid(row=1, column=0, sticky='NEWS')
+        # self.set_frame_configure(pm25_part)
+        pm25_part.columnconfigure(0, weight=1)
+        pm25_part.rowconfigure(0,weight=2)
+        pm25_part.rowconfigure(1,weight=1)
+        pm25_part.rowconfigure(2,weight=1)
+        pm25_part.rowconfigure(3,weight=1)
+        pm25_part.rowconfigure(4,weight=1)
+        
+        
+
+        self.PM1_label = Label(pm25_part, text=self.PM25, bg='black', fg='white', font=('Arial', 12))
+        self.PM1_label.grid(row=1, column=0, sticky='NEWS')
+        
+        self.PM25_label = Label(pm25_part, text=self.PM25, bg='black', fg='white', font=('Arial', 12))
+        self.PM25_label.grid(row=2, column=0, sticky='NEWS')
+        
         self.PM25_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM25'))
         self.PM25_unit_label = Label(pm25_part, text='ug/m3', bg='black', fg='white', font=('Arial', 11))
-        self.PM25_unit_label.grid(row=2,column=0)
+        self.PM25_unit_label.grid(row=3,column=0)
 
         h2s_part = tk.Frame(sensor_part, bg='black')
         h2s_part.grid(row=2,column=4,sticky='NEWS')
@@ -441,8 +456,8 @@ class Home(ttk.Frame):
         pm25_img_label.grid(row=0, column=0)
         pm25_img_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM25', sensor_value=self.controller.PM25))
 
-        pm25_label = Label(pm25_part, text='PM2.5', bg='black', fg='white', font=('Arial', 15))
-        pm25_label.grid(row=3, column=0, sticky='NEWS')
+        pm25_label = Label(pm25_part, text='PM1.0, 2.5', bg='black', fg='white', font=('Arial', 12))
+        pm25_label.grid(row=4, column=0, sticky='NEWS')
         pm25_label.bind("<Button-1>", lambda event: event_func(event, sensor_name='PM25', sensor_value=self.controller.PM25))
 ###########################################################################################################
         #h2s_part - contents

@@ -20,6 +20,7 @@ class UartDataThread(Thread):
         self.y = 1
         self.TVOC = 1.0
         self.CO2 = 0
+        self.PM1 = 0
         self.PM25 = 0
         self.PM10 = 0
         self.CH2O = 0
@@ -39,6 +40,7 @@ class UartDataThread(Thread):
         
         self.TVOC_level = 0                 # 0 - 제대로 된 센서 값을 받아오지 못하는 것이다.
         self.CO2_level = 0                  # 1 - 좋음
+        self.PM1_level = 0
         self.PM25_level = 0                 # 2 - 보통
         self.PM10_level = 0                 # 3 - 나쁨
         self.CH2O_level = 0                 # 4 - 아주 나쁨
@@ -74,57 +76,59 @@ class UartDataThread(Thread):
                 serial_list = self.serial_str.split(',')
                 print(serial_list)
                 # print(len(serial_list))
-                if len(serial_list) == 18:
+                if len(serial_list) == 19:
                     self.x, self.y = float(serial_list[0]), float(serial_list[1])
                     self.x = int((self.x-180)/3740*799)
                     self.y = int((self.y-400)/3410*479)
                     self.TVOC = float(serial_list[2])
                     self.CO2 = float(serial_list[3])
-                    self.PM25 = float(serial_list[4])
-                    self.PM10 = float(serial_list[5])
-                    self.CH2O = float(serial_list[6])
-                    self.Sm = float(serial_list[7])
-                    self.NH3 = float(serial_list[8])
-                    self.CO = float(serial_list[9])
-                    self.NO2 = float(serial_list[10])
-                    self.H2S = float(serial_list[11])
-                    self.LIGHT = float(serial_list[12])
-                    self.SOUND = float(serial_list[13])
-                    self.Rn = float(serial_list[14])
-                    self.O3 = float(serial_list[15])
-                    self.temperature = float(serial_list[16])
-                    self.humidity = float(serial_list[17])
+                    self.PM1 = float(serial_list[4])
+                    self.PM25 = float(serial_list[5])
+                    self.PM10 = float(serial_list[6])
+                    self.CH2O = float(serial_list[7])
+                    self.Sm = float(serial_list[8])
+                    self.NH3 = float(serial_list[9])
+                    self.CO = float(serial_list[10])
+                    self.NO2 = float(serial_list[11])
+                    self.H2S = float(serial_list[12])
+                    self.LIGHT = float(serial_list[13])
+                    self.SOUND = float(serial_list[14])
+                    self.Rn = float(serial_list[15])
+                    self.O3 = float(serial_list[16])
+                    self.temperature = float(serial_list[17])
+                    self.humidity = float(serial_list[18])
                     
                     
                     # if self.x ==0 and self.y ==0:       # 터치를 하고 있지 않을때
                     
                     self.controller.TVOC = serial_list[2]
                     self.controller.CO2 = serial_list[3]
-                    self.controller.PM25 = serial_list[4]
-                    self.controller.PM10 = serial_list[5]
-                    self.controller.CH2O = serial_list[6]
-                    self.controller.Sm = serial_list[7]
-                    self.controller.NH3 = serial_list[8]
-                    self.controller.CO = serial_list[9]
-                    self.controller.NO2 = serial_list[10]
-                    self.controller.H2S = serial_list[11]
-                    self.controller.LIGHT = serial_list[12]
-                    self.controller.SOUND = serial_list[13]
-                    self.controller.Rn = serial_list[14]
-                    self.controller.O3 = serial_list[15]
-                    self.controller.temperature = serial_list[16]
-                    self.controller.humidity = serial_list[17]
-                    self.key_value_list = [[],[]]
-                    self.key_list = []
-                    self.value_list = []
-                    for k, v in SENSOR_DICT.items():
-                        # print('key : ', k)
-                        # print('value : ', v[2:5])
-                        # self.key_list.append(k)
-                        # self.value_list.append(v[2:5])
-                        self.key_value_list[0].append(k)
-                        self.key_value_list[1].append(v)
-                    print(self.key_value_list)
+                    self.controller.PM1 = serial_list[4]
+                    self.controller.PM25 = serial_list[5]
+                    self.controller.PM10 = serial_list[6]
+                    self.controller.CH2O = serial_list[7]
+                    self.controller.Sm = serial_list[8]
+                    self.controller.NH3 = serial_list[9]
+                    self.controller.CO = serial_list[10]
+                    self.controller.NO2 = serial_list[11]
+                    self.controller.H2S = serial_list[12]
+                    self.controller.LIGHT = serial_list[13]
+                    self.controller.SOUND = serial_list[14]
+                    self.controller.Rn = serial_list[15]
+                    self.controller.O3 = serial_list[16]
+                    self.controller.temperature = serial_list[17]
+                    self.controller.humidity = serial_list[18]
+                    # self.key_value_list = [[],[]]
+                    # self.key_list = []
+                    # self.value_list = []
+                    # for k, v in SENSOR_DICT.items():
+                    #     # print('key : ', k)
+                    #     # print('value : ', v[2:5])
+                    #     # self.key_list.append(k)
+                    #     # self.value_list.append(v[2:5])
+                    #     self.key_value_list[0].append(k)
+                    #     self.key_value_list[1].append(v)
+                    # print(self.key_value_list)
                     
                         
                         
@@ -161,8 +165,6 @@ class UartDataThread(Thread):
                     # self.controller.Rn_level = 0
                     # self.controller.O3_level = 0
                     
-                    
-
                     
                     self.two_pos = [[self.last_x, self.last_y],[self.x, self.y]]
                     self.last_x = self.x

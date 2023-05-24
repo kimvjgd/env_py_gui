@@ -27,7 +27,7 @@ SENSOR_DICT = {
     'PM10':['img/sensor/Main-PM10.png','img/sensor/PM10.png', 30, 80, 150,75],
     'LIGHT':['img/sensor/Main-LIGHT.png','img/sensor/LIGHT.png', 3, 5, 10,10],
     'CH2O':['img/sensor/Main-CH2O.png','img/sensor/CH2O.png', 0.001, 0.01, 0.08,0.1],
-    'SOUND':['img/sensor/Main-SOUND.png','img/sensor/SOUND.png', 35, 40, 60,60],
+    'SOUND':['img/sensor/Main-Sound.png','img/sensor/Sound.png', 35, 40, 60,60],
     'SM':['img/sensor/Main-Sm.png','img/sensor/Sm.png', 0, 1, 2,1],  # temp
     'RN':['img/sensor/Main-Rn.png','img/sensor/Rn.png', 74, 200, 300,200],  # unit 설정 필수 일단 pCi/l
     'NH3':['img/sensor/Main-NH3.png','img/sensor/NH3.png', 0.15, 1, 5,1],
