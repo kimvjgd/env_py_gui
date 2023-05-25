@@ -57,7 +57,7 @@ class WifiScreen(ttk.Frame):
 
         status_part.columnconfigure(0, weight=1)
         status_part.columnconfigure(1, weight=10)
-        status_part.columnconfigure(2, weight=1)
+        # status_part.columnconfigure(2, weight=1)
         
         back_button_part = tk.Frame(status_part, bg='black')
         back_button_part.grid(row=0, column=0, sticky="NEWS", pady=0,ipadx=0, ipady=0)
@@ -81,9 +81,9 @@ class WifiScreen(ttk.Frame):
         def get_wifi(event):
             self.new_ver_wifi_func()
             
-        get_wifi_label = Label(status_part, text='get wifi!', fg='white', bg='black')
-        get_wifi_label.grid(row=0, column=2)
-        get_wifi_label.bind("<Button-1>", get_wifi)
+        # get_wifi_label = Label(status_part, text='get wifi!', fg='white', bg='black')
+        # get_wifi_label.grid(row=0, column=2)
+        # get_wifi_label.bind("<Button-1>", get_wifi)
         
         
         

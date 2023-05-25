@@ -154,7 +154,8 @@ class Element(ttk.Frame):
         # value.grid(row=0, column=0, sticky='W')
 
         # 1 - Sensor gauge
-        self.get_image(sensor_value_part, 'img/gauge/gage-12.png',700,50,row=0,column=0, sticky='EWS',pady=10)
+        # self.get_image(sensor_value_part, 'img/gauge/gage-12.png',700,50,row=0,column=0, sticky='EWS',pady=10)
+        sensor_gauge = self.get_image(sensor_value_part, 'img/gauge/gage-12.png',700,50,row=0,column=0, sticky='EWS',pady=10)
         # gauge = Label(sensor_value_part, bg='magenta')
         # gauge.grid(row=1, column=0, sticky='NEWS')
         # 1 - Sensor range
@@ -190,6 +191,19 @@ class Element(ttk.Frame):
         def local_click(event):
             command()
         img_label.bind("<Button-1>", local_click)
+    
+    def get_image_instance(self, frame, path, width, height, row, column,sticky, command=None,rowspan=1, pady=0):
+        img = Image.open(path)
+        resized_img = img.resize((width,height), Image.ANTIALIAS)
+        photo_img = ImageTk.PhotoImage(resized_img)
+        img_label = Label(frame, image=photo_img, bg='black')
+        img_label.image = photo_img
+        img_label.grid(row=row, column=column, rowspan=rowspan, sticky=sticky, pady=pady)
+        def local_click(event):
+            command()
+        img_label.bind("<Button-1>", local_click)
+        return img_label
+    
 
     def get_button(self, frame,command, path, width, height, row, column,sticky):
         img = Image.open(path)
@@ -233,7 +247,19 @@ class Element(ttk.Frame):
         self.last_range_label.config(text=last_range)
         if sensor_name == 'TVOC':
             self.measurement_label.config(text=self.controller.TVOC)
+            value = float(self.controller.TVOC)
+
             self.change_to_level(self.controller.TVOC_level)
+
+            # 최대값 SENSOR_DICT[4] 
+            max = SENSOR_DICT[sensor_name][4]
+            if value < 0:
+                print('value minus error')
+            elif value < max/12:
+                pass
+            else:
+                pass
+
         elif sensor_name == 'CO2':
             self.measurement_label.config(text=self.controller.CO2)
             self.change_to_level(self.controller.CO2_level)
