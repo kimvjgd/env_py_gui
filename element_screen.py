@@ -17,6 +17,113 @@ class Element(ttk.Frame):
         
         status_part = tk.Frame(self, bg="black")
         status_part.grid(row=0, column=0, sticky="NEWS")
+        img = Image.open('img/gauge/gage-00.png')
+        temp_gauge_00_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_00_img = ImageTk.PhotoImage(temp_gauge_00_img)
+        
+        img = Image.open('img/gauge/gage-01.png')
+        temp_gauge_01_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_01_img = ImageTk.PhotoImage(temp_gauge_01_img)
+        
+        img = Image.open('img/gauge/gage-02.png')
+        temp_gauge_02_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_02_img = ImageTk.PhotoImage(temp_gauge_02_img)
+        
+        img = Image.open('img/gauge/gage-03.png')
+        temp_gauge_03_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_03_img = ImageTk.PhotoImage(temp_gauge_03_img)
+        
+        img = Image.open('img/gauge/gage-04.png')
+        temp_gauge_04_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_04_img = ImageTk.PhotoImage(temp_gauge_04_img)
+        
+        img = Image.open('img/gauge/gage-05.png')
+        temp_gauge_05_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_05_img = ImageTk.PhotoImage(temp_gauge_05_img)
+        
+        img = Image.open('img/gauge/gage-06.png')
+        temp_gauge_06_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_06_img = ImageTk.PhotoImage(temp_gauge_06_img)
+        
+        img = Image.open('img/gauge/gage-07.png')
+        temp_gauge_07_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_07_img = ImageTk.PhotoImage(temp_gauge_07_img)
+        
+        img = Image.open('img/gauge/gage-08.png')
+        temp_gauge_08_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_08_img = ImageTk.PhotoImage(temp_gauge_08_img)
+        
+        img = Image.open('img/gauge/gage-09.png')
+        temp_gauge_09_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_09_img = ImageTk.PhotoImage(temp_gauge_09_img)
+        
+        img = Image.open('img/gauge/gage-10.png')
+        temp_gauge_10_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_10_img = ImageTk.PhotoImage(temp_gauge_10_img)
+        
+        img = Image.open('img/gauge/gage-11.png')
+        temp_gauge_11_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_11_img = ImageTk.PhotoImage(temp_gauge_11_img)
+        
+        img = Image.open('img/gauge/gage-12.png')
+        temp_gauge_12_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_12_img = ImageTk.PhotoImage(temp_gauge_12_img)
+        
+        img = Image.open('img/gauge/gage-13.png')
+        temp_gauge_13_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_13_img = ImageTk.PhotoImage(temp_gauge_13_img)
+        
+        img = Image.open('img/gauge/gage-14.png')
+        temp_gauge_14_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_14_img = ImageTk.PhotoImage(temp_gauge_14_img)
+        
+        img = Image.open('img/gauge/gage-15.png')
+        temp_gauge_15_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_15_img = ImageTk.PhotoImage(temp_gauge_15_img)
+        
+        img = Image.open('img/gauge/gage-16.png')
+        temp_gauge_16_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_16_img = ImageTk.PhotoImage(temp_gauge_16_img)
+        
+        img = Image.open('img/gauge/gage-17.png')
+        temp_gauge_17_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_17_img = ImageTk.PhotoImage(temp_gauge_17_img)
+        
+        img = Image.open('img/gauge/gage-18.png')
+        temp_gauge_18_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_18_img = ImageTk.PhotoImage(temp_gauge_18_img)
+        
+        img = Image.open('img/gauge/gage-19.png')
+        temp_gauge_19_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_19_img = ImageTk.PhotoImage(temp_gauge_19_img)
+        
+        img = Image.open('img/gauge/gage-20.png')
+        temp_gauge_20_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_20_img = ImageTk.PhotoImage(temp_gauge_20_img)
+        
+        img = Image.open('img/gauge/gage-21.png')
+        temp_gauge_21_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_21_img = ImageTk.PhotoImage(temp_gauge_21_img)
+        
+        img = Image.open('img/gauge/gage-22.png')
+        temp_gauge_22_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_22_img = ImageTk.PhotoImage(temp_gauge_22_img)
+        
+        img = Image.open('img/gauge/gage-23.png')
+        temp_gauge_23_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_23_img = ImageTk.PhotoImage(temp_gauge_23_img)
+        
+        img = Image.open('img/gauge/gage-24.png')
+        temp_gauge_24_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_24_img = ImageTk.PhotoImage(temp_gauge_24_img)
+        
+        img = Image.open('img/gauge/gage-25.png')
+        temp_gauge_25_img = img.resize((700,50), Image.ANTIALIAS)
+        self.gauge_25_img = ImageTk.PhotoImage(temp_gauge_25_img)
+        
+        
+        
+
         
         
         status_part.rowconfigure(0, weight=1)
@@ -155,7 +262,7 @@ class Element(ttk.Frame):
 
         # 1 - Sensor gauge
         # self.get_image(sensor_value_part, 'img/gauge/gage-12.png',700,50,row=0,column=0, sticky='EWS',pady=10)
-        sensor_gauge = self.get_image(sensor_value_part, 'img/gauge/gage-12.png',700,50,row=0,column=0, sticky='EWS',pady=10)
+        self.sensor_gauge = self.get_image_instance(sensor_value_part, 'img/gauge/gage-12.png',700,50,row=0,column=0, sticky='EWS',pady=10)
         # gauge = Label(sensor_value_part, bg='magenta')
         # gauge.grid(row=1, column=0, sticky='NEWS')
         # 1 - Sensor range
@@ -256,9 +363,59 @@ class Element(ttk.Frame):
             if value < 0:
                 print('value minus error')
             elif value < max/12:
-                pass
+                self.sensor_gauge.config(image=self.gauge_00_img)
+            elif value < max/12*2:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*3:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*4:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*5:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*6:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*7:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*8:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*9:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*10:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*11:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*12:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*13:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*14:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*15:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*16:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*17:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*18:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*19:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*20:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*21:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*22:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*23:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*24:
+                self.sensor_gauge.config(image=self.gauge_01_img)
+            elif value < max/12*25:
+                self.sensor_gauge.config(image=self.gauge_01_img)
             else:
-                pass
+                print('something error in element_value')
+            
+                
 
         elif sensor_name == 'CO2':
             self.measurement_label.config(text=self.controller.CO2)
