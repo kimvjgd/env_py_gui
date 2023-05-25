@@ -10,7 +10,6 @@ class Element(ttk.Frame):
         self.controller = controller
         self.sensor_name = sensor
 
-
         self.columnconfigure(0, weight=1)
         
         self.rowconfigure(0,weight=1)
@@ -80,8 +79,8 @@ class Element(ttk.Frame):
         
 
         # 1 - Sensor name
-        title = Label(sensor_description_part, bg='red', text='TVOC!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        title.grid(row=0, column=1, sticky='NEWS')
+        self.title_label = Label(sensor_description_part, bg='red', text='sensor_name part')
+        self.title_label.grid(row=0, column=1, sticky='NWS')
         
         # 2 - Sensor description
         img = Label(sensor_description_part, bg='yellow', text='description!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
@@ -107,10 +106,6 @@ class Element(ttk.Frame):
         # 1 - Sensor range
         range = Label(sensor_value_part, bg='cyan')
         range.grid(row=2, column=0, sticky='NEWS')
-        
-        
-        
-        
         
         
         
@@ -149,10 +144,9 @@ class Element(ttk.Frame):
         #     'NH3':['img/sensor/Main-NH3.png','img/sensor/NH3.png', 0.15, 1, 5],
         #     'O3':['img/sensor/Main-O3.png','img/sensor/O3.png', 0.03, 0.09, 0.15],
         # }
-        
-        
-    
     def change_image(self,sensor_name):
+        self.title_label.config(text=sensor_name)
+        print(SENSOR_DICT[sensor_name][2:6])
         img = PhotoImage(file=SENSOR_DICT[sensor_name][1])
         self.img_label.configure(image=img)
         self.img_label.image = img

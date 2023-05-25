@@ -79,23 +79,26 @@ def wifi_search_new_ver():
                     # print(wifi_info[1])       # ssid
                     # print(wifi_info[6])       # signal
                     # print(wifi_info[-1])      # security
-                    wifi_info[6] = int(wifi_info[6])
-                    temp_grade = ''
-                    if wifi_info[6] >= 80:
-                        temp_grade = 'a'
-                    elif wifi_info[6] >=60:
-                        temp_grade = 'b'
-                    elif wifi_info[6] >=40:
-                        temp_grade = 'c'
-                    elif wifi_info[6] <40 and wifi_info[6] >0:
-                        temp_grade = 'd'
+                    if wifi_info[6] == 'Mbit/s':
+                        pass
                     else:
-                        temp_grade = 'e'
-                        print('wifi signal error')
+                        wifi_info[6] = int(wifi_info[6])
+                        temp_grade = ''
+                        if wifi_info[6] >= 80:
+                            temp_grade = 'a'
+                        elif wifi_info[6] >=60:
+                            temp_grade = 'b'
+                        elif wifi_info[6] >=40:
+                            temp_grade = 'c'
+                        elif wifi_info[6] <40 and wifi_info[6] >0:
+                            temp_grade = 'd'
+                        else:
+                            temp_grade = 'e'
+                            print('wifi signal error')
                     
                     
                     # available_wifilist.append([wifi_info[1], wifi_info[6], wifi_info[-1]])
-                    available_wifilist.append([wifi_info[1], temp_grade, wifi_info[-1]])
+                        available_wifilist.append([wifi_info[1], temp_grade, wifi_info[-1]])
 
             elif "*" in line:
                 # Extract the Wi-Fi information from the line

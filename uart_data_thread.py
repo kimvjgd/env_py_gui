@@ -2,15 +2,15 @@ from threading import Thread, Lock
 import serial
 import pyautogui
 from sensor_list import SENSOR_DICT
-
 pyautogui.FAILSAFE = False
 
 # 나중에 음수로 오면 error이니깐 -> 핸들링 작업 해야함
 
 
 class UartDataThread(Thread):
-    def __init__(self, controller):
+    def __init__(self, controller, view):
         Thread.__init__(self)
+        self.view = view
         self.serialport = serial.Serial('/dev/ttyS5', 115200, timeout=0.1)
         self.two_pos = [[0,0],[0,0]]
         self.last_x = 0                             # 근데 흠...
@@ -79,7 +79,8 @@ class UartDataThread(Thread):
                 
                 
                 serial_list = self.serial_str.split(',')
-                print(serial_list)
+                if self.view:
+                    print(serial_list)
                 # print(len(serial_list))
                 if len(serial_list) == 19:
                     self.x, self.y = float(serial_list[0]), float(serial_list[1])
@@ -423,7 +424,7 @@ class UartDataThread(Thread):
                             else:
                                 print('uart k, v 에서 잘못되었다... 왜?')
                             
-                            
+                        
                             
                         #     # print('key : ', k)
                         #     # print('value : ', v[2:5])

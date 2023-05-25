@@ -18,6 +18,7 @@ from uart_data_thread import UartDataThread
  
 
 FULL_SCREEN = False             # (True/False) - (Full Screen/Fixed Size Screen)
+UART_DATA_VIEW = False
 PRIMARY_COLOR = "#2e3f4f"
 DEVICE_NUMBER = 1
 
@@ -153,6 +154,7 @@ class EnvSensor(tk.Tk):
     
     def show_element_frame(self, container):
         # Element UI고치느라 주석
+        
         self.element_frame.change_image(self.sensor_name)  
         frame = self.frames[container]
         frame.tkraise()
@@ -166,7 +168,7 @@ class EnvSensor(tk.Tk):
 if __name__== '__main__':
 
     app = EnvSensor()
-    u = UartDataThread(app)
+    u = UartDataThread(app, UART_DATA_VIEW)
     u.start()
 
     app.home_frame.get_all_data()
