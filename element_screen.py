@@ -47,10 +47,10 @@ class Element(ttk.Frame):
         ###############################################################################################################
         # main frame
         
-        main_part = tk.Frame(self, bg='red')
+        main_part = tk.Frame(self, bg='black')
         main_part.grid(row=1, column=0, sticky='NEWS')
         main_part.columnconfigure(0, weight=1)
-        main_part.rowconfigure(0, weight=4)
+        main_part.rowconfigure(0, weight=9)
         main_part.rowconfigure(1, weight=5)
         
         ######################## 1 2 1 1 1 ########################
@@ -71,7 +71,7 @@ class Element(ttk.Frame):
         # image_name = 'img/sensor/' + controller.sensor_name + '.png'
         # self.get_image(sensor_description_part, image_name, 80, 80, 0, 0, 'NEWS', rowspan=2)
         sensor_img = Image.open(image_path)
-        resized_img = sensor_img.resize((70, 70), Image.ANTIALIAS)
+        resized_img = sensor_img.resize((80, 80), Image.ANTIALIAS)
         sensor_image = ImageTk.PhotoImage(resized_img)
         self.img_label = Label(sensor_description_part, image=sensor_image, bg='black')
         self.img_label.image = sensor_image
@@ -133,9 +133,7 @@ class Element(ttk.Frame):
         level_extra_label = Label(level_frame, text='수준입니다.', bg='black', fg='white',font=('Arial',19))
         level_extra_label.grid(row=0, column=2,sticky='NSW')
         
-        
-        
-        
+    
         
         # description_label = Label(sensor_description_part, bg='black', text='description!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         # description_label.grid(row=1, column=1, sticky='NEWS')
@@ -156,14 +154,27 @@ class Element(ttk.Frame):
         # value.grid(row=0, column=0, sticky='W')
 
         # 1 - Sensor gauge
-        self.get_image(sensor_value_part, 'img/gauge/gage-12.png',700,50,row=0,column=0, sticky='EWS',pady=25)
+        self.get_image(sensor_value_part, 'img/gauge/gage-12.png',700,50,row=0,column=0, sticky='EWS',pady=10)
         # gauge = Label(sensor_value_part, bg='magenta')
         # gauge.grid(row=1, column=0, sticky='NEWS')
         # 1 - Sensor range
         range_frame = tk.Frame(sensor_value_part, bg='black')
-        range_frame.grid(row=1, column=0, sticky='NEWS')
+        range_frame.grid(row=1, column=0, sticky='NEWS', padx=40)
         range_frame.rowconfigure(0, weight=1)
         range_frame.columnconfigure(0, weight=1)
+        range_frame.columnconfigure(1, weight=1)
+        range_frame.columnconfigure(2, weight=1)
+        
+        self.first_range_label = Label(range_frame, text='good', fg='white', bg='black',font=('Arial',10))
+        self.first_range_label.grid(row=0, column=0, sticky='E')
+
+        self.second_range_label = Label(range_frame, text='soso', fg='white', bg='black',font=('Arial',10))
+        self.second_range_label.grid(row=0, column=1, sticky='E')
+
+        self.last_range_label = Label(range_frame, text='bad', fg='white', bg='black',font=('Arial',10))
+        self.last_range_label.grid(row=0, column=2, sticky='E')
+        
+        
         # range = Label(sensor_value_part, bg='cyan')
         # range.grid(row=1, column=0, sticky='NEWS')
         
@@ -204,10 +215,19 @@ class Element(ttk.Frame):
         #     'NH3':['img/sensor/Main-NH3.png','img/sensor/NH3.png', 0.15, 1, 5],
         #     'O3':['img/sensor/Main-O3.png','img/sensor/O3.png', 0.03, 0.09, 0.15],
         # }
+
     def change_image(self,sensor_name):
         self.title_label.config(text=sensor_name)
+        last_range = str(SENSOR_DICT[sensor_name][4]) + SENSOR_DICT[sensor_name][6]
+        first_range = str(last_range/3)
+        second_range = str(2*last_range/3)
+        # reco_range = SENSOR_DICT[sensor_name][5]
+        self.first_range_label.config(text=first_range)
+        self.second_range_label.config(text=second_range)
+        self.last_range_label.config(text=last_range)
         
         print(SENSOR_DICT[sensor_name][2:6])
+        
         img = PhotoImage(file=SENSOR_DICT[sensor_name][1])
         self.img_label.configure(image=img)
         self.img_label.image = img
