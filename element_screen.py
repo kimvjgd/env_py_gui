@@ -17,9 +17,6 @@ class Element(ttk.Frame):
         
         status_part = tk.Frame(self, bg="black")
         status_part.grid(row=0, column=0, sticky="NEWS")
-        img = Image.open('img/gauge/gage-00.png')
-        temp_gauge_00_img = img.resize((700,50), Image.ANTIALIAS)
-        self.gauge_00_img = ImageTk.PhotoImage(temp_gauge_00_img)
         
         img = Image.open('img/gauge/gage-01.png')
         temp_gauge_01_img = img.resize((700,50), Image.ANTIALIAS)
@@ -353,125 +350,144 @@ class Element(ttk.Frame):
         self.second_range_label.config(text=second_range)
         self.last_range_label.config(text=last_range)
         if sensor_name == 'TVOC':
-            self.measurement_label.config(text=self.controller.TVOC)
-            value = float(self.controller.TVOC)
+            text = str(self.controller.TVOC) + ' [' + SENSOR_DICT[sensor_name][6] + ']'
+            self.measurement_label.config(text=text)
+            
 
             self.change_to_level(self.controller.TVOC_level)
 
-            # 최대값 SENSOR_DICT[4] 
+            value = float(self.controller.TVOC)
             max = SENSOR_DICT[sensor_name][4]
-            if value < 0:
-                print('value minus error')
-            elif value < max/12:
-                self.sensor_gauge.config(image=self.gauge_00_img)
-            elif value < max/12*2:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*3:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*4:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*5:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*6:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*7:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*8:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*9:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*10:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*11:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*12:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*13:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*14:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*15:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*16:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*17:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*18:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*19:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*20:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*21:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*22:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*23:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*24:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            elif value < max/12*25:
-                self.sensor_gauge.config(image=self.gauge_01_img)
-            else:
-                print('something error in element_value')
+            
+            self.change_gauge(value, max)
             
                 
 
         elif sensor_name == 'CO2':
-            self.measurement_label.config(text=self.controller.CO2)
+            text = str(self.controller.CO2) + ' [' + SENSOR_DICT[sensor_name][6] + ']'
+            self.measurement_label.config(text=text)
             self.change_to_level(self.controller.CO2_level)
+            value = float(self.controller.CO2)
+            max = SENSOR_DICT[sensor_name][4]
+            
+            self.change_gauge(value, max)
 
         elif sensor_name == 'PM1':
-            self.measurement_label.config(text=self.controller.PM1)
+            text = str(self.controller.PM1) + ' [' + SENSOR_DICT[sensor_name][6] + ']'
+            self.measurement_label.config(text=text)
             self.change_to_level(self.controller.PM1_level)
+            value = float(self.controller.PM1)
+            max = SENSOR_DICT[sensor_name][4]
+            
+            self.change_gauge(value, max)
 
         elif sensor_name == 'PM25':
-            self.measurement_label.config(text=self.controller.PM25)
+            text = str(self.controller.PM25) + ' [' + SENSOR_DICT[sensor_name][6] + ']'
+            self.measurement_label.config(text=text)
             self.change_to_level(self.controller.PM25_level)
+            value = float(self.controller.PM25)
+            max = SENSOR_DICT[sensor_name][4]
+            
+            self.change_gauge(value, max)
 
         elif sensor_name == 'PM10':
-            self.measurement_label.config(text=self.controller.PM10)
+            text = str(self.controller.PM10) + ' [' + SENSOR_DICT[sensor_name][6] + ']'
+            self.measurement_label.config(text=text)
             self.change_to_level(self.controller.PM10_level)
+            value = float(self.controller.PM10)
+            max = SENSOR_DICT[sensor_name][4]
+            
+            self.change_gauge(value, max)
 
         elif sensor_name == 'CH2O':
-            self.measurement_label.config(text=self.controller.CH2O)
+            text = str(self.controller.CH2O) + ' [' + SENSOR_DICT[sensor_name][6] + ']'
+            self.measurement_label.config(text=text)
             self.change_to_level(self.controller.CH2O_level)
+            value = float(self.controller.CH2O)
+            max = SENSOR_DICT[sensor_name][4]
+            
+            self.change_gauge(value, max)
 
         elif sensor_name == 'SM':
-            self.measurement_label.config(text=self.controller.Sm)
+            text = str(self.controller.Sm) + ' [' + SENSOR_DICT[sensor_name][6] + ']'
+            self.measurement_label.config(text=text)
             self.change_to_level(self.controller.Sm_level)
+            value = float(self.controller.Sm)
+            max = SENSOR_DICT[sensor_name][4]
+            
+            self.change_gauge(value, max)
 
         elif sensor_name == 'NH3':
-            self.measurement_label.config(text=self.controller.NH3)
+            text = str(self.controller.NH3) + ' [' + SENSOR_DICT[sensor_name][6] + ']'
+            self.measurement_label.config(text=text)
             self.change_to_level(self.controller.NH3_level)
+            value = float(self.controller.NH3)
+            max = SENSOR_DICT[sensor_name][4]
+            
+            self.change_gauge(value, max)
 
         elif sensor_name == 'CO':
-            self.measurement_label.config(text=self.controller.CO)
+            text = str(self.controller.CO) + ' [' + SENSOR_DICT[sensor_name][6] + ']'
+            self.measurement_label.config(text=text)
             self.change_to_level(self.controller.CO_level)
+            value = float(self.controller.CO)
+            max = SENSOR_DICT[sensor_name][4]
+            
+            self.change_gauge(value, max)
 
         elif sensor_name == 'NO2':
-            self.measurement_label.config(text=self.controller.NO2)
+            text = str(self.controller.NO2) + ' [' + SENSOR_DICT[sensor_name][6] + ']'
+            self.measurement_label.config(text=text)
             self.change_to_level(self.controller.NO2_level)
+            value = float(self.controller.NO2)
+            max = SENSOR_DICT[sensor_name][4]
+            
+            self.change_gauge(value, max)
 
         elif sensor_name == 'H2S':
-            self.measurement_label.config(text=self.controller.H2S)
+            text = str(self.controller.H2S) + ' [' + SENSOR_DICT[sensor_name][6] + ']'
+            self.measurement_label.config(text=text)
             self.change_to_level(self.controller.H2S_level)
+            value = float(self.controller.H2S)
+            max = SENSOR_DICT[sensor_name][4]
+            
+            self.change_gauge(value, max)
 
         elif sensor_name == 'LIGHT':
-            self.measurement_label.config(text=self.controller.LIGHT)
+            text = str(self.controller.LIGHT) + ' [' + SENSOR_DICT[sensor_name][6] + ']'
+            self.measurement_label.config(text=text)
             self.change_to_level(self.controller.LIGHT_level)
+            value = float(self.controller.LIGHT)
+            max = SENSOR_DICT[sensor_name][4]
+            
+            self.change_gauge(value, max)
 
         elif sensor_name == 'SOUND':
-            self.measurement_label.config(text=self.controller.SOUND)
+            text = str(self.controller.SOUND) + ' [' + SENSOR_DICT[sensor_name][6] + ']'
+            self.measurement_label.config(text=text)
             self.change_to_level(self.controller.SOUND_level)
+            value = float(self.controller.SOUND)
+            max = SENSOR_DICT[sensor_name][4]
+            
+            self.change_gauge(value, max)
 
         elif sensor_name == 'RN':
-            self.measurement_label.config(text=self.controller.Rn)
+            text = str(self.controller.Rn) + ' [' + SENSOR_DICT[sensor_name][6] + ']'
+            self.measurement_label.config(text=text)
             self.change_to_level(self.controller.Rn_level)
+            value = float(self.controller.Rn)
+            max = SENSOR_DICT[sensor_name][4]
+            
+            self.change_gauge(value, max)
 
         elif sensor_name == 'O3':
-            self.measurement_label.config(text=self.controller.O3)
+            text = str(self.controller.O3) + ' [' + SENSOR_DICT[sensor_name][6] + ']'
+            self.measurement_label.config(text=text)
             self.change_to_level(self.controller.O3_level)
+            value = float(self.controller.O3)
+            max = SENSOR_DICT[sensor_name][4]
+            
+            self.change_gauge(value, max)
 
         else:
             print('sensorname_failed')
@@ -499,4 +515,85 @@ class Element(ttk.Frame):
             self.level_value_label.config(text='매우 나쁨', fg='red')
         else:
             pass
+    
+    def change_gauge(self, value, max):
+        if value < 0:
+            print('value minus error')
+        elif value < max/12:
+            self.sensor_gauge.config(image=self.gauge_01_img)
+            self.sensor_gauge.image = self.gauge_01_img
+        elif value < max/12*2:
+            self.sensor_gauge.config(image=self.gauge_02_img)
+            self.sensor_gauge.image = self.gauge_02_img
+        elif value < max/12*3:
+            self.sensor_gauge.config(image=self.gauge_03_img)
+            self.sensor_gauge.image = self.gauge_03_img
+        elif value < max/12*4:
+            self.sensor_gauge.config(image=self.gauge_04_img)
+            self.sensor_gauge.image = self.gauge_04_img
+        elif value < max/12*5:
+            self.sensor_gauge.config(image=self.gauge_05_img)
+            self.sensor_gauge.image = self.gauge_05_img
+        elif value < max/12*6:
+            self.sensor_gauge.config(image=self.gauge_06_img)
+            self.sensor_gauge.image = self.gauge_06_img
+        elif value < max/12*7:
+            self.sensor_gauge.config(image=self.gauge_07_img)
+            self.sensor_gauge.image = self.gauge_07_img
+        elif value < max/12*8:
+            self.sensor_gauge.config(image=self.gauge_08_img)
+            self.sensor_gauge.image = self.gauge_08_img
+        elif value < max/12*9:
+            self.sensor_gauge.config(image=self.gauge_09_img)
+            self.sensor_gauge.image = self.gauge_09_img
+        elif value < max/12*10:
+            self.sensor_gauge.config(image=self.gauge_10_img)
+            self.sensor_gauge.image = self.gauge_10_img
+        elif value < max/12*11:
+            self.sensor_gauge.config(image=self.gauge_11_img)
+            self.sensor_gauge.image = self.gauge_11_img
+        elif value < max/12*12:
+            self.sensor_gauge.config(image=self.gauge_12_img)
+            self.sensor_gauge.image = self.gauge_12_img
+        elif value < max/12*13:
+            self.sensor_gauge.config(image=self.gauge_13_img)
+            self.sensor_gauge.image = self.gauge_13_img
+        elif value < max/12*14:
+            self.sensor_gauge.config(image=self.gauge_14_img)
+            self.sensor_gauge.image = self.gauge_14_img
+        elif value < max/12*15:
+            self.sensor_gauge.config(image=self.gauge_15_img)
+            self.sensor_gauge.image = self.gauge_15_img
+        elif value < max/12*16:
+            self.sensor_gauge.config(image=self.gauge_16_img)
+            self.sensor_gauge.image = self.gauge_16_img
+        elif value < max/12*17:
+            self.sensor_gauge.config(image=self.gauge_17_img)
+            self.sensor_gauge.image = self.gauge_17_img
+        elif value < max/12*18:
+            self.sensor_gauge.config(image=self.gauge_18_img)
+            self.sensor_gauge.image = self.gauge_18_img
+        elif value < max/12*19:
+            self.sensor_gauge.config(image=self.gauge_19_img)
+            self.sensor_gauge.image = self.gauge_19_img
+        elif value < max/12*20:
+            self.sensor_gauge.config(image=self.gauge_20_img)
+            self.sensor_gauge.image = self.gauge_20_img
+        elif value < max/12*21:
+            self.sensor_gauge.config(image=self.gauge_21_img)
+            self.sensor_gauge.image = self.gauge_21_img
+        elif value < max/12*22:
+            self.sensor_gauge.config(image=self.gauge_22_img)
+            self.sensor_gauge.image = self.gauge_22_img
+        elif value < max/12*23:
+            self.sensor_gauge.config(image=self.gauge_23_img)
+            self.sensor_gauge.image = self.gauge_23_img
+        elif value < max/12*24:
+            self.sensor_gauge.config(image=self.gauge_24_img)
+            self.sensor_gauge.image = self.gauge_24_img
+        elif value > max:
+            self.sensor_gauge.config(image=self.gauge_25_img)
+            self.sensor_gauge.image = self.gauge_25_img
+        else:
+            print('something error in element_value')
         
