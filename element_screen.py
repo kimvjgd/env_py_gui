@@ -61,7 +61,7 @@ class Element(ttk.Frame):
         sensor_description_part.columnconfigure(0, weight=2)
         sensor_description_part.columnconfigure(1, weight=9)
         sensor_description_part.rowconfigure(0, weight=1)
-        sensor_description_part.rowconfigure(1, weight=2)
+        sensor_description_part.rowconfigure(1, weight=4)
         
         
         ###########################################################################
@@ -79,12 +79,66 @@ class Element(ttk.Frame):
         
 
         # 1 - Sensor name
-        self.title_label = Label(sensor_description_part, bg='red', text='sensor_name part')
+        self.title_label = Label(sensor_description_part, font=('Arial', 23),fg='white', bg='black', text='sensor_name part')
         self.title_label.grid(row=0, column=1, sticky='NWS')
         
         # 2 - Sensor description
-        img = Label(sensor_description_part, bg='yellow', text='description!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        img.grid(row=1, column=1, sticky='NEWS')
+        # description_label = tk.Text(sensor_description_part)
+        # description_label.insert("sensor_name","의 기준치는","recommend_value","recommended_value_unit","이고","검출량은","sensor_value","value_unit","로","level","수준입니다.")
+
+############################################################################################################################################################
+############################################################################################################################################################
+############################################################################################################################################################
+        description_frame = tk.Frame(sensor_description_part, bg='yellow')
+        description_frame.grid(row=1, column=1 ,sticky='NEWS')
+        description_frame.columnconfigure(0, weight = 1)
+        description_frame.rowconfigure(0, weight=1)
+        description_frame.rowconfigure(1, weight=1)
+        description_frame.rowconfigure(2, weight=1)
+############################################################################################################################################################
+        recommended_frame = tk.Frame(description_frame, bg='black')
+        recommended_frame.grid(row=0, column=0, sticky='NEWS')
+        recommended_frame.rowconfigure(0, weight=1)
+        recommended_frame.columnconfigure(0, weight=1)
+        recommended_frame.columnconfigure(1, weight=10)
+        recommended_title_label = Label(recommended_frame, text='권고치    :', fg='white', bg='black', font=('Arial',19))
+        recommended_title_label.grid(row=0, column=0, sticky='WNS')
+        recommended_label = Label(recommended_frame, text='0000.00 ug/m3', fg='white', bg='black', font=('Arial',19))
+        recommended_label.grid(row=0, column=1, sticky='NSW')
+
+############################################################################################################################################################
+        measurement_frame = tk.Frame(description_frame, bg='black')
+        measurement_frame.grid(row=1, column=0, sticky='NEWS')
+        measurement_frame.rowconfigure(0, weight=1)
+        measurement_frame.columnconfigure(0, weight=1)
+        measurement_frame.columnconfigure(1, weight=10)
+        measurement_title_label = Label(measurement_frame, text='측정량    :', fg='white', bg='black', font=('Arial',19))
+        measurement_title_label.grid(row=0, column=0, sticky='WNS')
+        measurement_label = Label(measurement_frame, text='1111.11 ug/m3', fg='white', bg='black', font=('Arial',19))
+        measurement_label.grid(row=0, column=1, sticky='NSW')
+        
+        
+############################################################################################################################################################
+        level_frame = tk.Frame(description_frame, bg='black')
+        level_frame.grid(row=2, column=0, sticky='NEWS')
+        level_frame.rowconfigure(0,weight=1)
+        level_frame.columnconfigure(0, weight=1)
+        level_frame.columnconfigure(1, weight=1)
+        level_frame.columnconfigure(2, weight=10)
+
+        level_reco_label = Label(level_frame, text='권고치 대비', bg='black', fg='white',font=('Arial',19))
+        level_reco_label.grid(row=0, column=0,sticky='NSW')
+        level_value_label = Label(level_frame, text='보통', bg='black', fg='white',font=('Arial',19))
+        level_value_label.grid(row=0, column=1,sticky='NSW')
+        level_extra_label = Label(level_frame, text='수준입니다.', bg='black', fg='white',font=('Arial',19))
+        level_extra_label.grid(row=0, column=2,sticky='NSW')
+        
+        
+        
+        
+        
+        # description_label = Label(sensor_description_part, bg='black', text='description!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        # description_label.grid(row=1, column=1, sticky='NEWS')
         
         
         
@@ -94,28 +148,34 @@ class Element(ttk.Frame):
         sensor_value_part.grid(row=1, column=0, sticky='NEWS')
         sensor_value_part.columnconfigure(0,weight=1)
         sensor_value_part.rowconfigure(0,weight=3)
-        sensor_value_part.rowconfigure(1,weight=4)
-        sensor_value_part.rowconfigure(2,weight=3)
+        sensor_value_part.rowconfigure(1,weight=1)
+        # sensor_value_part.rowconfigure(2,weight=3)
+
         # 1 - Sensor value
-        value = Label(sensor_value_part, bg='orange', text='52g/m^3')
-        value.grid(row=0, column=0, sticky='W')
+        # value = Label(sensor_value_part, bg='orange', text='52g/m^3')
+        # value.grid(row=0, column=0, sticky='W')
+
         # 1 - Sensor gauge
-        self.get_image(sensor_value_part, 'img/gauge/gage-12.png',700,50,row=1,column=0, sticky='NEWS')
+        self.get_image(sensor_value_part, 'img/gauge/gage-12.png',700,50,row=0,column=0, sticky='EWS',pady=25)
         # gauge = Label(sensor_value_part, bg='magenta')
         # gauge.grid(row=1, column=0, sticky='NEWS')
         # 1 - Sensor range
-        range = Label(sensor_value_part, bg='cyan')
-        range.grid(row=2, column=0, sticky='NEWS')
+        range_frame = tk.Frame(sensor_value_part, bg='black')
+        range_frame.grid(row=1, column=0, sticky='NEWS')
+        range_frame.rowconfigure(0, weight=1)
+        range_frame.columnconfigure(0, weight=1)
+        # range = Label(sensor_value_part, bg='cyan')
+        # range.grid(row=1, column=0, sticky='NEWS')
         
         
         
-    def get_image(self, frame, path, width, height, row, column,sticky, command=None,rowspan=1):
+    def get_image(self, frame, path, width, height, row, column,sticky, command=None,rowspan=1, pady=0):
         img = Image.open(path)
         resized_img = img.resize((width,height), Image.ANTIALIAS)
         photo_img = ImageTk.PhotoImage(resized_img)
         img_label = Label(frame, image=photo_img, bg='black')
         img_label.image = photo_img
-        img_label.grid(row=row, column=column, rowspan=rowspan, sticky=sticky)
+        img_label.grid(row=row, column=column, rowspan=rowspan, sticky=sticky, pady=pady)
         def local_click(event):
             command()
         img_label.bind("<Button-1>", local_click)
@@ -146,6 +206,7 @@ class Element(ttk.Frame):
         # }
     def change_image(self,sensor_name):
         self.title_label.config(text=sensor_name)
+        
         print(SENSOR_DICT[sensor_name][2:6])
         img = PhotoImage(file=SENSOR_DICT[sensor_name][1])
         self.img_label.configure(image=img)
