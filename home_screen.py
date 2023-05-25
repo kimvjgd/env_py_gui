@@ -67,6 +67,11 @@ class Home(ttk.Frame):
         self.client.username_pw_set(ACCESS_TOKEN)
         self.client.connect(THINGSBOARD_HOST, port, 60)
         self.client.loop_start()
+
+        self.pre_temperature_level = 0
+        self.pre_humidity_level = 0
+        self.temperature_level = 0
+        self.humidity_level = 0
         
         # self.time_update()
         self.columnconfigure(0, weight=1)
@@ -119,13 +124,114 @@ class Home(ttk.Frame):
         sensor_part.columnconfigure(11,weight=1)
         sensor_part.columnconfigure(12,weight=9)    # nh3   &   o3
         
+        img = Image.open('img/humidity/humidity0.png')
+        temp_hum_0_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.hum_0_img = ImageTk.PhotoImage(temp_hum_0_img)
+        
+        img = Image.open('img/humidity/humidity1.png')
+        temp_hum_1_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.hum_1_img = ImageTk.PhotoImage(temp_hum_1_img)
+        
+        img = Image.open('img/humidity/humidity2.png')
+        temp_hum_2_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.hum_2_img = ImageTk.PhotoImage(temp_hum_2_img)
+        
+        img = Image.open('img/humidity/humidity3.png')
+        temp_hum_3_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.hum_3_img = ImageTk.PhotoImage(temp_hum_3_img)
+        
+        img = Image.open('img/humidity/humidity4.png')
+        temp_hum_4_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.hum_4_img = ImageTk.PhotoImage(temp_hum_4_img)
+        
+        img = Image.open('img/humidity/humidity5.png')
+        temp_hum_5_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.hum_5_img = ImageTk.PhotoImage(temp_hum_5_img)
+        
+        img = Image.open('img/humidity/humidity6.png')
+        temp_hum_6_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.hum_6_img = ImageTk.PhotoImage(temp_hum_6_img)
+        
+        img = Image.open('img/humidity/humidity7.png')
+        temp_hum_7_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.hum_7_img = ImageTk.PhotoImage(temp_hum_7_img)
+        
+        img = Image.open('img/humidity/humidity8.png')
+        temp_hum_8_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.hum_8_img = ImageTk.PhotoImage(temp_hum_8_img)
+        
+        img = Image.open('img/humidity/humidity9.png')
+        temp_hum_9_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.hum_9_img = ImageTk.PhotoImage(temp_hum_9_img)
+        
+        img = Image.open('img/humidity/humidity10.png')
+        temp_hum_10_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.hum_10_img = ImageTk.PhotoImage(temp_hum_10_img)
+        
+        img = Image.open('img/humidity/humidity11.png')
+        temp_hum_11_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.hum_11_img = ImageTk.PhotoImage(temp_hum_11_img)
+        
+##################################################################################################
+        img = Image.open('img/temperature/temp0.png')
+        temp_temperature_0_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.temp_0_img = ImageTk.PhotoImage(temp_temperature_0_img)
+        
+        img = Image.open('img/temperature/temp1.png')
+        temp_temperature_1_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.temp_1_img = ImageTk.PhotoImage(temp_temperature_1_img)
+        
+        img = Image.open('img/temperature/temp2.png')
+        temp_temperature_2_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.temp_2_img = ImageTk.PhotoImage(temp_temperature_2_img)
+        
+        img = Image.open('img/temperature/temp3.png')
+        temp_temperature_3_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.temp_3_img = ImageTk.PhotoImage(temp_temperature_3_img)
+        
+        img = Image.open('img/temperature/temp4.png')
+        temp_temperature_4_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.temp_4_img = ImageTk.PhotoImage(temp_temperature_4_img)
+        
+        img = Image.open('img/temperature/temp5.png')
+        temp_temperature_5_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.temp_5_img = ImageTk.PhotoImage(temp_temperature_5_img)
+        
+        img = Image.open('img/temperature/temp6.png')
+        temp_temperature_6_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.temp_6_img = ImageTk.PhotoImage(temp_temperature_6_img)
+        
+        img = Image.open('img/temperature/temp7.png')
+        temp_temperature_7_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.temp_7_img = ImageTk.PhotoImage(temp_temperature_7_img)
+        
+        img = Image.open('img/temperature/temp8.png')
+        temp_temperature_8_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.temp_8_img = ImageTk.PhotoImage(temp_temperature_8_img)
+        
+        img = Image.open('img/temperature/temp9.png')
+        temp_temperature_9_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.temp_9_img = ImageTk.PhotoImage(temp_temperature_9_img)
+        
+        img = Image.open('img/temperature/temp10.png')
+        temp_temperature_10_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.temp_10_img = ImageTk.PhotoImage(temp_temperature_10_img)
+        
+        img = Image.open('img/temperature/temp11.png')
+        temp_temperature_11_img = img.resize((240, 35), Image.ANTIALIAS)
+        self.temp_11_img = ImageTk.PhotoImage(temp_temperature_11_img)
+        
+        
+        
+        
+        
         
         
         
         
         ##### put modules in frames #####
 ################################################################################################################################################################
-        from PIL import Image, ImageTk
+        # from PIL import Image, ImageTk
 
         #status
         self.time_label = tk.Label(status_part,bg='black',text='', fg='white', font=('Arial', 20))
@@ -171,7 +277,16 @@ class Home(ttk.Frame):
         mqtt_button = tk.Button(status_part,bg='red',image=quit_image,highlightthickness=0, command=self.send_mqtt_data, height=20, width=20, bd=0, borderwidth=0)
         mqtt_button.grid(column=4,row=0)
         
-        
+######################################################################################################################################################
+######################################################################################################################################################
+######################################################################################################################################################
+######################################################################################################################################################
+######################################################################################################################################################
+######################################################################################################################################################
+######################################################################################################################################################
+######################################################################################################################################################
+######################################################################################################################################################
+######################################################################################################################################################
         # temperature & humidity
         
         # temperature
@@ -181,7 +296,7 @@ class Home(ttk.Frame):
         self.temp_label = Label(temp_hum_part, text=self.temperature, bg='black', fg='white', font=('Arial', 15))
         self.temp_label.grid(row=0, column=1, sticky='NEWS')
         # self.set_image(temp_hum_part, 'img/temperature/temp5.png', row=0, column=2, height=20)
-        self.get_image(temp_hum_part,'img/temperature/temp5.png', 240, 35, 0, 2, 'NEWS')
+        self.temp_gauge = self.get_image_instance(temp_hum_part,'img/temperature/temp5.png', 240, 35, 0, 2, 'NEWS')
 
 
         # humidity
@@ -191,7 +306,7 @@ class Home(ttk.Frame):
         self.humidity_label = Label(temp_hum_part, text=self.humidity, bg='black', fg='white', font=('Arial', 15))
         self.humidity_label.grid(row=0, column=4, sticky='NEWS')
         # self.set_image(temp_hum_part, 'img/humidity/humidity5.png', row=0, column=5, height=20)
-        self.get_image(temp_hum_part,'img/humidity/humidity5.png', 240, 35, 0, 5, 'NEWS')
+        self.hum_gauge = self.get_image_instance(temp_hum_part,'img/humidity/humidity5.png', 240, 35, 0, 5, 'NEWS')
         
         
         
@@ -359,14 +474,8 @@ class Home(ttk.Frame):
         # )
         # element_button.grid(row=0, column=1, sticky="NEWS", pady = (10,0))
 
-        
-####################################################################################################################
-####################################################################################################################
-####################################################################################################################
-####################################################################################################################
-####################################################################################################################
 
-        def event_func(event, sensor_name, sensor_value):
+        def event_func(event, sensor_name, sensor_value=0):
             # 순서 바꾸면 안돼!!!!
         #     print('Value : ', end='')
         #     print(sensor_value)
@@ -723,6 +832,21 @@ class Home(ttk.Frame):
             else:
                 command()
         img_label.bind("<Button-1>", local_click)
+
+#     def get_image_instance(self, frame, path, width, height, row, column,sticky, command=None):
+#         img = Image.open(path)
+#         resized_img = img.resize((width,height), Image.ANTIALIAS)
+#         photo_img = ImageTk.PhotoImage(resized_img)
+#         img_label = Label(frame, image=photo_img, bg='black')
+#         img_label.image = photo_img
+#         img_label.grid(row=row, column=column, sticky=sticky)
+#         def local_click(event):
+#             if command == None:
+#                 pass
+#             else:
+#                 command()
+#         img_label.bind("<Button-1>", local_click)
+#         return img_label
     
     def send_mqtt_data(self):
 
@@ -764,11 +888,18 @@ class Home(ttk.Frame):
         self.client.publish('v1/devices/me/telemetry', json.dumps(sensor_data), 1)
         
     def get_all_data(self):
-        check_value = str(self.controller.TVOC)
-        if not check_value.startswith('PY'):                    # 원래 이렇게 처리하는게 아닌데.. 시간이 없어서 나중에 고칠 것...
-                self.temperature = self.controller.temperature
+        check_value1 = str(self.controller.TVOC)
+        check_value2 = str(self.controller.temperature)
+        check_value3 = str(self.controller.humidity)
+        
+        
+        
+        
+        if not check_value1.startswith('PY') and not check_value2.startswith('PY') and not check_value3.startswith('PY'):                    # 원래 이렇게 처리하는게 아닌데.. 시간이 없어서 나중에 고칠 것...
+                
+                self.temperature = float(self.controller.temperature)
                 self.temp_label.config(text=self.temperature)
-                self.humidity = self.controller.humidity
+                self.humidity = float(self.controller.humidity)
                 self.humidity_label.config(text=self.humidity)
                 # 밑에 마저 해야한다.
                 self.TVOC = self.controller.TVOC
@@ -831,7 +962,112 @@ class Home(ttk.Frame):
                 self.change_text_color(self.controller.SOUND_level, self.Sound_label)
                 self.change_text_color(self.controller.Rn_level, self.Rn_label)
                 self.change_text_color(self.controller.O3_level, self.O3_label)
-        
+###############################################################################################################
+###############################################################################################################
+###############################################################################################################
+###############################################################################################################
+###############################################################################################################
+                
+                # self.temperature
+                # 0~100'C까지
+                # if temperature < 0:
+                #         print('temperatire error')
+                # elif temperature < 5:
+                #         self.temperature_level = 0
+                #         # self.temp_gauge.config(image)
+                # elif temperature < 10:
+                #         self.
+                temperature = float(self.controller.temperature)
+                humidity = float(self.controller.humidity)
+                self.change_temp_gauge(temperature)
+                self.change_hum_gauge(humidity)
+                print('temperature level : '+ str(self.temperature_level))
+                print('humidity level : ' + str(self.humidity_level))
+                # 여기서 바꿔주고
+                if self.temperature_level != self.pre_temperature_level:
+                        if self.temperature_level == 0:
+                                self.temp_gauge.config(image=self.temp_0_img)
+                                self.temp_gauge.image = self.temp_0_img
+                        elif self.temperature_level == 1:
+                                self.temp_gauge.config(image=self.temp_1_img)
+                                self.temp_gauge.image = self.temp_1_img
+                        elif self.temperature_level == 2:
+                                self.temp_gauge.config(image=self.temp_2_img)
+                                self.temp_gauge.image = self.temp_2_img
+                        elif self.temperature_level == 3:
+                                self.temp_gauge.config(image=self.temp_3_img)
+                                self.temp_gauge.image = self.temp_3_img
+                        elif self.temperature_level == 4:
+                                self.temp_gauge.config(image=self.temp_4_img)
+                                self.temp_gauge.image = self.temp_4_img
+                        elif self.temperature_level == 5:
+                                self.temp_gauge.config(image=self.temp_5_img)
+                                self.temp_gauge.image = self.temp_5_img
+                        elif self.temperature_level == 6:
+                                self.temp_gauge.config(image=self.temp_6_img)
+                                self.temp_gauge.image = self.temp_6_img
+                        elif self.temperature_level == 7:
+                                self.temp_gauge.config(image=self.temp_7_img)
+                                self.temp_gauge.image = self.temp_7_img
+                        elif self.temperature_level == 8:
+                                self.temp_gauge.config(image=self.temp_8_img)
+                                self.temp_gauge.image = self.temp_8_img
+                        elif self.temperature_level == 9:
+                                self.temp_gauge.config(image=self.temp_9_img)
+                                self.temp_gauge.image = self.temp_9_img
+                        elif self.temperature_level == 10:
+                                self.temp_gauge.config(image=self.temp_10_img)
+                                self.temp_gauge.image = self.temp_10_img
+                        elif self.temperature_level == 11:
+                                self.temp_gauge.config(image=self.temp_11_img)
+                                self.temp_gauge.image = self.temp_11_img
+                        else:
+                                pass
+                        
+                if self.humidity_level != self.pre_humidity_level:
+                        if self.humidity_level == 0:
+                                self.hum_gauge.config(image=self.hum_0_img)
+                                self.hum_gauge.image = self.hum_0_img
+                        elif self.humidity_level == 1:
+                                self.hum_gauge.config(image=self.hum_1_img)
+                                self.hum_gauge.image = self.hum_1_img
+                        elif self.humidity_level == 2:
+                                self.hum_gauge.config(image=self.hum_2_img)
+                                self.hum_gauge.image = self.hum_2_img
+                        elif self.humidity_level == 3:
+                                self.hum_gauge.config(image=self.hum_3_img)
+                                self.hum_gauge.image = self.hum_3_img
+                        elif self.humidity_level == 4:
+                                self.hum_gauge.config(image=self.hum_4_img)
+                                self.hum_gauge.image = self.hum_4_img
+                        elif self.humidity_level == 5:
+                                self.hum_gauge.config(image=self.hum_5_img)
+                                self.hum_gauge.image = self.hum_5_img
+                        elif self.humidity_level == 6:
+                                self.hum_gauge.config(image=self.hum_6_img)
+                                self.hum_gauge.image = self.hum_6_img
+                        elif self.humidity_level == 7:
+                                self.hum_gauge.config(image=self.hum_7_img)
+                                self.hum_gauge.image = self.hum_7_img
+                        elif self.humidity_level == 8:
+                                self.hum_gauge.config(image=self.hum_8_img)
+                                self.hum_gauge.image = self.hum_8_img
+                        elif self.humidity_level == 9:
+                                self.hum_gauge.config(image=self.hum_9_img)
+                                self.hum_gauge.image = self.hum_9_img
+                        elif self.humidity_level == 10:
+                                self.hum_gauge.config(image=self.hum_10_img)
+                                self.hum_gauge.image = self.hum_10_img
+                        elif self.humidity_level == 11:
+                                self.hum_gauge.config(image=self.hum_11_img)
+                                self.hum_gauge.image = self.hum_11_img
+                        else:
+                                pass
+                self.pre_temperature_level = self.temperature_level
+                self.pre_humidity_level = self.humidity_level
+                print('pre temperature level : '+ str(self.pre_temperature_level))
+                print('pre humidity level : ' + str(self.pre_humidity_level))
+
         
         self.after(2000, self.get_all_data)
 
@@ -852,3 +1088,61 @@ class Home(ttk.Frame):
     
     def quit_program(self):
         sys.exit()
+   
+    def change_temp_gauge(self, value):         # temp, hum 을 합치기 실패
+        if value < 0:
+                print('error이거나 온도가 너무 낮음')
+                self.temperature_level = 0
+        elif value < 10:
+                self.temperature_level = 1
+        elif value < 20:
+                self.temperature_level = 2
+        elif value < 30:
+                self.temperature_level = 3
+        elif value < 40:
+                self.temperature_level = 4
+        elif value < 50:
+                self.temperature_level = 5
+        elif value < 60:
+                self.temperature_level = 6
+        elif value < 70:
+                self.temperature_level = 7
+        elif value < 80:
+                self.temperature_level = 8
+        elif value < 90:
+                self.temperature_level = 9
+        elif value < 100:
+                self.temperature_level = 10
+        elif value >= 100:
+                self.temperature_level = 11
+        else:
+                print('error value')
+
+    def change_hum_gauge(self, value):         # temp, hum 을 합치기 실패
+        if value < 0:
+                print('error')
+                self.humidity_level = 0
+        elif value < 10:
+                self.humidity_level = 1
+        elif value < 20:
+                self.humidity_level = 2
+        elif value < 30:
+                self.humidity_level = 3
+        elif value < 40:
+                self.humidity_level = 4
+        elif value < 50:
+                self.humidity_level = 5
+        elif value < 60:
+                self.humidity_level = 6
+        elif value < 70:
+                self.humidity_level = 7
+        elif value < 80:
+                self.humidity_level = 8
+        elif value < 90:
+                self.humidity_level = 9
+        elif value < 100:
+                self.humidity_level = 10
+        elif value >= 100:
+                self.humidity_level = 11
+        else:
+                print('error value')
