@@ -103,8 +103,8 @@ class Element(ttk.Frame):
         recommended_frame.columnconfigure(1, weight=10)
         recommended_title_label = Label(recommended_frame, text='권고치    :', fg='white', bg='black', font=('Arial',19))
         recommended_title_label.grid(row=0, column=0, sticky='WNS')
-        recommended_label = Label(recommended_frame, text='0000.00 ug/m3', fg='white', bg='black', font=('Arial',19))
-        recommended_label.grid(row=0, column=1, sticky='NSW')
+        self.recommended_label = Label(recommended_frame, text='0000.00 ug/m3', fg='white', bg='black', font=('Arial',19))
+        self.recommended_label.grid(row=0, column=1, sticky='NSW')
 
 ############################################################################################################################################################
         measurement_frame = tk.Frame(description_frame, bg='black')
@@ -114,8 +114,8 @@ class Element(ttk.Frame):
         measurement_frame.columnconfigure(1, weight=10)
         measurement_title_label = Label(measurement_frame, text='측정량    :', fg='white', bg='black', font=('Arial',19))
         measurement_title_label.grid(row=0, column=0, sticky='WNS')
-        measurement_label = Label(measurement_frame, text='1111.11 ug/m3', fg='white', bg='black', font=('Arial',19))
-        measurement_label.grid(row=0, column=1, sticky='NSW')
+        self.measurement_label = Label(measurement_frame, text='1111.11 ug/m3', fg='white', bg='black', font=('Arial',19))
+        self.measurement_label.grid(row=0, column=1, sticky='NSW')
         
         
 ############################################################################################################################################################
@@ -128,8 +128,8 @@ class Element(ttk.Frame):
 
         level_reco_label = Label(level_frame, text='권고치 대비', bg='black', fg='white',font=('Arial',19))
         level_reco_label.grid(row=0, column=0,sticky='NSW')
-        level_value_label = Label(level_frame, text='보통', bg='black', fg='white',font=('Arial',19))
-        level_value_label.grid(row=0, column=1,sticky='NSW')
+        self.level_value_label = Label(level_frame, text='보통', bg='black', fg='white',font=('Arial',19))
+        self.level_value_label.grid(row=0, column=1,sticky='NSW')
         level_extra_label = Label(level_frame, text='수준입니다.', bg='black', fg='white',font=('Arial',19))
         level_extra_label.grid(row=0, column=2,sticky='NSW')
         
@@ -217,18 +217,103 @@ class Element(ttk.Frame):
         # }
 
     def change_image(self,sensor_name):
+        # self.controller
         self.title_label.config(text=sensor_name)
-        last_range = str(SENSOR_DICT[sensor_name][4]) + SENSOR_DICT[sensor_name][6]
-        first_range = str(last_range/3)
-        second_range = str(2*last_range/3)
+        last_range = SENSOR_DICT[sensor_name][4]
+        first_range = last_range/3
+        first_range = "{:.2f}".format(first_range)
+        second_range = 2*last_range/3
+        second_range = "{:.2f}".format(second_range)
+        last_range = "{:.2f}".format(last_range)
+        last_range = last_range + ' [' + SENSOR_DICT[sensor_name][6] + ']'
         # reco_range = SENSOR_DICT[sensor_name][5]
+        
         self.first_range_label.config(text=first_range)
         self.second_range_label.config(text=second_range)
         self.last_range_label.config(text=last_range)
+        if sensor_name == 'TVOC':
+            self.measurement_label.config(text=self.controller.TVOC)
+            self.change_to_level(self.controller.TVOC_level)
+        elif sensor_name == 'CO2':
+            self.measurement_label.config(text=self.controller.CO2)
+            self.change_to_level(self.controller.CO2_level)
+
+        elif sensor_name == 'PM1':
+            self.measurement_label.config(text=self.controller.PM1)
+            self.change_to_level(self.controller.PM1_level)
+
+        elif sensor_name == 'PM25':
+            self.measurement_label.config(text=self.controller.PM25)
+            self.change_to_level(self.controller.PM25_level)
+
+        elif sensor_name == 'PM10':
+            self.measurement_label.config(text=self.controller.PM10)
+            self.change_to_level(self.controller.PM10_level)
+
+        elif sensor_name == 'CH2O':
+            self.measurement_label.config(text=self.controller.CH2O)
+            self.change_to_level(self.controller.CH2O_level)
+
+        elif sensor_name == 'SM':
+            self.measurement_label.config(text=self.controller.Sm)
+            self.change_to_level(self.controller.Sm_level)
+
+        elif sensor_name == 'NH3':
+            self.measurement_label.config(text=self.controller.NH3)
+            self.change_to_level(self.controller.NH3_level)
+
+        elif sensor_name == 'CO':
+            self.measurement_label.config(text=self.controller.CO)
+            self.change_to_level(self.controller.CO_level)
+
+        elif sensor_name == 'NO2':
+            self.measurement_label.config(text=self.controller.NO2)
+            self.change_to_level(self.controller.NO2_level)
+
+        elif sensor_name == 'H2S':
+            self.measurement_label.config(text=self.controller.H2S)
+            self.change_to_level(self.controller.H2S_level)
+
+        elif sensor_name == 'LIGHT':
+            self.measurement_label.config(text=self.controller.LIGHT)
+            self.change_to_level(self.controller.LIGHT_level)
+
+        elif sensor_name == 'SOUND':
+            self.measurement_label.config(text=self.controller.SOUND)
+            self.change_to_level(self.controller.SOUND_level)
+
+        elif sensor_name == 'RN':
+            self.measurement_label.config(text=self.controller.Rn)
+            self.change_to_level(self.controller.Rn_level)
+
+        elif sensor_name == 'O3':
+            self.measurement_label.config(text=self.controller.O3)
+            self.change_to_level(self.controller.O3_level)
+
+        else:
+            print('sensorname_failed')
+        
+        
+        
+        
+        recommended_text = str(SENSOR_DICT[sensor_name][5]) + ' [' + SENSOR_DICT[sensor_name][6] +']'
+        self.recommended_label.config(text=recommended_text)
         
         print(SENSOR_DICT[sensor_name][2:6])
+
         
         img = PhotoImage(file=SENSOR_DICT[sensor_name][1])
         self.img_label.configure(image=img)
         self.img_label.image = img
+    def change_to_level(self, level):
+        if level == 1:
+            self.level_value_label.config(text='좋음', fg='blue')
+        elif level == 2:
+            self.level_value_label.config(text='보통', fg='green')
+        elif level == 3:
+            self.level_value_label.config(text='나쁨', fg='brown')
+        elif level == 4:
+            self.level_value_label.config(text='매우 나쁨', fg='red')
+        else:
+            pass
         
